@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import PersonIcon from "@mui/icons-material/Person";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
 import SchoolIcon from "@mui/icons-material/School";
+import { supabase } from "../../lib/supabase";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -15,6 +17,9 @@ export default function SignUpPage() {
     password: "",
     graduationYear: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,10 +29,50 @@ export default function SignUpPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign up attempt:", formData);
-    // TODO: Implement authentication logic
+    setLoading(true);
+    setError("");
+
+    try {
+      // Determine role based on graduation year
+      const currentYear = new Date().getFullYear();
+      const role =
+        parseInt(formData.graduationYear) > currentYear
+          ? "current_player"
+          : "alumni";
+
+      // Sign up user with Supabase Auth
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.name,
+            graduation_year: parseInt(formData.graduationYear),
+            role: role,
+          },
+        },
+      });
+
+      if (signUpError) {
+        throw signUpError;
+      }
+
+      if (data.user && !data.user.email_confirmed_at) {
+        // Email confirmation required
+        setError(
+          "Please check your email to confirm your account before logging in."
+        );
+      } else {
+        // Redirect to profile completion or dashboard
+        router.push("/login");
+      }
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -59,6 +104,13 @@ export default function SignUpPage() {
             />
             <h1 className="text-3xl font-bold text-gray-900">SIGN UP</h1>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+              {error}
+            </div>
+          )}
 
           {/* Sign Up Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -146,9 +198,10 @@ export default function SignUpPage() {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#A51C30] hover:bg-[#8B1721] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] transition-colors"
+                disabled={loading}
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#A51C30] hover:bg-[#8B1721] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign Up
+                {loading ? "Creating Account..." : "Sign Up"}
               </button>
             </div>
 

@@ -1,16 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
+import { supabase } from "../../lib/supabase";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,10 +25,47 @@ export default function LoginPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login attempt:", formData);
-    // TODO: Implement authentication logic
+    setLoading(true);
+    setError("");
+
+    try {
+      const { data, error: signInError } =
+        await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+      if (signInError) {
+        throw signInError;
+      }
+
+      if (data.user) {
+        // Check if profile is completed
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("profile_completed")
+          .eq("id", data.user.id)
+          .single();
+
+        if (profile && !profile.profile_completed) {
+          router.push("/profile/complete");
+        } else {
+          router.push("/");
+        }
+      }
+    } catch (error) {
+      if (error.message.includes("Invalid login credentials")) {
+        setError("Invalid email or password");
+      } else if (error.message.includes("Email not confirmed")) {
+        setError("Please check your email to confirm your account");
+      } else {
+        setError(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,6 +84,13 @@ export default function LoginPage() {
             />
             <h1 className="text-3xl font-bold text-gray-900">LOGIN</h1>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+              {error}
+            </div>
+          )}
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -97,9 +146,10 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#A51C30] hover:bg-[#8B1721] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] transition-colors"
+                disabled={loading}
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#A51C30] hover:bg-[#8B1721] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Login
+                {loading ? "Logging In..." : "Login"}
               </button>
             </div>
 
