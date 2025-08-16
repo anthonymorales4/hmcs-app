@@ -8,12 +8,12 @@ export default function Navbar() {
   const [showAlumniDropdown, setShowAlumniDropdown] = useState(false);
 
   const primaryNavItems = [
-    { name: "About Us", href: "/about" },
+    { name: "About Us", href: "/" },
     { name: "Roster", href: "/roster" },
     { name: "Board", href: "/board" },
     { name: "Schedule", href: "/schedule" },
     { name: "Standings", href: "/standings" },
-    { name: "Alumni", href: "/alumni" },
+    { name: "Alumni", href: "/alumni/directory" },
   ];
 
   const alumniNavItems = [
@@ -64,7 +64,7 @@ export default function Navbar() {
 
                   {/* Alumni Dropdown */}
                   {item.name === "Alumni" && showAlumniDropdown && (
-                    <div className="absolute top-full left-0 bg-[#A51C30] border-t-2 border-white shadow-lg z-50 min-w-48">
+                    <div className="absolute top-full left-0 bg-[#A51C30] shadow-lg z-50 min-w-48">
                       {alumniNavItems.map((subItem) => (
                         <Link
                           key={subItem.name}
@@ -79,6 +79,16 @@ export default function Navbar() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Login Button */}
+          <div className="hidden md:block">
+            <Link
+              href="/login"
+              className="text-white hover:text-gray-200 px-3 py-2 text-sm font-medium transition-colors"
+            >
+              Login
+            </Link>
           </div>
         </div>
       </div>
