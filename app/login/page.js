@@ -41,19 +41,14 @@ export default function LoginPage() {
         throw signInError;
       }
 
-      if (data.user) {
-        // Check if profile is completed
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("profile_completed")
-          .eq("id", data.user.id)
-          .single();
-
-        if (profile && !profile.profile_completed) {
-          router.push("/profile/complete");
-        } else {
-          router.push("/");
-        }
+      if (data.user && !data.user.email_confirmed_at) {
+        // Email confirmation required
+        setError(
+          "Please check your email to confirm your account before logging in."
+        );
+      } else {
+        console.log("Pushing to homepage");
+        router.push("/");
       }
     } catch (error) {
       if (error.message.includes("Invalid login credentials")) {
@@ -87,7 +82,7 @@ export default function LoginPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm mb-6">
               {error}
             </div>
           )}

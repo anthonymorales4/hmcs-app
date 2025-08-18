@@ -92,7 +92,7 @@ export default function Navbar() {
                 onMouseEnter={() => setShowUserDropdown(true)}
                 onMouseLeave={() => setShowUserDropdown(false)}
               >
-                <button className="text-white hover:text-gray-200 px-3 py-2 text-sm font-medium transition-colors flex items-center space-x-2">
+                <button className="text-white hover:text-gray-200 px-3 py-2 text-sm font-medium transition-colors flex items-center space-x-2 cursor-pointer">
                   <span>{profile?.full_name || "Profile"}</span>
                   <svg
                     className="w-4 h-4"
@@ -113,16 +113,10 @@ export default function Navbar() {
                 {showUserDropdown && (
                   <div className="absolute top-full right-0 bg-[#A51C30] shadow-lg z-50 min-w-48">
                     <Link
-                      href="/profile"
+                      href="/alumni/profile"
                       className="block px-4 py-3 text-sm text-white hover:bg-[#8B1721] transition-colors"
                     >
                       View Profile
-                    </Link>
-                    <Link
-                      href="/profile/edit"
-                      className="block px-4 py-3 text-sm text-white hover:bg-[#8B1721] transition-colors"
-                    >
-                      Edit Profile
                     </Link>
                     <button
                       onClick={signOut}

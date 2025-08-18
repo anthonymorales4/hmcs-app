@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
-      
+
       if (session?.user) {
         setUser(session.user);
         await fetchProfile(session.user.id);
@@ -38,8 +38,10 @@ export const AuthProvider = ({ children }) => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      console.log("onAuthStateChange", session);
       if (session?.user) {
         setUser(session.user);
+        console.log("session.user.id", session.user.id);
         await fetchProfile(session.user.id);
       } else {
         setUser(null);
@@ -52,12 +54,15 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const fetchProfile = async (userId) => {
+    console.log("Fetching profile...");
     try {
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", userId)
         .single();
+
+      console.log("Fetched profile:", data);
 
       if (error) {
         console.error("Error fetching profile:", error);
@@ -72,6 +77,7 @@ export const AuthProvider = ({ children }) => {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
+    console.log("Signing out...");
     if (error) {
       console.error("Error signing out:", error);
     }

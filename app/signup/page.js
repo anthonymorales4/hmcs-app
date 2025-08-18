@@ -59,15 +59,8 @@ export default function SignUpPage() {
         throw signUpError;
       }
 
-      if (data.user && !data.user.email_confirmed_at) {
-        // Email confirmation required
-        setError(
-          "Please check your email to confirm your account before logging in."
-        );
-      } else {
-        // Redirect to profile completion or dashboard
-        router.push("/login");
-      }
+      // Redirect to login page
+      router.push("/login");
     } catch (error) {
       setError(error.message);
     } finally {
