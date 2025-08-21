@@ -23,7 +23,7 @@ export default function Navbar() {
     { name: "Alumni Directory", href: "/alumni/directory" },
     { name: "Announcements", href: "/alumni/announcements" },
     { name: "Donations", href: "/alumni/donations" },
-    { name: "Profile", href: "/alumni/profile" },
+    { name: "Profile", href: "/profile" },
   ];
 
   return (
@@ -113,7 +113,7 @@ export default function Navbar() {
                 {showUserDropdown && (
                   <div className="absolute top-full right-0 bg-[#A51C30] shadow-lg z-50 min-w-48">
                     <Link
-                      href="/alumni/profile"
+                      href="/profile"
                       className="block px-4 py-3 text-sm text-white hover:bg-[#8B1721] transition-colors"
                     >
                       View Profile

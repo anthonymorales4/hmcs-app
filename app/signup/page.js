@@ -9,6 +9,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
 import SchoolIcon from "@mui/icons-material/School";
 import { supabase } from "../../lib/supabase";
+import { validatePlayerName } from "../../lib/rosterValidation";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ export default function SignUpPage() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
 
   const handleInputChange = (e) => {
@@ -33,8 +35,17 @@ export default function SignUpPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setSuccess("");
 
     try {
+      // Validate name against roster data
+      const nameValidation = await validatePlayerName(formData.name);
+      if (!nameValidation.isValid) {
+        throw new Error(
+          "Name not found in Harvard Men's Club Soccer roster. Please contact us if you believe this is an error."
+        );
+      }
+
       // Determine role based on graduation year
       const currentYear = new Date().getFullYear();
       const role =
@@ -59,8 +70,13 @@ export default function SignUpPage() {
         throw signUpError;
       }
 
-      // Redirect to login page
-      router.push("/login");
+      // Show success message
+      setSuccess("Account created successfully! Redirecting to login...");
+
+      // Redirect to login page after 3 seconds
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -102,6 +118,13 @@ export default function SignUpPage() {
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
               {error}
+            </div>
+          )}
+
+          {/* Success Message */}
+          {success && (
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md text-sm mb-6">
+              {success}
             </div>
           )}
 
