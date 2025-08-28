@@ -25,15 +25,6 @@ export default function ProfilePage() {
     setIsEditing(!isEditing);
   }
 
-  function handleProfileUpdate(updatedProfile) {
-    setProfile(updatedProfile);
-    setIsEditing(false);
-  }
-
-  function handleImageUpdate(updatedProfile) {
-    setProfile(updatedProfile);
-  }
-
   if (loading) {
     return (
       <ProtectedRoute>
@@ -53,7 +44,6 @@ export default function ProfilePage() {
             profile={profile}
             isEditing={isEditing}
             onEditClick={handleToggleEdit}
-            onProfileUpdate={handleImageUpdate}
           />
 
           {/* Profile Completion Bar */}

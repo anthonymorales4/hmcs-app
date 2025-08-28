@@ -1,14 +1,8 @@
 "use client";
 
 import RoleBadge from "./RoleBadge";
-import ProfileImageUpload from "./ProfileImageUpload";
 
-export default function ProfileHeader({
-  profile,
-  isEditing,
-  onEditClick,
-  onProfileUpdate,
-}) {
+export default function ProfileHeader({ profile, isEditing, onEditClick }) {
   if (!profile) return null;
 
   const { full_name, graduation_year, role, position, board_position } =
@@ -16,21 +10,9 @@ export default function ProfileHeader({
 
   const isBoard = board_position && board_position.trim() !== "";
 
-  function handleImageUpdate(updatedProfile) {
-    if (onProfileUpdate) {
-      onProfileUpdate(updatedProfile);
-    }
-  }
-
   return (
     <div className="rounded-lg overflow-hidden">
       <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-center gap-8">
-        {/* Large Circular Profile Image */}
-        <ProfileImageUpload
-          profile={profile}
-          onImageUpdate={handleImageUpdate}
-        />
-
         {/* Profile Information */}
         <div className="flex-1 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
