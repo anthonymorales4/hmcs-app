@@ -1,0 +1,109 @@
+{
+  "academicYear": "2019-2020",
+  "competitions": {
+    "nirsa": {
+      "season": "2019",
+      "teams": [
+        {
+          "id": 1,
+          "name": "Tufts - Blue",
+          "wins": 9,
+          "losses": 1,
+          "ties": 1,
+          "goalsFor": 43,
+          "goalsAgainst": 5,
+          "goalDifference": 38,
+          "points": 28
+        },
+        {
+          "id": 2,
+          "name": "Worcester Polytechnic",
+          "wins": 9,
+          "losses": 1,
+          "ties": 0,
+          "goalsFor": 23,
+          "goalsAgainst": 5,
+          "goalDifference": 18,
+          "points": 27
+        },
+        {
+          "id": 3,
+          "name": "Tufts - Brown",
+          "wins": 7,
+          "losses": 2,
+          "ties": 2,
+          "goalsFor": 27,
+          "goalsAgainst": 10,
+          "goalDifference": 17,
+          "points": 23
+        },
+        {
+          "id": 4,
+          "name": "Harvard - Crimson",
+          "wins": 5,
+          "losses": 1,
+          "ties": 3,
+          "goalsFor": 22,
+          "goalsAgainst": 5,
+          "goalDifference": 17,
+          "points": 18
+        },
+        {
+          "id": 5,
+          "name": "Harvard - White",
+          "wins": 5,
+          "losses": 2,
+          "ties": 1,
+          "goalsFor": 17,
+          "goalsAgainst": 10,
+          "goalDifference": 7,
+          "points": 16
+        },
+        {
+          "id": 6,
+          "name": "Brandeis University",
+          "wins": 3,
+          "losses": 5,
+          "ties": 0,
+          "goalsFor": 11,
+          "goalsAgainst": 13,
+          "goalDifference": -2,
+          "points": 9
+        },
+        {
+          "id": 7,
+          "name": "College of the Holy Cross",
+          "wins": 2,
+          "losses": 6,
+          "ties": 1,
+          "goalsFor": 12,
+          "goalsAgainst": 27,
+          "goalDifference": -15,
+          "points": 7
+        },
+        {
+          "id": 8,
+          "name": "Clark University",
+          "wins": 1,
+          "losses": 10,
+          "ties": 0,
+          "goalsFor": 10,
+          "goalsAgainst": 52,
+          "goalDifference": -42,
+          "points": 3
+        },
+        {
+          "id": 9,
+          "name": "Merrimack College",
+          "wins": 1,
+          "losses": 10,
+          "ties": 0,
+          "goalsFor": 11,
+          "goalsAgainst": 54,
+          "goalDifference": -43,
+          "points": 3
+        }
+      ]
+    }
+  }
+}

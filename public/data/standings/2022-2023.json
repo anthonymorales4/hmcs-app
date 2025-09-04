@@ -1,0 +1,109 @@
+{
+  "academicYear": "2022-2023",
+  "competitions": {
+    "nirsa": {
+      "season": "2022",
+      "teams": [
+        {
+          "id": 1,
+          "name": "Tufts University - Brown",
+          "wins": 8,
+          "losses": 1,
+          "ties": 1,
+          "goalsFor": 26,
+          "goalsAgainst": 4,
+          "goalDifference": 22,
+          "points": 25
+        },
+        {
+          "id": 2,
+          "name": "Worcester Polytechnic",
+          "wins": 8,
+          "losses": 2,
+          "ties": 0,
+          "goalsFor": 17,
+          "goalsAgainst": 6,
+          "goalDifference": 11,
+          "points": 24
+        },
+        {
+          "id": 3,
+          "name": "Tufts University - Blue",
+          "wins": 8,
+          "losses": 2,
+          "ties": 0,
+          "goalsFor": 21,
+          "goalsAgainst": 7,
+          "goalDifference": 14,
+          "points": 24
+        },
+        {
+          "id": 4,
+          "name": "Harvard University - Crimson",
+          "wins": 6,
+          "losses": 2,
+          "ties": 2,
+          "goalsFor": 27,
+          "goalsAgainst": 7,
+          "goalDifference": 20,
+          "points": 20
+        },
+        {
+          "id": 5,
+          "name": "Harvard University - White",
+          "wins": 4,
+          "losses": 5,
+          "ties": 0,
+          "goalsFor": 12,
+          "goalsAgainst": 23,
+          "goalDifference": -11,
+          "points": 12
+        },
+        {
+          "id": 6,
+          "name": "Springfield College",
+          "wins": 2,
+          "losses": 5,
+          "ties": 1,
+          "goalsFor": 4,
+          "goalsAgainst": 14,
+          "goalDifference": -10,
+          "points": 7
+        },
+        {
+          "id": 7,
+          "name": "Merrimack College",
+          "wins": 1,
+          "losses": 6,
+          "ties": 1,
+          "goalsFor": 7,
+          "goalsAgainst": 22,
+          "goalDifference": -15,
+          "points": 4
+        },
+        {
+          "id": 8,
+          "name": "Brandeis University",
+          "wins": 0,
+          "losses": 8,
+          "ties": 2,
+          "goalsFor": 9,
+          "goalsAgainst": 26,
+          "goalDifference": -17,
+          "points": 2
+        },
+        {
+          "id": 9,
+          "name": "Clark University",
+          "wins": 0,
+          "losses": 8,
+          "ties": 2,
+          "goalsFor": 7,
+          "goalsAgainst": 34,
+          "goalDifference": -27,
+          "points": 2
+        }
+      ]
+    }
+  }
+}

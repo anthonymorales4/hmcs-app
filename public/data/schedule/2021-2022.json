@@ -1,0 +1,92 @@
+{
+  "academicYear": "2021-2022",
+  "seasons": {
+    "nirsa": {
+      "season": "2021",
+      "teamName": "Harvard - Crimson",
+      "games": [
+        {
+          "id": 1,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Merrimack College",
+          "date": "2021-10-10",
+          "time": "12:45 PM",
+          "score": { "home": 6, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Tufts - Blue",
+          "awayTeam": "Harvard - Crimson",
+          "date": "2021-10-09",
+          "time": "12:45 PM",
+          "score": { "home": 2, "away": 3 },
+          "result": "LOSS"
+        },
+        {
+          "id": 3,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Harvard - White",
+          "date": "2021-10-06",
+          "time": "7:00 PM",
+          "score": { "home": 2, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 4,
+          "homeTeam": "Clark University",
+          "awayTeam": "Harvard - Crimson",
+          "date": "2021-10-03",
+          "time": "1:45 PM",
+          "score": { "home": 0, "away": 12 },
+          "result": "WIN"
+        },
+        {
+          "id": 5,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Brandeis University",
+          "date": "2021-10-02",
+          "time": "11:00 AM",
+          "score": { "home": 7, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 6,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "College of Holy Cross",
+          "date": "2021-09-26",
+          "time": "3:00 PM",
+          "score": { "home": 4, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 7,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Tufts - Brown",
+          "date": "2021-09-25",
+          "time": "10:30 AM",
+          "score": { "home": 3, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 8,
+          "homeTeam": "Boston College",
+          "awayTeam": "Harvard - Crimson",
+          "date": "2021-09-18",
+          "time": "1:00 PM",
+          "score": { "home": 1, "away": 1 },
+          "result": "TIE"
+        },
+        {
+          "id": 9,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Worcester Polytechnic",
+          "date": "2021-09-12",
+          "time": "3:30 PM",
+          "score": { "home": 3, "away": 1 },
+          "result": "WIN"
+        }
+      ]
+    }
+  }
+}

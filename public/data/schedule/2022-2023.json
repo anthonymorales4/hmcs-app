@@ -1,0 +1,101 @@
+{
+  "academicYear": "2022-2023",
+  "seasons": {
+    "nirsa": {
+      "season": "2022",
+      "teamName": "Harvard University - Crimson",
+      "games": [
+        {
+          "id": 1,
+          "homeTeam": "Tufts University - Blue",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2022-10-08",
+          "time": "11:00 AM",
+          "score": { "home": 0, "away": 2 },
+          "result": "WIN"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Brandeis University",
+          "date": "2022-10-02",
+          "time": "2:30 PM",
+          "score": { "home": 3, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 3,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Springfield College",
+          "date": "2022-10-01",
+          "time": "5:00 PM",
+          "score": { "home": 6, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 4,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Boston University",
+          "date": "2022-09-29",
+          "time": "8:30 PM",
+          "score": { "home": 2, "away": 2 },
+          "result": "TIE"
+        },
+        {
+          "id": 5,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Tufts University - Brown",
+          "date": "2022-09-25",
+          "time": "1:00 PM",
+          "score": { "home": 1, "away": 1 },
+          "result": "TIE"
+        },
+        {
+          "id": 6,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Harvard University - White",
+          "date": "2022-09-21",
+          "time": "7:00 PM",
+          "score": { "home": 3, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 7,
+          "homeTeam": "Worcester Polytechnic",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2022-09-18",
+          "time": "4:00 PM",
+          "score": { "home": 1, "away": 0 },
+          "result": "LOSS"
+        },
+        {
+          "id": 8,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Merrimack College",
+          "date": "2022-09-17",
+          "time": "1:00 PM",
+          "score": { "home": 4, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 9,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Clark University",
+          "date": "2022-09-11",
+          "time": "4:00 PM",
+          "score": { "home": 6, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 10,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Boston College",
+          "date": "2022-09-10",
+          "time": "12:00 PM",
+          "score": { "home": 0, "away": 1 },
+          "result": "LOSS"
+        }
+      ]
+    }
+  }
+}

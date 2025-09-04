@@ -1,0 +1,92 @@
+{
+  "academicYear": "2019-2020",
+  "seasons": {
+    "nirsa": {
+      "season": "2019",
+      "teamName": "Harvard - Crimson",
+      "games": [
+        {
+          "id": 1,
+          "homeTeam": "Tufts - Blue",
+          "awayTeam": "Harvard - Crimson",
+          "date": "2019-10-12",
+          "time": "11:00 AM",
+          "score": { "home": 0, "away": 0 },
+          "result": "TIE"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Harvard - White",
+          "date": "2019-10-08",
+          "time": "7:00 PM",
+          "score": { "home": 1, "away": 1 },
+          "result": "TIE"
+        },
+        {
+          "id": 3,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Tufts - Brown",
+          "date": "2019-10-06",
+          "time": "1:00 PM",
+          "score": { "home": 1, "away": 1 },
+          "result": "TIE"
+        },
+        {
+          "id": 4,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Merrimack College",
+          "date": "2019-10-05",
+          "time": "7:00 PM",
+          "score": { "home": 2, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 5,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Brandeis University",
+          "date": "2019-09-29",
+          "time": "1:00 PM",
+          "score": { "home": 5, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 6,
+          "homeTeam": "Worcester Polytechnic",
+          "awayTeam": "Harvard - Crimson",
+          "date": "2019-09-28",
+          "time": "1:00 PM",
+          "score": { "home": 1, "away": 0 },
+          "result": "LOSS"
+        },
+        {
+          "id": 7,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "College of the Holy Cross",
+          "date": "2019-09-22",
+          "time": "4:00 PM",
+          "score": { "home": 3, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 8,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Clark University",
+          "date": "2019-09-21",
+          "time": "12:00 PM",
+          "score": { "home": 8, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 9,
+          "homeTeam": "Harvard - Crimson",
+          "awayTeam": "Boston University",
+          "date": "2019-09-15",
+          "time": "2:00 PM",
+          "score": { "home": 2, "away": 1 },
+          "result": "WIN"
+        }
+      ]
+    }
+  }
+}

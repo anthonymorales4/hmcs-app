@@ -1,0 +1,83 @@
+{
+  "academicYear": "2023-2024",
+  "seasons": {
+    "nirsa": {
+      "season": "2023",
+      "teamName": "Harvard University - Crimson",
+      "games": [
+        {
+          "id": 1,
+          "homeTeam": "Boston University",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2023-10-03",
+          "time": "TBD",
+          "score": { "home": 3, "away": 0 },
+          "result": "LOSS"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Tufts University - Blue",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2023-10-01",
+          "time": "TBD",
+          "score": { "home": 0, "away": 0 },
+          "result": "TIE"
+        },
+        {
+          "id": 3,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Brandeis University",
+          "date": "2023-09-30",
+          "time": "TBD",
+          "score": { "home": 3, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 4,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Worcester Polytechnic Institute",
+          "date": "2023-09-24",
+          "time": "TBD",
+          "score": { "home": 1, "away": 2 },
+          "result": "LOSS"
+        },
+        {
+          "id": 5,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Harvard University - White",
+          "date": "2023-09-23",
+          "time": "TBD",
+          "score": { "home": 2, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 6,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Merrimack College",
+          "date": "2023-09-23",
+          "time": "TBD",
+          "score": { "home": 2, "away": 2 },
+          "result": "TIE"
+        },
+        {
+          "id": 7,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Tufts University - Brown",
+          "date": "2023-09-17",
+          "time": "TBD",
+          "score": { "home": 3, "away": 2 },
+          "result": "WIN"
+        },
+        {
+          "id": 8,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Clark University",
+          "date": "2023-09-16",
+          "time": "TBD",
+          "score": { "home": 10, "away": 0 },
+          "result": "WIN"
+        }
+      ]
+    }
+  }
+}

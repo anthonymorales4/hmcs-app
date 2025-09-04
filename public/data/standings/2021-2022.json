@@ -1,0 +1,109 @@
+{
+  "academicYear": "2021-2022",
+  "competitions": {
+    "nirsa": {
+      "season": "2021",
+      "teams": [
+        {
+          "id": 1,
+          "name": "Tufts - Blue",
+          "wins": 9,
+          "losses": 1,
+          "ties": 0,
+          "goalsFor": 33,
+          "goalsAgainst": 5,
+          "goalDifference": 28,
+          "points": 27
+        },
+        {
+          "id": 2,
+          "name": "Harvard - Crimson",
+          "wins": 7,
+          "losses": 1,
+          "ties": 1,
+          "goalsFor": 40,
+          "goalsAgainst": 8,
+          "goalDifference": 32,
+          "points": 22
+        },
+        {
+          "id": 3,
+          "name": "Worcester Polytechnic",
+          "wins": 7,
+          "losses": 3,
+          "ties": 0,
+          "goalsFor": 21,
+          "goalsAgainst": 9,
+          "goalDifference": 12,
+          "points": 21
+        },
+        {
+          "id": 4,
+          "name": "Tufts - Brown",
+          "wins": 4,
+          "losses": 4,
+          "ties": 2,
+          "goalsFor": 14,
+          "goalsAgainst": 14,
+          "goalDifference": 0,
+          "points": 14
+        },
+        {
+          "id": 5,
+          "name": "College of Holy Cross",
+          "wins": 4,
+          "losses": 5,
+          "ties": 1,
+          "goalsFor": 18,
+          "goalsAgainst": 19,
+          "goalDifference": -1,
+          "points": 13
+        },
+        {
+          "id": 6,
+          "name": "Harvard - White",
+          "wins": 2,
+          "losses": 4,
+          "ties": 2,
+          "goalsFor": 16,
+          "goalsAgainst": 16,
+          "goalDifference": 0,
+          "points": 8
+        },
+        {
+          "id": 7,
+          "name": "Clark University",
+          "wins": 2,
+          "losses": 7,
+          "ties": 1,
+          "goalsFor": 7,
+          "goalsAgainst": 34,
+          "goalDifference": -27,
+          "points": 7
+        },
+        {
+          "id": 8,
+          "name": "Brandeis University",
+          "wins": 1,
+          "losses": 7,
+          "ties": 1,
+          "goalsFor": 5,
+          "goalsAgainst": 33,
+          "goalDifference": -28,
+          "points": 4
+        },
+        {
+          "id": 9,
+          "name": "Merrimack College",
+          "wins": 0,
+          "losses": 7,
+          "ties": 1,
+          "goalsFor": 5,
+          "goalsAgainst": 28,
+          "goalDifference": -23,
+          "points": 1
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "academicYear": "2024-2025",
+  "seasons": {
+    "nirsa": {
+      "season": "2024",
+      "teamName": "Harvard University - Crimson",
+      "games": [
+        {
+          "id": 1,
+          "homeTeam": "Tufts University - Blue",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2024-10-12",
+          "time": "5:00 PM",
+          "score": { "home": 1, "away": 0 },
+          "result": "LOSS"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Boston University",
+          "date": "2024-10-07",
+          "time": "9:00 PM",
+          "score": { "home": 1, "away": 5 },
+          "result": "LOSS"
+        },
+        {
+          "id": 3,
+          "homeTeam": "Worcester Polytechnic",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2024-10-05",
+          "time": "6:30 PM",
+          "score": { "home": 0, "away": 0 },
+          "result": "TIE"
+        },
+        {
+          "id": 4,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Harvard University - White",
+          "date": "2024-10-03",
+          "time": "9:00 PM",
+          "score": { "home": 1, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 5,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Brandeis University",
+          "date": "2024-09-29",
+          "time": "4:00 PM",
+          "score": { "home": 2, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 6,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Tufts University - Brown",
+          "date": "2024-09-28",
+          "time": "2:00 PM",
+          "score": { "home": 2, "away": 4 },
+          "result": "LOSS"
+        },
+        {
+          "id": 7,
+          "homeTeam": "College of the Holy Cross",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2024-09-22",
+          "time": "2:00 PM",
+          "score": { "home": 2, "away": 3 },
+          "result": "WIN"
+        },
+        {
+          "id": 8,
+          "homeTeam": "Springfield College",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2024-09-21",
+          "time": "3:00 PM",
+          "score": { "home": 0, "away": 5 },
+          "result": "WIN"
+        },
+        {
+          "id": 9,
+          "homeTeam": "Clark University",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2024-09-14",
+          "time": "1:00 PM",
+          "score": { "home": 0, "away": 2 },
+          "result": "WIN"
+        },
+        {
+          "id": 10,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Boston College",
+          "date": "2024-09-13",
+          "time": "8:00 PM",
+          "score": { "home": 0, "away": 4 },
+          "result": "LOSS"
+        }
+      ]
+    },
+    "ivies": {
+      "season": "2025",
+      "teamName": "Harvard",
+      "games": [
+        {
+          "id": 1,
+          "homeTeam": "Harvard",
+          "awayTeam": "Princeton",
+          "date": "2025-04-20",
+          "time": "11:30 AM",
+          "location": "Stevenson Field",
+          "gameType": "Semi-Final",
+          "score": { "home": 1, "away": 2 },
+          "result": "LOSS"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Harvard",
+          "awayTeam": "Dartmouth",
+          "date": "2025-04-20",
+          "time": "9:00 AM",
+          "location": "Stevenson Field",
+          "gameType": "Group Stage",
+          "score": { "home": 2, "away": 1 },
+          "result": "WIN"
+        },
+        {
+          "id": 3,
+          "homeTeam": "UPenn",
+          "awayTeam": "Harvard",
+          "date": "2025-04-19",
+          "time": "6:30 PM",
+          "location": "Berylson Family Fields",
+          "gameType": "Group Stage",
+          "score": { "home": 2, "away": 1 },
+          "result": "LOSS"
+        },
+        {
+          "id": 4,
+          "homeTeam": "Cornell",
+          "awayTeam": "Harvard",
+          "date": "2025-04-19",
+          "time": "4:15 PM",
+          "location": "Berylson Family Fields",
+          "gameType": "Group Stage",
+          "score": { "home": 0, "away": 4 },
+          "result": "WIN"
+        }
+      ]
+    }
+  }
+}
