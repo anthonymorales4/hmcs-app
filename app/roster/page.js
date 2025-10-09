@@ -42,7 +42,6 @@ export default function RosterPage() {
             };
           });
           setPlayerData(playerData);
-          console.log("playerData", playerData);
         }
       } catch (error) {
         console.error("Error fetching roster data:", error);
@@ -77,10 +76,11 @@ export default function RosterPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {selectedYear.replace("-", "-")} ROSTER
-          </h1>
+        <div className="text-left mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Roster</h1>
+          <p className="mt-4 text-lg text-gray-600">
+            Meet current and past players of the club.
+          </p>
           <YearDropdown
             selectedYear={selectedYear}
             onYearChange={handleYearChange}

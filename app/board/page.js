@@ -108,10 +108,11 @@ export default function BoardPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {selectedYear} BOARD
-          </h1>
+        <div className="text-left mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Board</h1>
+          <p className="mt-4 text-lg text-gray-600">
+            Meet the ones who have guided the club throughout its history.
+          </p>
           <YearDropdown
             selectedYear={selectedYear}
             onYearChange={setSelectedYear}
@@ -160,7 +161,7 @@ export default function BoardPage() {
                                 <Image
                                   src={
                                     profile?.profile_image_url ||
-                                    "/HarvardLogo.svg"
+                                    "/images/HarvardLogo.svg"
                                   }
                                   alt={member.name}
                                   width={128}

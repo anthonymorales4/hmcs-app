@@ -168,9 +168,12 @@ export default function AlumniDirectoryPage() {
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-8">
-              ALUMNI DIRECTORY
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Alumni Directory
             </h1>
+            <p className="mt-4 text-lg text-gray-600">
+              Browse and connect with alumni.
+            </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-8">
               <SearchBar

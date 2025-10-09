@@ -3,9 +3,8 @@
 import { ACADEMIC_YEAR_OPTIONS } from "../../lib/constants";
 
 export default function YearDropdown({ selectedYear, onYearChange }) {
-
   return (
-    <div className="flex justify-center mb-8">
+    <div className="mt-4 mb-4">
       <select
         value={selectedYear}
         onChange={(e) => onYearChange(e.target.value)}

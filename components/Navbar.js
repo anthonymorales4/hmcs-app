@@ -35,7 +35,7 @@ export default function Navbar() {
           <div className="flex-shrink-0">
             <Link href="/">
               <Image
-                src="/HarvardLogo.svg"
+                src="/images/HarvardLogo.svg"
                 alt="Harvard Logo"
                 width={40}
                 height={40}

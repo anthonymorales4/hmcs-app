@@ -105,7 +105,7 @@ export default function SignUpPage() {
           {/* Harvard Logo */}
           <div className="text-center mb-8">
             <Image
-              src="/HarvardLogo.svg"
+              src="/images/HarvardLogo.svg"
               alt="Harvard Logo"
               width={60}
               height={60}

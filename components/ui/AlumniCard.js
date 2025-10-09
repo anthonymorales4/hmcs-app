@@ -24,7 +24,7 @@ export default function AlumniCard({ name, profileData }) {
         ) : (
           <div className="flex items-center justify-center h-full">
             <Image
-              src="/HarvardLogo.svg"
+              src="/images/HarvardLogo.svg"
               alt="Harvard Logo"
               width={80}
               height={80}

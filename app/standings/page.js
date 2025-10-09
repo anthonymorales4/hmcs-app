@@ -68,12 +68,13 @@ export default function StandingsPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {selectedYear} STANDINGS
-          </h1>
-          <YearDropdown 
-            selectedYear={selectedYear} 
+        <div className="text-left mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Standings</h1>
+          <p className="mt-4 text-lg text-gray-600">
+            Current league standings and team performance.
+          </p>
+          <YearDropdown
+            selectedYear={selectedYear}
             onYearChange={setSelectedYear}
           />
         </div>
@@ -112,7 +113,7 @@ export default function StandingsPage() {
                   {getCompetitionName(selectedCompetition)}
                 </h2>
               </div>
-              
+
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
@@ -145,11 +146,11 @@ export default function StandingsPage() {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {getCurrentStandings().map((team, index) => (
-                      <tr 
-                        key={team.id} 
+                      <tr
+                        key={team.id}
                         className={`${
-                          isHarvardTeam(team.name) 
-                            ? "bg-red-50 hover:bg-red-100" 
+                          isHarvardTeam(team.name)
+                            ? "bg-red-50 hover:bg-red-100"
                             : "hover:bg-gray-50"
                         }`}
                       >
@@ -159,9 +160,9 @@ export default function StandingsPage() {
                               {index + 1}.
                             </div>
                             <div className={`text-sm ${
-                              isHarvardTeam(team.name) 
-                                ? "font-bold text-[#A51C30]" 
-                                : "font-medium text-gray-900"
+                                isHarvardTeam(team.name)
+                                  ? "font-bold text-[#A51C30]"
+                                  : "font-medium text-gray-900"
                             }`}>
                               {team.name}
                             </div>
@@ -183,11 +184,11 @@ export default function StandingsPage() {
                           {team.goalsAgainst}
                         </td>
                         <td className={`px-3 py-4 whitespace-nowrap text-center text-sm font-medium ${
-                          team.goalDifference > 0 
-                            ? "text-green-600" 
-                            : team.goalDifference < 0 
-                            ? "text-red-600" 
-                            : "text-gray-900"
+                            team.goalDifference > 0
+                              ? "text-green-600"
+                              : team.goalDifference < 0
+                              ? "text-red-600"
+                              : "text-gray-900"
                         }`}>
                           {team.goalDifference > 0 ? `+${team.goalDifference}` : team.goalDifference}
                         </td>
@@ -204,7 +205,7 @@ export default function StandingsPage() {
         ) : standingsData === null ? (
           <div className="text-center py-8">
             <div className="text-lg text-gray-600">
-              {selectedYear === "2020-2021" 
+              {selectedYear === "2020-2021"
                 ? "No standings available for the 2020-2021 season due to COVID-19."
                 : "No standings data available for this year."}
             </div>

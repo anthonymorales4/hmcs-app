@@ -55,8 +55,8 @@ export default function SchedulePage() {
     const [hour, minute] = time.split(":");
     const formattedHour = parseInt(hour, 10);
     const formattedTime = minute === "00" 
-      ? `${formattedHour}${period}` 
-      : `${formattedHour}:${minute}${period}`;
+        ? `${formattedHour}${period}`
+        : `${formattedHour}:${minute}${period}`;
     return formattedTime;
   };
 
@@ -82,25 +82,25 @@ export default function SchedulePage() {
 
   const getAllGames = () => {
     if (!scheduleData) return [];
-    
+
     let allGames = [];
-    
+
     if (scheduleData.seasons.nirsa) {
       allGames = [...allGames, ...scheduleData.seasons.nirsa.games.map(game => ({
-        ...game,
-        competition: "nirsa",
+          ...game,
+          competition: "nirsa",
         teamName: scheduleData.seasons.nirsa.teamName
       }))];
     }
-    
+
     if (scheduleData.seasons.ivies) {
       allGames = [...allGames, ...scheduleData.seasons.ivies.games.map(game => ({
-        ...game,
-        competition: "ivies",
+          ...game,
+          competition: "ivies",
         teamName: scheduleData.seasons.ivies.teamName
       }))];
     }
-    
+
     // Sort by date descending (most recent first)
     return allGames.sort((a, b) => new Date(b.date) - new Date(a.date));
   };
@@ -134,12 +134,13 @@ export default function SchedulePage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {selectedYear} SCHEDULE
-          </h1>
-          <YearDropdown 
-            selectedYear={selectedYear} 
+        <div className="text-left mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Schedule</h1>
+          <p className="mt-4 text-lg text-gray-600">
+            View upcoming games and match schedules.
+          </p>
+          <YearDropdown
+            selectedYear={selectedYear}
             onYearChange={setSelectedYear}
           />
         </div>
@@ -160,9 +161,9 @@ export default function SchedulePage() {
                         {game.teamName} {isHarvardHome(game, game.teamName) ? "vs." : "@"} {getOpponent(game, game.teamName)}
                       </div>
                       <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                        game.competition === "nirsa" 
-                          ? "bg-blue-100 text-blue-800" 
-                          : "bg-purple-100 text-purple-800"
+                          game.competition === "nirsa"
+                            ? "bg-blue-100 text-blue-800"
+                            : "bg-purple-100 text-purple-800"
                       }`}>
                         {getCompetitionBanner(game.competition)}
                       </span>
@@ -190,7 +191,7 @@ export default function SchedulePage() {
         ) : scheduleData === null ? (
           <div className="text-center py-8">
             <div className="text-lg text-gray-600">
-              {selectedYear === "2020-2021" 
+              {selectedYear === "2020-2021"
                 ? "No games were played during the 2020-2021 season due to COVID-19."
                 : "No schedule data available for this year."}
             </div>

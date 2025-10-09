@@ -8,24 +8,24 @@ export default function Home() {
 
   const carouselImages = [
     {
-      src: "/HarvardBrown2023.JPG",
-      alt: "Harvard vs Brown 2023",
+      src: "/images/DSC01442.JPG",
+      alt: "Chris Scazzero Vs Brown 2023",
     },
     {
-      src: "https://via.placeholder.com/800x400/A51C30/ffffff?text=Team+Photo+2024",
-      alt: "Team Photo 2024",
+      src: "/images/DSC00814.JPG",
+      alt: "Alex Young Vs Princeton 2023",
     },
     {
-      src: "https://via.placeholder.com/800x400/A51C30/ffffff?text=Training+Session",
-      alt: "Training Session",
+      src: "/images/DSC00683.JPG",
+      alt: "Alex Kim Vs Dartmouth 2023",
     },
     {
-      src: "https://via.placeholder.com/800x400/A51C30/ffffff?text=Championship+Game",
-      alt: "Championship Game",
+      src: "/images/DSC01113.JPG",
+      alt: "Alex Kim Vs Yale 2023",
     },
     {
-      src: "https://via.placeholder.com/800x400/A51C30/ffffff?text=Alumni+Event",
-      alt: "Alumni Event",
+      src: "/images/DSC01341.JPG",
+      alt: "Arjun Akwei Vs Brown 2023",
     },
   ];
 
@@ -143,48 +143,7 @@ export default function Home() {
           </div>
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
             <div>
-              <p className="text-lg text-gray-600">
-                Harvard Men&apos;s Club Soccer represents the finest tradition
-                of collegiate athletics, combining competitive excellence with
-                academic achievement. Our team has been a cornerstone of
-                Harvard&apos;s athletic community for decades.
-              </p>
-              <p className="mt-4 text-lg text-gray-600">
-                We compete at the highest level while fostering lifelong
-                friendships and professional networks that extend far beyond the
-                soccer field.
-              </p>
-            </div>
-            <div className="mt-8 lg:mt-0">
-              <div className="grid grid-cols-1 gap-6">
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-[#A51C30]">
-                    Excellence
-                  </h3>
-                  <p className="mt-2 text-gray-600">
-                    Striving for the highest standards in academics, athletics,
-                    and character.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-[#A51C30]">
-                    Brotherhood
-                  </h3>
-                  <p className="mt-2 text-gray-600">
-                    Building lifelong bonds through shared experiences and
-                    mutual support.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-[#A51C30]">
-                    Legacy
-                  </h3>
-                  <p className="mt-2 text-gray-600">
-                    Creating lasting impact that extends beyond our time at
-                    Harvard.
-                  </p>
-                </div>
-              </div>
+              <p className="text-lg text-gray-600">{/* Insert Text Here */}</p>
             </div>
           </div>
         </div>
@@ -197,29 +156,40 @@ export default function Home() {
                 Fall Tryouts 2025
               </h2>
             </div>
-            <div className="max-w-2xl mx-auto">
-              <div className="bg-gray-50 rounded-lg p-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                  Tryout Information
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Date:</span>
-                    <span className="font-medium">September 1-3, 2025</span>
+            <div className="max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="bg-gray-50 rounded-lg p-8">
+                  <div className="space-y-4">
+                    <h3 className="text-l font-bold text-gray-900">Day 1</h3>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Date:</span>
+                      <span className="font-medium">September 6, 2025</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Time:</span>
+                      <span className="font-medium">2 PM - 5 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Location:</span>
+                      <span className="font-medium">Cumnock Fields</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Time:</span>
-                    <span className="font-medium">4:00 PM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Location:</span>
-                    <span className="font-medium">Harvard Athletic Fields</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">What to bring:</span>
-                    <span className="font-medium">
-                      Cleats, shin guards, water
-                    </span>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-8">
+                  <div className="space-y-4">
+                    <h3 className="text-l font-bold text-gray-900">Day 2</h3>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Date:</span>
+                      <span className="font-medium">September 7, 2025</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Time:</span>
+                      <span className="font-medium">3:30 PM - 5:30 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Location:</span>
+                      <span className="font-medium">Cumnock Fields</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -234,21 +204,14 @@ export default function Home() {
           </div>
           <div className="max-w-2xl mx-auto">
             <div className="bg-white rounded-lg p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                Get In Touch
-              </h3>
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Email:</span>
-                  <span className="font-medium">hmcs@harvard.edu</span>
+                  <span className="font-medium"></span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Instagram:</span>
-                  <span className="font-medium">@harvardmensclubsoccer</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">For tryouts:</span>
-                  <span className="font-medium">Contact our captains</span>
+                  <span className="font-medium">@harvardmcsoc</span>
                 </div>
               </div>
             </div>
