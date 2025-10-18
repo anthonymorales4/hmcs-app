@@ -5,6 +5,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import { formatInstagramUrl } from "@/lib/utils";
 
 export default function ContactInfoCard({ profile }) {
   if (!profile) return null;
@@ -26,13 +27,13 @@ export default function ContactInfoCard({ profile }) {
     },
     {
       label: "LinkedIn",
-      value: linkedin_url ? "View Profile" : null,
+      value: linkedin_url ? profile.full_name : null,
       icon: <LinkedInIcon className="h-5 w-5 text-gray-400" />,
       link: linkedin_url,
     },
     {
       label: "Instagram",
-      value: instagram_url ? "View Profile" : null,
+      value: instagram_url ? formatInstagramUrl(instagram_url) : null,
       icon: <InstagramIcon className="h-5 w-5 text-gray-400" />,
       link: instagram_url,
     },

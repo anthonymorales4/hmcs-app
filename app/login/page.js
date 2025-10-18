@@ -41,23 +41,9 @@ export default function LoginPage() {
         throw signInError;
       }
 
-      if (data.user && !data.user.email_confirmed_at) {
-        // Email confirmation required
-        setError(
-          "Please check your email to confirm your account before logging in."
-        );
-      } else {
-        console.log("Pushing to homepage");
-        router.push("/");
-      }
+      router.push("/");
     } catch (error) {
-      if (error.message.includes("Invalid login credentials")) {
-        setError("Invalid email or password");
-      } else if (error.message.includes("Email not confirmed")) {
-        setError("Please check your email to confirm your account");
-      } else {
-        setError(error.message);
-      }
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -65,10 +51,8 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Login Form Section */}
       <div className="flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20 bg-white">
         <div className="w-full max-w-sm mx-auto">
-          {/* Harvard Logo */}
           <div className="text-center mb-8">
             <Image
               src="/images/HarvardLogo.svg"
@@ -79,15 +63,11 @@ export default function LoginPage() {
             />
             <h1 className="text-3xl font-bold text-gray-900">LOGIN</h1>
           </div>
-
-          {/* Error Message */}
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm mb-6">
               {error}
             </div>
           )}
-
-          {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="relative">
               <label htmlFor="email" className="sr-only">
@@ -108,7 +88,6 @@ export default function LoginPage() {
                 onChange={handleInputChange}
               />
             </div>
-
             <div className="relative">
               <label htmlFor="password" className="sr-only">
                 Password
@@ -128,7 +107,6 @@ export default function LoginPage() {
                 onChange={handleInputChange}
               />
             </div>
-
             <div className="text-left">
               <Link
                 href="/forgot-password"
@@ -137,7 +115,6 @@ export default function LoginPage() {
                 Forgot your password?
               </Link>
             </div>
-
             <div>
               <button
                 type="submit"
@@ -147,7 +124,6 @@ export default function LoginPage() {
                 {loading ? "Logging In..." : "Login"}
               </button>
             </div>
-
             <div className="text-center">
               <p className="text-sm text-gray-600">
                 Don&apos;t have an account?{" "}
@@ -162,8 +138,6 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
-
-      {/* Image Section */}
       <div className="hidden lg:flex lg:flex-1 lg:relative">
         <Image
           src="/DSC01558.JPG"

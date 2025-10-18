@@ -11,7 +11,7 @@ export default function PlayerCard({
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="relative h-48 bg-gray-100">
+      <div className="relative h-48 bg-gray-200">
         {profileImageUrl ? (
           <Image
             src={profileImageUrl}

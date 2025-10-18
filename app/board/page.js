@@ -4,105 +4,84 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 import YearDropdown from "../../components/ui/YearDropdown";
+import { formatBoardPositionTitle, getBoardPositionOrder } from "@/lib/utils";
 
 export default function BoardPage() {
   const [selectedYear, setSelectedYear] = useState("2024-2025");
   const [boardData, setBoardData] = useState(null);
   const [profileData, setProfileData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    async function loadBoardData(year) {
+      setLoading(true);
+      try {
+        const response = await fetch(`/data/board/${year}.json`);
+        if (response.ok) {
+          const data = await response.json();
+          setBoardData(data);
+
+          if (data.boardMembers) {
+            await loadProfileData(data.boardMembers);
+          }
+        } else {
+          setBoardData(null);
+          setProfileData({});
+        }
+      } catch (error) {
+        console.error("Error loading board data:", error);
+        setBoardData(null);
+        setProfileData({});
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    async function loadProfileData(boardMembers) {
+      try {
+        const names = boardMembers.map((member) => member.name);
+
+        // Query Supabase for board members
+        const { data: profiles, error } = await supabase
+          .from("profiles")
+          .select(
+            "full_name, graduation_year, house, hometown, profile_image_url"
+          )
+          .in("full_name", names);
+
+        if (error) {
+          console.error("Error fetching profiles:", error);
+          return;
+        }
+
+        // Create an object of objects to store profile data
+        const profileData = {};
+        profiles?.forEach((profile) => {
+          profileData[profile.full_name] = profile;
+        });
+
+        setProfileData(profileData);
+      } catch (error) {
+        console.error("Error loading profile data:", error);
+      }
+    }
+
     loadBoardData(selectedYear);
   }, [selectedYear]);
 
-  const loadBoardData = async (year) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`/data/board/${year}.json`);
-      if (response.ok) {
-        const data = await response.json();
-        setBoardData(data);
-
-        // Load profile data from Supabase for each board member
-        if (data.boardMembers) {
-          await loadProfileData(data.boardMembers);
-        }
-      } else {
-        setBoardData(null);
-        setProfileData({});
-      }
-    } catch (error) {
-      console.error("Error loading board data:", error);
-      setBoardData(null);
-      setProfileData({});
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadProfileData = async (boardMembers) => {
-    try {
-      const names = boardMembers.map((member) => member.name);
-
-      const { data: profiles, error } = await supabase
-        .from("profiles")
-        .select(
-          "full_name, graduation_year, house, hometown, profile_image_url"
-        )
-        .in("full_name", names);
-
-      if (error) {
-        console.error("Error fetching profiles:", error);
-        return;
-      }
-
-      // Create a lookup object
-      const profileLookup = {};
-      profiles?.forEach((profile) => {
-        profileLookup[profile.full_name] = profile;
-      });
-
-      setProfileData(profileLookup);
-    } catch (error) {
-      console.error("Error loading profile data:", error);
-    }
-  };
-
-  const groupBoardMembers = () => {
+  const getBoardMembersByPosition = () => {
     if (!boardData || !boardData.boardMembers) return {};
 
-    const grouped = {};
+    const membersByPosition = {};
     boardData.boardMembers.forEach((member) => {
       const position = member.position;
-      if (!grouped[position]) {
-        grouped[position] = [];
+      if (!membersByPosition[position]) {
+        membersByPosition[position] = [];
       }
-      grouped[position].push(member);
+      membersByPosition[position].push(member);
     });
 
-    return grouped;
-  };
-
-  const getPositionOrder = () => {
-    return ["President", "Captain", "Treasurer", "Social Chair"];
-  };
-
-  const formatPositionTitle = (position, members) => {
-    if (position === "Captain" && members.length > 1) {
-      return "Captains";
-    }
-    return position;
-  };
-
-  const formatPositionWithNames = (position, members) => {
-    const positionTitle = formatPositionTitle(position, members);
-    if (members.length === 1) {
-      return `${positionTitle}: ${members[0].name}`;
-    } else if (members.length > 1) {
-      const names = members.map((m) => m.name).join(" & ");
-      return `${positionTitle}: ${names}`;
-    }
-    return positionTitle;
+    return membersByPosition;
   };
 
   return (
@@ -129,9 +108,9 @@ export default function BoardPage() {
           boardData.boardMembers &&
           boardData.boardMembers.length > 0 ? (
           <div className="space-y-12">
-            {getPositionOrder().map((position) => {
-              const grouped = groupBoardMembers();
-              const members = grouped[position];
+            {getBoardPositionOrder().map((position) => {
+              const boardMembersByPosition = getBoardMembersByPosition();
+              const members = boardMembersByPosition[position];
 
               if (!members || members.length === 0) return null;
 
@@ -141,8 +120,8 @@ export default function BoardPage() {
                   className="bg-white rounded-lg shadow-md overflow-hidden"
                 >
                   <div className="px-6 py-4 border-b border-gray-200">
-                    <h2 className="text-2xl font-bold text-gray-900 uppercase tracking-wide">
-                      {formatPositionWithNames(position, members)}
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      {formatBoardPositionTitle(position, members)}
                     </h2>
                   </div>
 
@@ -155,9 +134,8 @@ export default function BoardPage() {
                             key={`${member.position}-${index}`}
                             className="flex flex-col sm:flex-row gap-6"
                           >
-                            {/* Image */}
                             <div className="flex-shrink-0">
-                              <div className="w-32 h-32 bg-gray-200 rounded-lg overflow-hidden">
+                              <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200">
                                 <Image
                                   src={
                                     profile?.profile_image_url ||
@@ -166,23 +144,20 @@ export default function BoardPage() {
                                   alt={member.name}
                                   width={128}
                                   height={128}
-                                  className="w-full h-full object-cover"
+                                  className={`w-full h-full ${
+                                    profile?.profile_image_url
+                                      ? "object-cover"
+                                      : "object-contain p-6"
+                                  }`}
                                 />
                               </div>
                             </div>
-
-                            {/* Text Content */}
                             <div className="flex-1">
                               <div className="space-y-3">
                                 <div className="text-lg font-semibold text-gray-900">
                                   {member.name}
                                 </div>
                                 <div className="text-sm text-gray-600 space-y-1">
-                                  {profile?.graduation_year && (
-                                    <div>
-                                      Class of {profile.graduation_year}
-                                    </div>
-                                  )}
                                   {profile?.house && <div>{profile.house}</div>}
                                   {profile?.hometown && (
                                     <div>{profile.hometown}</div>
@@ -190,6 +165,11 @@ export default function BoardPage() {
                                   {!profile && (
                                     <div className="text-gray-400 italic">
                                       Profile not found
+                                    </div>
+                                  )}
+                                  {profile?.graduation_year && (
+                                    <div>
+                                      Class of {profile.graduation_year}
                                     </div>
                                   )}
                                 </div>
@@ -204,18 +184,10 @@ export default function BoardPage() {
               );
             })}
           </div>
-        ) : boardData === null ? (
-          <div className="text-center py-8">
-            <div className="text-lg text-gray-600">
-              {selectedYear === "2020-2021"
-                ? "No board information available for the 2020-2021 season due to COVID-19."
-                : "No board information available for this year."}
-            </div>
-          </div>
         ) : (
           <div className="text-center py-8">
             <div className="text-lg text-gray-600">
-              No board members listed for this year.
+              No board information available for this year.
             </div>
           </div>
         )}

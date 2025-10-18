@@ -82,7 +82,7 @@ export default function AlumniDirectoryPage() {
   useEffect(() => {
     let allAlumni = [...alumniData];
 
-    // Apply search filter
+    // Apply search
     if (searchTerm) {
       const searchTermLower = searchTerm.toLowerCase();
       allAlumni = allAlumni.filter((alumni) => {
@@ -121,6 +121,7 @@ export default function AlumniDirectoryPage() {
     setFilteredAlumni(allAlumni);
   }, [searchTerm, filters, alumniData]);
 
+  // Event handlers
   const handleSearchChange = (term) => {
     setSearchTerm(term);
   };
@@ -132,31 +133,13 @@ export default function AlumniDirectoryPage() {
     }));
   };
 
+  // Loading state
   if (loading) {
     return (
       <ProtectedRoute>
-        <div className="min-h-screen bg-gray-50 py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <div className="animate-pulse">
-                <div className="h-12 bg-gray-300 rounded w-1/2 mx-auto mb-8"></div>
-                <div className="h-10 bg-gray-200 rounded w-full max-w-md mx-auto mb-4"></div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[...Array(8)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="bg-white rounded-lg shadow-md overflow-hidden"
-                    >
-                      <div className="h-48 bg-gray-200"></div>
-                      <div className="p-4 space-y-2">
-                        <div className="h-4 bg-gray-200 rounded"></div>
-                        <div className="h-3 bg-gray-100 rounded"></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+        <div className="text-center py-8">
+          <div className="text-lg text-gray-600">
+            Loading alumni information...
           </div>
         </div>
       </ProtectedRoute>
@@ -171,7 +154,7 @@ export default function AlumniDirectoryPage() {
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               Alumni Directory
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 mb-4 text-lg text-gray-600">
               Browse and connect with alumni.
             </p>
 
@@ -193,7 +176,7 @@ export default function AlumniDirectoryPage() {
                 <AlumniCard
                   key={`${alumni.name}-${index}`}
                   name={alumni.name}
-                  profileData={alumni.profile}
+                  profile={alumni.profile}
                 />
               ))}
             </div>

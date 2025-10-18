@@ -22,7 +22,7 @@ export default function CareerInfoCard({ profile }) {
 
   const careerInfoFields = [
     {
-      label: "Current Job",
+      label: "Job",
       value: current_job,
       icon: <WorkIcon className="h-5 w-5 text-gray-400" />,
     },
@@ -32,7 +32,7 @@ export default function CareerInfoCard({ profile }) {
       icon: <BusinessIcon className="h-5 w-5 text-gray-400" />,
     },
     {
-      label: "Current Location",
+      label: "Location",
       value: current_location,
       icon: <LocationOnIcon className="h-5 w-5 text-gray-400" />,
     },

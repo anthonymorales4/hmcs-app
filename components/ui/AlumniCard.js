@@ -2,18 +2,18 @@ import Image from "next/image";
 import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
 
-export default function AlumniCard({ name, profileData }) {
+export default function AlumniCard({ name, profile }) {
   const nameParts = name.trim().split(" ");
   const firstName = nameParts.slice(0, -1).join(" ");
   const lastName = nameParts[nameParts.length - 1];
 
-  const profileImageUrl = profileData?.profile_image_url;
-  const currentJob = profileData?.current_job;
-  const currentCompany = profileData?.current_company;
+  const profileImageUrl = profile?.profile_image_url;
+  const currentJob = profile?.current_job;
+  const currentCompany = profile?.current_company;
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="relative h-48 bg-gray-100">
+      <div className="relative h-48 bg-gray-200">
         {profileImageUrl ? (
           <Image
             src={profileImageUrl}

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import RoleBadge from "./RoleBadge";
 
 export default function ProfileHeader({ profile, isEditing, onEditClick }) {
@@ -13,26 +14,16 @@ export default function ProfileHeader({ profile, isEditing, onEditClick }) {
   return (
     <div className="rounded-lg overflow-hidden">
       <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-center gap-8">
-        {/* Profile Information */}
         <div className="flex-1 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-2">
-              {/* Name */}
-              <h1 className="text-3xl font-bold text-gray-900 uppercase tracking-wide">
-                {full_name}
-              </h1>
-
-              {/* Class Year */}
+              <h1 className="text-3xl font-bold text-gray-900">{full_name}</h1>
               <h3 className="text-lg italic text-gray-700">
                 Class of {graduation_year}
               </h3>
-
-              {/* Position */}
               {position && (
                 <p className="text-gray-600 font-medium">{position}</p>
               )}
-
-              {/* Role Badges */}
               <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                 <RoleBadge role={role} />
                 {isBoard &&
@@ -46,8 +37,6 @@ export default function ProfileHeader({ profile, isEditing, onEditClick }) {
                   ))}
               </div>
             </div>
-
-            {/* Edit Button */}
             <div className="flex items-center">
               <button
                 onClick={onEditClick}

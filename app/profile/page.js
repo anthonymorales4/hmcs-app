@@ -9,11 +9,12 @@ import AboutMeCard from "../../components/ui/AboutMeCard";
 import PersonalInfoCard from "../../components/ui/PersonalInfoCard";
 import ContactInfoCard from "../../components/ui/ContactInfoCard";
 import CareerInfoCard from "../../components/ui/CareerInfoCard";
+import ProfileEditForm from "../../components/ui/ProfileEditForm";
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const { user, profile: authProfile, loading } = useAuth();
+  const { profile: authProfile, loading } = useAuth();
 
   useEffect(() => {
     if (authProfile) {
@@ -25,11 +26,18 @@ export default function ProfilePage() {
     setIsEditing(!isEditing);
   }
 
+  function handleProfileUpdate(updatedProfile) {
+    setProfile(updatedProfile);
+    setIsEditing(false);
+  }
+
   if (loading) {
     return (
       <ProtectedRoute>
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A51C30]"></div>
+        <div className="text-center py-8">
+          <div className="text-lg text-gray-600">
+            Loading profile information...
+          </div>
         </div>
       </ProtectedRoute>
     );
@@ -39,55 +47,34 @@ export default function ProfilePage() {
     <ProtectedRoute>
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Profile Header */}
           <ProfileHeader
             profile={profile}
             isEditing={isEditing}
             onEditClick={handleToggleEdit}
           />
-
-          {/* Profile Completion Bar */}
           {profile && (
             <div className="mt-6">
               <ProfileCompletionBar profile={profile} />
             </div>
           )}
-
-          {/* Profile Content */}
           {isEditing ? (
             <div className="mt-6">
-              {/* TODO: ProfileEditForm component will go here */}
-              <div className="bg-white shadow rounded-lg p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
-                  Edit Profile
-                </h3>
-                <p className="text-gray-500">
-                  ProfileEditForm component coming soon...
-                </p>
-                <button
-                  onClick={handleToggleEdit}
-                  className="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md text-sm 
-          font-medium transition-colors"
-                >
-                  Cancel for now
-                </button>
-              </div>
+              <ProfileEditForm
+                profile={profile}
+                onCancel={handleToggleEdit}
+                onUpdate={handleProfileUpdate}
+              />
             </div>
           ) : (
             profile && (
               <>
-                {/* About Me Section - Full Width */}
                 <div className="mt-6">
                   <AboutMeCard profile={profile} />
                 </div>
-
-                {/* Two Column Layout - Personal Info & Contact Info */}
                 <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <PersonalInfoCard profile={profile} />
                   <ContactInfoCard profile={profile} />
                 </div>
-
-                {/* Career Information - Full Width (Alumni Only) */}
                 {profile.role === "alumni" && (
                   <div className="mt-6">
                     <CareerInfoCard profile={profile} />

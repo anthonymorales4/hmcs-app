@@ -9,7 +9,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
 import SchoolIcon from "@mui/icons-material/School";
 import { supabase } from "../../lib/supabase";
-import { validatePlayerName } from "../../lib/rosterValidation";
+import { validatePlayerName } from "../../lib/utils";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
