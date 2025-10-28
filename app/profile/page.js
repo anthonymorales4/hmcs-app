@@ -31,6 +31,10 @@ export default function ProfilePage() {
     setIsEditing(false);
   }
 
+  function handleImageUpdate(updatedProfile) {
+    setProfile(updatedProfile);
+  }
+
   if (loading) {
     return (
       <ProtectedRoute>
@@ -51,6 +55,7 @@ export default function ProfilePage() {
             profile={profile}
             isEditing={isEditing}
             onEditClick={handleToggleEdit}
+            onImageUpdate={handleImageUpdate}
           />
           {profile && (
             <div className="mt-6">

@@ -1,7 +1,7 @@
 {
   "academicYear": "2024-2025",
   "competitions": {
-    "nirsa": {
+    "NIRSA Region 1": {
       "season": "2024",
       "teams": [
         {
@@ -105,9 +105,8 @@
         }
       ]
     },
-    "ivies": {
+    "Ivy League Championships": {
       "season": "2025",
-      "competition": "ivies",
       "teams": [
         {
           "id": 1,
