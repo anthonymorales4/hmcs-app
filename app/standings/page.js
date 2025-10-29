@@ -116,19 +116,16 @@ export default function StandingsPage() {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {getTeams().map((team, index) => (
-                      <tr key={team.id}>
+                      <tr
+                        key={team.id}
+                        className="bg-gray-50 hover:bg-gray-100"
+                      >
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="text-sm font-medium text-gray-900 mr-2">
                               {index + 1}.
                             </div>
-                            <div
-                              className={`text-sm ${
-                                isHarvard(team.name)
-                                  ? "font-bold text-[#A51C30]"
-                                  : "font-medium text-gray-900"
-                              }`}
-                            >
+                            <div className="text-sm font-medium">
                               {team.name}
                             </div>
                           </div>
@@ -153,7 +150,7 @@ export default function StandingsPage() {
                             ? `+${team.goalDifference}`
                             : team.goalDifference}
                         </td>
-                        <td className="px-3 py-4 whitespace-nowrap text-center text-sm font-bold text-gray-900">
+                        <td className="px-3 py-4 whitespace-nowrap text-center text-sm text-gray-900">
                           {team.points}
                         </td>
                       </tr>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
+import SchoolIcon from "@mui/icons-material/School";
 
 export default function AlumniCard({ name, profile }) {
   const nameParts = name.trim().split(" ");
@@ -57,6 +58,10 @@ export default function AlumniCard({ name, profile }) {
                 <span>{currentCompany}</span>
               </div>
             )}
+            <div className="flex items-center gap-2">
+              <SchoolIcon className="text-[#A51C30]" fontSize="small" />
+              <span>Class of {profile.graduation_year}</span>
+            </div>
           </div>
         )}
       </div>
