@@ -86,7 +86,6 @@ export default function RosterPage() {
             onYearChange={handleYearChange}
           />
         </div>
-
         {rosterData && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {playerData.map((player, index) => (
@@ -99,7 +98,6 @@ export default function RosterPage() {
             ))}
           </div>
         )}
-
         {!rosterData && !loading && (
           <div className="text-center py-12">
             <p className="text-lg text-gray-600">

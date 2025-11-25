@@ -97,7 +97,6 @@ export default function BoardPage() {
             onYearChange={setSelectedYear}
           />
         </div>
-
         {loading ? (
           <div className="text-center py-8">
             <div className="text-lg text-gray-600">
@@ -124,7 +123,6 @@ export default function BoardPage() {
                       {formatBoardPositionTitle(position, members)}
                     </h2>
                   </div>
-
                   <div className="p-6">
                     <div className="grid gap-8">
                       {members.map((member, index) => {

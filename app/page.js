@@ -45,11 +45,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Carousel Section */}
       <div className="relative bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="relative">
-            {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
               className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors cursor-pointer"
@@ -69,7 +67,6 @@ export default function Home() {
                 />
               </svg>
             </button>
-
             <button
               onClick={nextSlide}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors cursor-pointer"
@@ -89,8 +86,6 @@ export default function Home() {
                 />
               </svg>
             </button>
-
-            {/* Image */}
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
                 src={carouselImages[currentSlide].src}
@@ -99,8 +94,6 @@ export default function Home() {
                 className="object-cover"
                 priority={currentSlide === 0}
               />
-
-              {/* Title and Tagline */}
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
                 <div className="text-center text-white">
                   <h1 className="text-4xl font-bold sm:text-6xl drop-shadow-lg">
@@ -111,8 +104,6 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-
-              {/* Navigation Dots */}
               <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
                 <div className="flex space-x-2">
                   {carouselImages.map((_, index) => (
@@ -133,22 +124,17 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* Content Sections */}
       <div className="bg-gray-50">
-        {/* About Us Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">About Us</h2>
           </div>
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
             <div>
-              <p className="text-lg text-gray-600">{/* Insert Text Here */}</p>
+              <p className="text-lg text-gray-600"></p>
             </div>
           </div>
         </div>
-
-        {/* Fall Tryouts Section */}
         <div className="bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="text-center mb-8">
@@ -196,8 +182,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Contact Us Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900">Contact Us</h2>

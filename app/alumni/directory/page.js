@@ -157,7 +157,6 @@ export default function AlumniDirectoryPage() {
             <p className="mt-4 mb-4 text-lg text-gray-600">
               Browse and connect with alumni.
             </p>
-
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-8">
               <SearchBar
                 searchTerm={searchTerm}
@@ -169,7 +168,6 @@ export default function AlumniDirectoryPage() {
               />
             </div>
           </div>
-
           {filteredAlumni.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {filteredAlumni.map((alumni, index) => (

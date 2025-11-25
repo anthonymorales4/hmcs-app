@@ -86,7 +86,6 @@ export default function SignUpPage() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Image Section */}
       <div className="hidden lg:flex lg:flex-1 lg:relative">
         <Image
           src="/DSC01096.JPG"
@@ -98,11 +97,8 @@ export default function SignUpPage() {
         />
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
-
-      {/* Sign Up Form Section*/}
       <div className="flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20 bg-white">
         <div className="w-full max-w-sm mx-auto">
-          {/* Harvard Logo */}
           <div className="text-center mb-8">
             <Image
               src="/images/HarvardLogo.svg"
@@ -113,22 +109,16 @@ export default function SignUpPage() {
             />
             <h1 className="text-3xl font-bold text-gray-900">SIGN UP</h1>
           </div>
-
-          {/* Error Message */}
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
               {error}
             </div>
           )}
-
-          {/* Success Message */}
           {success && (
             <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md text-sm mb-6">
               {success}
             </div>
           )}
-
-          {/* Sign Up Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="relative">
               <label htmlFor="name" className="sr-only">
@@ -149,7 +139,6 @@ export default function SignUpPage() {
                 onChange={handleInputChange}
               />
             </div>
-
             <div className="relative">
               <label htmlFor="email" className="sr-only">
                 Email address
@@ -169,7 +158,6 @@ export default function SignUpPage() {
                 onChange={handleInputChange}
               />
             </div>
-
             <div className="relative">
               <label htmlFor="password" className="sr-only">
                 Password
@@ -189,7 +177,6 @@ export default function SignUpPage() {
                 onChange={handleInputChange}
               />
             </div>
-
             <div className="relative">
               <label htmlFor="graduationYear" className="sr-only">
                 Graduation Year
@@ -210,7 +197,6 @@ export default function SignUpPage() {
                 onChange={handleInputChange}
               />
             </div>
-
             <div>
               <button
                 type="submit"
@@ -220,7 +206,6 @@ export default function SignUpPage() {
                 {loading ? "Creating Account..." : "Sign Up"}
               </button>
             </div>
-
             <div className="text-center">
               <p className="text-sm text-gray-600">
                 Already have an account?{" "}

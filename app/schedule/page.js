@@ -42,10 +42,14 @@ export default function SchedulePage() {
   const getDaySuffix = (day) => {
     if (day >= 11 && day <= 13) return "th";
     switch (day % 10) {
-      case 1: return "st";
-      case 2: return "nd";
-      case 3: return "rd";
-      default: return "th";
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
     }
   };
 
@@ -54,15 +58,20 @@ export default function SchedulePage() {
     const [time, period] = timeString.split(" ");
     const [hour, minute] = time.split(":");
     const formattedHour = parseInt(hour, 10);
-    const formattedTime = minute === "00" 
+    const formattedTime =
+      minute === "00"
         ? `${formattedHour}${period}`
         : `${formattedHour}:${minute}${period}`;
     return formattedTime;
   };
 
   const isHarvardHome = (game, teamName) => {
-    return game.homeTeam.toLowerCase().includes("harvard") || 
-           game.homeTeam.toLowerCase().includes(teamName?.toLowerCase().split(" ")[0] || "harvard");
+    return (
+      game.homeTeam.toLowerCase().includes("harvard") ||
+      game.homeTeam
+        .toLowerCase()
+        .includes(teamName?.toLowerCase().split(" ")[0] || "harvard")
+    );
   };
 
   const getOpponent = (game, teamName) => {
@@ -86,19 +95,25 @@ export default function SchedulePage() {
     let allGames = [];
 
     if (scheduleData.seasons.nirsa) {
-      allGames = [...allGames, ...scheduleData.seasons.nirsa.games.map(game => ({
+      allGames = [
+        ...allGames,
+        ...scheduleData.seasons.nirsa.games.map((game) => ({
           ...game,
           competition: "nirsa",
-        teamName: scheduleData.seasons.nirsa.teamName
-      }))];
+          teamName: scheduleData.seasons.nirsa.teamName,
+        })),
+      ];
     }
 
     if (scheduleData.seasons.ivies) {
-      allGames = [...allGames, ...scheduleData.seasons.ivies.games.map(game => ({
+      allGames = [
+        ...allGames,
+        ...scheduleData.seasons.ivies.games.map((game) => ({
           ...game,
           competition: "ivies",
-        teamName: scheduleData.seasons.ivies.teamName
-      }))];
+          teamName: scheduleData.seasons.ivies.teamName,
+        })),
+      ];
     }
 
     // Sort by date descending (most recent first)
@@ -107,27 +122,38 @@ export default function SchedulePage() {
 
   const getResultColor = (result) => {
     switch (result) {
-      case "WIN": return "bg-green-500";
-      case "LOSS": return "bg-red-500";
-      case "TIE": return "bg-yellow-500";
-      default: return "bg-gray-500";
+      case "WIN":
+        return "bg-green-500";
+      case "LOSS":
+        return "bg-red-500";
+      case "TIE":
+        return "bg-yellow-500";
+      default:
+        return "bg-gray-500";
     }
   };
 
   const getResultLetter = (result) => {
     switch (result) {
-      case "WIN": return "W";
-      case "LOSS": return "L";
-      case "TIE": return "T";
-      default: return "-";
+      case "WIN":
+        return "W";
+      case "LOSS":
+        return "L";
+      case "TIE":
+        return "T";
+      default:
+        return "-";
     }
   };
 
   const getCompetitionBanner = (competition) => {
     switch (competition) {
-      case "nirsa": return "NIRSA Region 1";
-      case "ivies": return "Ivy League Championships";
-      default: return "";
+      case "nirsa":
+        return "NIRSA Region 1";
+      case "ivies":
+        return "Ivy League Championships";
+      default:
+        return "";
     }
   };
 
@@ -144,7 +170,6 @@ export default function SchedulePage() {
             onYearChange={setSelectedYear}
           />
         </div>
-
         {loading ? (
           <div className="text-center py-8">
             <div className="text-lg text-gray-600">Loading schedule...</div>
@@ -153,18 +178,24 @@ export default function SchedulePage() {
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <div className="divide-y divide-gray-200">
               {getAllGames().map((game) => (
-                <div key={`${game.competition}-${game.id}`} className="p-6 flex items-center justify-between">
-                  {/* Left side - Teams and Date/Time */}
+                <div
+                  key={`${game.competition}-${game.id}`}
+                  className="p-6 flex items-center justify-between"
+                >
                   <div className="flex-1">
                     <div className="flex items-center space-x-4">
                       <div className="text-lg font-semibold text-gray-900">
-                        {game.teamName} {isHarvardHome(game, game.teamName) ? "vs." : "@"} {getOpponent(game, game.teamName)}
+                        {game.teamName}{" "}
+                        {isHarvardHome(game, game.teamName) ? "vs." : "@"}{" "}
+                        {getOpponent(game, game.teamName)}
                       </div>
-                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                      <span
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                           game.competition === "nirsa"
                             ? "bg-blue-100 text-blue-800"
                             : "bg-purple-100 text-purple-800"
-                      }`}>
+                        }`}
+                      >
                         {getCompetitionBanner(game.competition)}
                       </span>
                     </div>
@@ -172,15 +203,18 @@ export default function SchedulePage() {
                       {formatDate(game.date)} / {formatTime(game.time)}
                     </div>
                   </div>
-
-                  {/* Right side - Score and Result */}
                   <div className="flex items-center space-x-4">
                     <div className="text-right">
                       <div className="text-lg font-semibold text-gray-900">
-                        {getHarvardScore(game, game.teamName)} - {getOpponentScore(game, game.teamName)}
+                        {getHarvardScore(game, game.teamName)} -{" "}
+                        {getOpponentScore(game, game.teamName)}
                       </div>
                     </div>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold ${getResultColor(game.result)}`}>
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold ${getResultColor(
+                        game.result
+                      )}`}
+                    >
                       {getResultLetter(game.result)}
                     </div>
                   </div>
@@ -198,7 +232,9 @@ export default function SchedulePage() {
           </div>
         ) : (
           <div className="text-center py-8">
-            <div className="text-lg text-gray-600">No games scheduled for this year.</div>
+            <div className="text-lg text-gray-600">
+              No games scheduled for this year.
+            </div>
           </div>
         )}
       </div>

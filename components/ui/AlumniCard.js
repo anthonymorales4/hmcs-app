@@ -33,7 +33,6 @@ export default function AlumniCard({ name, profile }) {
           </div>
         )}
       </div>
-
       <div className="p-4">
         <div className="mb-3">
           <div className="text-left">
@@ -43,7 +42,6 @@ export default function AlumniCard({ name, profile }) {
             </span>
           </div>
         </div>
-
         {(currentJob || currentCompany) && (
           <div className="space-y-2 text-sm text-gray-600">
             {currentJob && (

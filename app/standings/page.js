@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import YearDropdown from "../../components/ui/YearDropdown";
-import { isHarvard } from "@/lib/utils";
 
 export default function StandingsPage() {
   const [selectedYear, setSelectedYear] = useState("2024-2025");
@@ -56,7 +55,6 @@ export default function StandingsPage() {
             onYearChange={setSelectedYear}
           />
         </div>
-
         {loading ? (
           <div className="text-center py-8">
             <div className="text-lg text-gray-600">Loading standings...</div>
