@@ -88,4 +88,6 @@ I played on the Harvard Men's Club Soccer team from 2021-2024. I loved being a p
 
 ## Technical Implementation
 
-- For all asynchronous functions, please use function declarations rather than arrow functions
+- Please use function declarations for server components and API routes.
+- Plase use arrow functions for event handlers, callbacks, and helper functions.
+- Use import { supabase } from "@/lib/supabase";
