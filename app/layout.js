@@ -1,4 +1,4 @@
-import { DM_Sans, Figtree } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "../components/LayoutWrapper";
 import { AuthProvider } from "../contexts/AuthContext";

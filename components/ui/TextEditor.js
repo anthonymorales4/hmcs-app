@@ -40,7 +40,7 @@ export default function TextEditor({ content, onChange }) {
     editorProps: {
       attributes: {
         class:
-          "tiptap prose prose-sm max-w-none focus:outline-none min-h-[150px] p-4 border border-gray-300 rounded-md",
+          "tiptap prose prose-sm max-w-none focus:outline-none min-h-[150px] p-5 bg-white text-gray-700 leading-relaxed",
       },
     },
   });
@@ -73,8 +73,8 @@ export default function TextEditor({ content, onChange }) {
     <button
       type="button"
       onClick={onClick}
-      className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-        isActive ? "bg-gray-300 text-[#A51C30]" : "text-gray-700"
+      className={`p-2 rounded-lg transition-all-smooth text-gray-500 ${
+        isActive ? "bg-gray-200 shadow-sm" : "hover:bg-gray-100"
       }`}
       title={label}
     >
@@ -83,7 +83,7 @@ export default function TextEditor({ content, onChange }) {
   );
 
   return (
-    <div className="border border-gray-300 rounded-md overflow-hidden">
+    <div className="border border-gray-200 rounded-xl overflow-hidden shadow-md focus-within:shadow-lg focus-within:border-gray-300 transition-all-smooth">
       <style jsx global>{`
         .tiptap ul {
           list-style-type: disc;
@@ -99,7 +99,7 @@ export default function TextEditor({ content, onChange }) {
           margin: 0.25rem 0;
         }
       `}</style>
-      <div className="flex items-center gap-1 p-2 bg-gray-50 border-b border-gray-300 flex-wrap">
+      <div className="flex items-center gap-2 p-3 bg-gray-50 border-b-2 border-b-gray-100 flex-wrap">
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           isActive={editor.isActive("bold")}

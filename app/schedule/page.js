@@ -158,60 +158,64 @@ export default function SchedulePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-left mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Schedule</h1>
-          <p className="mt-4 text-lg text-gray-600">
+        <div className="text-left mb-12">
+          <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">Schedule</h1>
+          <p className="mt-4 text-xl text-gray-600 leading-relaxed">
             View upcoming games and match schedules.
           </p>
+          <div className="gradient-divider my-6 w-32"></div>
           <YearDropdown
             selectedYear={selectedYear}
             onYearChange={setSelectedYear}
           />
         </div>
         {loading ? (
-          <div className="text-center py-8">
-            <div className="text-lg text-gray-600">Loading schedule...</div>
+          <div className="text-center py-12">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
+              <div className="text-xl text-gray-600 font-medium">Loading schedule...</div>
+            </div>
           </div>
         ) : scheduleData && getAllGames().length > 0 ? (
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="divide-y divide-gray-200">
+          <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
+            <div className="divide-y divide-gray-100">
               {getAllGames().map((game) => (
                 <div
                   key={`${game.competition}-${game.id}`}
-                  className="p-6 flex items-center justify-between"
+                  className="p-6 flex items-center justify-between hover:bg-gray-50 transition-all-smooth"
                 >
                   <div className="flex-1">
-                    <div className="flex items-center space-x-4">
-                      <div className="text-lg font-semibold text-gray-900">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <div className="text-lg font-bold text-gray-900">
                         {game.teamName}{" "}
-                        {isHarvardHome(game, game.teamName) ? "vs." : "@"}{" "}
+                        <span className="text-[#A51C30] mx-1">
+                          {isHarvardHome(game, game.teamName) ? "vs." : "@"}
+                        </span>{" "}
                         {getOpponent(game, game.teamName)}
                       </div>
                       <span
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                        className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold tracking-wide ring-1 ring-inset ${
                           game.competition === "nirsa"
-                            ? "bg-blue-100 text-blue-800"
-                            : "bg-purple-100 text-purple-800"
+                            ? "bg-blue-50 text-blue-700 ring-blue-500/20"
+                            : "bg-purple-50 text-purple-700 ring-purple-500/20"
                         }`}
                       >
                         {getCompetitionBanner(game.competition)}
                       </span>
                     </div>
-                    <div className="mt-1 text-sm text-gray-600">
-                      {formatDate(game.date)} / {formatTime(game.time)}
+                    <div className="mt-2 text-sm font-medium text-gray-600">
+                      {formatDate(game.date)} • {formatTime(game.time)}
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center gap-6">
                     <div className="text-right">
-                      <div className="text-lg font-semibold text-gray-900">
-                        {getHarvardScore(game, game.teamName)} -{" "}
-                        {getOpponentScore(game, game.teamName)}
+                      <div className="text-2xl font-bold text-gray-900">
+                        {getHarvardScore(game, game.teamName)} - {getOpponentScore(game, game.teamName)}
                       </div>
                     </div>
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold ${getResultColor(
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-base font-bold shadow-md ${getResultColor(
                         game.result
                       )}`}
                     >
@@ -223,17 +227,21 @@ export default function SchedulePage() {
             </div>
           </div>
         ) : scheduleData === null ? (
-          <div className="text-center py-8">
-            <div className="text-lg text-gray-600">
-              {selectedYear === "2020-2021"
-                ? "No games were played during the 2020-2021 season due to COVID-19."
-                : "No schedule data available for this year."}
+          <div className="text-center py-20">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
+              <div className="text-xl text-gray-600 font-medium">
+                {selectedYear === "2020-2021"
+                  ? "No games were played during the 2020-2021 season due to COVID-19."
+                  : "No schedule data available for this year."}
+              </div>
             </div>
           </div>
         ) : (
-          <div className="text-center py-8">
-            <div className="text-lg text-gray-600">
-              No games scheduled for this year.
+          <div className="text-center py-20">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
+              <div className="text-xl text-gray-600 font-medium">
+                No games scheduled for this year.
+              </div>
             </div>
           </div>
         )}

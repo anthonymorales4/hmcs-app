@@ -74,20 +74,23 @@ export default function RosterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-left mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Roster</h1>
-          <p className="mt-4 text-lg text-gray-600">
+        <div className="text-left mb-12">
+          <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+            Roster
+          </h1>
+          <p className="mt-4 text-xl text-gray-600 leading-relaxed">
             Meet current and past players of the club.
           </p>
+          <div className="gradient-divider my-6 w-32"></div>
           <YearDropdown
             selectedYear={selectedYear}
             onYearChange={handleYearChange}
           />
         </div>
         {rosterData && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {playerData.map((player, index) => (
               <PlayerCard
                 key={index}
@@ -99,10 +102,12 @@ export default function RosterPage() {
           </div>
         )}
         {!rosterData && !loading && (
-          <div className="text-center py-12">
-            <p className="text-lg text-gray-600">
-              No roster data available for {selectedYear}.
-            </p>
+          <div className="text-center py-20">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
+              <p className="text-xl text-gray-600 font-medium">
+                No roster data available for {selectedYear}.
+              </p>
+            </div>
           </div>
         )}
       </div>

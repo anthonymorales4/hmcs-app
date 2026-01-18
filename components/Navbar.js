@@ -27,13 +27,16 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-[#A51C30]">
+    <nav className="bg-[#A51C30] shadow-md relative">
       {/* Primary Navigation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/">
+            <Link
+              href="/"
+              className="block transition-transform hover:scale-110 duration-300"
+            >
               <Image
                 src="/images/HarvardLogo.svg"
                 alt="Harvard Logo"
@@ -46,7 +49,7 @@ export default function Navbar() {
 
           {/* Primary Navigation Items */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-10 flex items-baseline space-x-1">
               {primaryNavItems.map((item) => (
                 <div
                   key={item.name}
@@ -60,19 +63,19 @@ export default function Navbar() {
                 >
                   <Link
                     href={item.href}
-                    className="text-white hover:text-gray-200 px-3 py-2 text-sm font-medium transition-colors"
+                    className="text-white hover:bg-white/20 px-4 py-2 rounded-lg text-sm font-semibold transition-all-smooth hover:shadow-lg"
                   >
                     {item.name}
                   </Link>
 
                   {/* Alumni Dropdown */}
                   {item.name === "Alumni" && showAlumniDropdown && (
-                    <div className="absolute top-full left-0 bg-[#A51C30] shadow-lg z-50 min-w-48">
+                    <div className="absolute top-full left-0 mt-2 bg-white shadow-2xl rounded-xl overflow-hidden z-50 min-w-56 border border-gray-100 animate-slide-up">
                       {alumniNavItems.map((subItem) => (
                         <Link
                           key={subItem.name}
                           href={subItem.href}
-                          className="block px-4 py-3 text-sm text-white hover:bg-[#8B1721] transition-colors"
+                          className="block px-5 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-black transition-all-smooth"
                         >
                           {subItem.name}
                         </Link>
@@ -92,10 +95,12 @@ export default function Navbar() {
                 onMouseEnter={() => setShowUserDropdown(true)}
                 onMouseLeave={() => setShowUserDropdown(false)}
               >
-                <button className="text-white hover:text-gray-200 px-3 py-2 text-sm font-medium transition-colors flex items-center space-x-2 cursor-pointer">
+                <button className="text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-semibold transition-all-smooth flex items-center space-x-2 cursor-pointer hover:shadow-lg">
                   <span>{profile?.full_name || "Profile"}</span>
                   <svg
-                    className="w-4 h-4"
+                    className={`w-4 h-4 transition-transform duration-300 ${
+                      showUserDropdown ? "rotate-180" : ""
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -111,16 +116,16 @@ export default function Navbar() {
 
                 {/* User Dropdown */}
                 {showUserDropdown && (
-                  <div className="absolute top-full right-0 bg-[#A51C30] shadow-lg z-50 min-w-48">
+                  <div className="absolute top-full right-0 mt-1 bg-white shadow-2xl rounded-xl overflow-hidden z-50 min-w-56 border border-gray-100 animate-slide-up">
                     <Link
                       href="/profile"
-                      className="block px-4 py-3 text-sm text-white hover:bg-[#8B1721] transition-colors"
+                      className="block px-5 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-black transition-all-smooth"
                     >
                       View Profile
                     </Link>
                     <button
                       onClick={signOut}
-                      className="block w-full text-left px-4 py-3 text-sm text-white hover:bg-[#8B1721] transition-colors"
+                      className="block w-full text-left px-5 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-black transition-all-smooth"
                     >
                       Sign Out
                     </button>
@@ -130,7 +135,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="text-white hover:text-gray-200 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-semibold transition-all-smooth hover:shadow-lg"
               >
                 Login
               </Link>

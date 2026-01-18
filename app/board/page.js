@@ -85,28 +85,33 @@ export default function BoardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-left mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Board</h1>
-          <p className="mt-4 text-lg text-gray-600">
+        <div className="text-left mb-12">
+          <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+            Board
+          </h1>
+          <p className="mt-4 text-xl text-gray-600 leading-relaxed">
             Meet the ones who have guided the club throughout its history.
           </p>
+          <div className="gradient-divider my-6 w-32"></div>
           <YearDropdown
             selectedYear={selectedYear}
             onYearChange={setSelectedYear}
           />
         </div>
         {loading ? (
-          <div className="text-center py-8">
-            <div className="text-lg text-gray-600">
-              Loading board information...
+          <div className="text-center py-12">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
+              <div className="text-xl text-gray-600 font-medium">
+                Loading board information...
+              </div>
             </div>
           </div>
         ) : boardData &&
           boardData.boardMembers &&
           boardData.boardMembers.length > 0 ? (
-          <div className="space-y-12">
+          <div className="space-y-8">
             {getBoardPositionOrder().map((position) => {
               const boardMembersByPosition = getBoardMembersByPosition();
               const members = boardMembersByPosition[position];
@@ -116,58 +121,67 @@ export default function BoardPage() {
               return (
                 <div
                   key={position}
-                  className="bg-white rounded-lg shadow-md overflow-hidden"
+                  className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth"
                 >
-                  <div className="px-6 py-4 border-b border-gray-200">
-                    <h2 className="text-2xl font-bold text-gray-900">
+                  <div className="px-8 py-5 border-b-2 border-b-gray-100 bg-gray-50">
+                    <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
                       {formatBoardPositionTitle(position, members)}
                     </h2>
                   </div>
-                  <div className="p-6">
+                  <div className="p-8">
                     <div className="grid gap-8">
                       {members.map((member, index) => {
                         const profile = profileData[member.name];
                         return (
                           <div
                             key={`${member.position}-${index}`}
-                            className="flex flex-col sm:flex-row gap-6"
+                            className="flex flex-col sm:flex-row gap-6 group"
                           >
                             <div className="flex-shrink-0">
-                              <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200">
+                              <div className="w-36 h-36 rounded-full overflow-hidden transition-all-smooth">
                                 <Image
                                   src={
                                     profile?.profile_image_url ||
                                     "/images/HarvardLogo.svg"
                                   }
                                   alt={member.name}
-                                  width={128}
-                                  height={128}
+                                  width={144}
+                                  height={144}
                                   className={`w-full h-full ${
                                     profile?.profile_image_url
                                       ? "object-cover"
-                                      : "object-contain p-6"
+                                      : "object-contain p-6 opacity-50"
                                   }`}
                                 />
                               </div>
                             </div>
                             <div className="flex-1">
                               <div className="space-y-3">
-                                <div className="text-lg font-semibold text-gray-900">
+                                <div className="text-xl font-bold text-gray-900 tracking-tight">
                                   {member.name}
                                 </div>
-                                <div className="text-sm text-gray-600 space-y-1">
-                                  {profile?.house && <div>{profile.house}</div>}
+                                <div className="text-base text-gray-600 font-medium space-y-2">
+                                  {profile?.graduation_year && (
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-[#A51C30]">•</span>
+                                      Class of {profile.graduation_year}
+                                    </div>
+                                  )}
+                                  {profile?.house && (
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-[#A51C30]">•</span>
+                                      {profile.house}
+                                    </div>
+                                  )}
                                   {profile?.hometown && (
-                                    <div>{profile.hometown}</div>
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-[#A51C30]">•</span>
+                                      {profile.hometown}
+                                    </div>
                                   )}
                                   {!profile && (
                                     <div className="text-gray-400 italic">
                                       Profile not found
-                                    </div>
-                                  )}
-                                  {profile?.graduation_year && (
-                                    <div>
-                                      Class of {profile.graduation_year}
                                     </div>
                                   )}
                                 </div>
@@ -183,9 +197,11 @@ export default function BoardPage() {
             })}
           </div>
         ) : (
-          <div className="text-center py-8">
-            <div className="text-lg text-gray-600">
-              No board information available for this year.
+          <div className="text-center py-20">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
+              <div className="text-xl text-gray-600 font-medium">
+                No board information available for this year.
+              </div>
             </div>
           </div>
         )}

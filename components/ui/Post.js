@@ -12,8 +12,23 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { formatDistanceToNow } from "date-fns";
 
-export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLike, onOpenComments }) {
-  const { profile, content, created_at, updated_at, likes, comments, image_urls } = post;
+export default function Post({
+  post,
+  currentUserId,
+  onEdit,
+  onDelete,
+  onToggleLike,
+  onOpenComments,
+}) {
+  const {
+    profile,
+    content,
+    created_at,
+    updated_at,
+    likes,
+    comments,
+    image_urls,
+  } = post;
 
   // useEditor is a React hook from Tiptap that creates and manages an editor instance object with many properties and methods
   const editor = useEditor({
@@ -51,31 +66,36 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
   const isEdited = updated_at !== created_at;
   const isOwner = currentUserId === post.profile_id;
 
-  // Calculate likes data
+  // Calculate likes
   const likesCount = likes?.length || 0;
-  const userHasLiked = likes?.some((like) => like.profile_id === currentUserId) || false;
+  const userHasLiked =
+    likes?.some((like) => like.profile_id === currentUserId) || false;
 
-  // Calculate comments count
+  // Calculate comments
   const commentsCount = comments?.length || 0;
 
+  // Event handler (arrow function)
   const handleEdit = () => {
     if (onEdit) {
       onEdit(post);
     }
   };
 
+  // Event handler (arrow function)
   const handleDelete = () => {
     if (confirm("Are you sure you want to delete this post?")) {
       onDelete(post.id);
     }
   };
 
+  // Event handler (arrow function)
   const handleLikeClick = () => {
     if (onToggleLike) {
       onToggleLike(post.id);
     }
   };
 
+  // Event handler (arrow function)
   const handleCommentsClick = () => {
     if (onOpenComments) {
       onOpenComments(post);
@@ -83,7 +103,7 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-4 relative">
+    <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-8 mb-6 relative hover:shadow-l transition-all-smooth">
       <style jsx global>{`
         .tiptap ul {
           list-style-type: disc;
@@ -99,8 +119,8 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
           margin: 0.25rem 0;
         }
       `}</style>
-      <div className="flex items-start mb-4">
-        <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+      <div className="flex items-start mb-5">
+        <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
           {profile?.profile_image_url ? (
             <Image
               src={profile.profile_image_url}
@@ -109,20 +129,20 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
               className="object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-500 text-sm font-semibold">
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+              <span className="text-gray-600 text-lg font-bold">
                 {profile?.full_name?.charAt(0)}
               </span>
             </div>
           )}
         </div>
-        <div className="ml-3 flex-grow">
+        <div className="ml-4 flex-grow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-bold text-gray-900 uppercase text-sm">
+              <p className="font-bold text-gray-900 text-base">
                 {profile?.full_name}
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-sm text-gray-500 font-medium">
                 {formatTimestamp(created_at)}
                 {isEdited && " (edited)"}
               </p>
@@ -130,11 +150,11 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
           </div>
         </div>
         {isOwner && (
-          <div className="flex gap-1">
+          <div className="flex gap-2">
             {onEdit && (
               <button
                 onClick={handleEdit}
-                className="text-gray-400 hover:text-[#A51C30] transition-colors p-2"
+                className="text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-lg transition-all-smooth p-2"
                 title="Edit post"
               >
                 <EditIcon fontSize="small" />
@@ -143,7 +163,7 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
             {onDelete && (
               <button
                 onClick={handleDelete}
-                className="text-gray-400 hover:text-red-600 transition-colors p-2"
+                className="text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-lg transition-all-smooth p-2"
                 title="Delete post"
               >
                 <DeleteIcon fontSize="small" />
@@ -152,7 +172,7 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
           </div>
         )}
       </div>
-      <div className="mb-4">
+      <div className="mb-5 text-gray-700 leading-relaxed">
         {/* EditorContent is a React component from Tiptap responsible for rendering the actual DOM */}
         <EditorContent editor={editor} />
       </div>
@@ -160,14 +180,14 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
       {/* Images */}
       {image_urls && image_urls.length > 0 && (
         <div
-          className={`mb-4 grid gap-2 ${
+          className={`mb-8 grid gap-5 ${
             image_urls.length === 1
               ? "grid-cols-1"
               : image_urls.length === 2
-              ? "grid-cols-2"
-              : image_urls.length === 3
-              ? "grid-cols-3"
-              : "grid-cols-2"
+                ? "grid-cols-2"
+                : image_urls.length === 3
+                  ? "grid-cols-3"
+                  : "grid-cols-2"
           }`}
         >
           {image_urls.map((url, index) => (
@@ -176,27 +196,27 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative block overflow-hidden rounded-md group"
+              className="relative block overflow-hidden rounded-lg group ring-1 ring-gray-200 shadow-md hover:shadow-xl transition-all-smooth"
             >
               <Image
                 src={url}
                 alt={`Post image ${index + 1}`}
                 width={400}
                 height={300}
-                className="w-full h-auto object-cover group-hover:opacity-90 transition-opacity"
+                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </a>
           ))}
         </div>
       )}
 
-      <div className="flex items-center gap-6 pt-4 border-t border-gray-200">
+      <div className="flex items-center gap-8 pt-5 border-t-2 border-gray-100">
         <button
           onClick={handleLikeClick}
-          className={`flex items-center gap-2 transition-colors ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all-smooth font-medium ${
             userHasLiked
-              ? "text-[#A51C30]"
-              : "text-gray-600 hover:text-[#A51C30]"
+              ? "text-[#A51C30] bg-red-50 hover:bg-red-100"
+              : "text-gray-600 hover:text-[#A51C30] hover:bg-gray-50"
           }`}
         >
           {userHasLiked ? (
@@ -204,14 +224,14 @@ export default function Post({ post, currentUserId, onEdit, onDelete, onToggleLi
           ) : (
             <FavoriteBorderIcon fontSize="small" />
           )}
-          <span className="text-sm">{likesCount}</span>
+          <span className="text-sm font-semibold">{likesCount}</span>
         </button>
         <button
           onClick={handleCommentsClick}
-          className="flex items-center gap-2 text-gray-600 hover:text-[#A51C30] transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:text-[#A51C30] hover:bg-gray-50 transition-all-smooth font-medium"
         >
           <ChatBubbleOutlineIcon fontSize="small" />
-          <span className="text-sm">{commentsCount}</span>
+          <span className="text-sm font-semibold">{commentsCount}</span>
         </button>
       </div>
     </div>
