@@ -5,6 +5,9 @@ import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 import YearDropdown from "../../components/ui/YearDropdown";
 import { formatBoardPositionTitle, getBoardPositionOrder } from "@/lib/utils";
+import SchoolIcon from "@mui/icons-material/School";
+import HomeIcon from "@mui/icons-material/Home";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function BoardPage() {
   const [selectedYear, setSelectedYear] = useState("2024-2025");
@@ -45,7 +48,7 @@ export default function BoardPage() {
         const { data: profiles, error } = await supabase
           .from("profiles")
           .select(
-            "full_name, graduation_year, house, hometown, profile_image_url"
+            "full_name, concentration, house, hometown, profile_image_url"
           )
           .in("full_name", names);
 
@@ -84,9 +87,64 @@ export default function BoardPage() {
     return membersByPosition;
   };
 
+  const SkeletonCard = () => (
+    <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
+      <div className="h-48 bg-gray-200 animate-pulse" />
+      <div className="p-5">
+        <div className="mb-4">
+          <div className="flex gap-2">
+            <div className="h-3 w-12 bg-gray-200 rounded animate-pulse" />
+            <div className="h-4 w-20 bg-gray-300 rounded animate-pulse" />
+          </div>
+        </div>
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="h-5 w-5 bg-gray-200 rounded animate-pulse" />
+            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse" />
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="h-5 w-5 bg-gray-200 rounded animate-pulse" />
+            <div className="h-4 w-28 bg-gray-200 rounded animate-pulse" />
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="h-5 w-5 bg-gray-200 rounded animate-pulse" />
+            <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-left mb-12">
+            <div className="h-12 w-40 bg-gray-300 rounded animate-pulse mb-4" />
+            <div className="h-6 w-96 bg-gray-200 rounded animate-pulse mt-4" />
+            <div className="h-1 w-32 bg-gray-200 rounded my-6 animate-pulse" />
+            <div className="h-10 w-40 bg-gray-200 rounded-lg animate-pulse mt-4" />
+          </div>
+          <div className="space-y-12">
+            {[1, 2, 3, 4].map((section) => (
+              <div key={section}>
+                <div className="h-8 w-32 bg-gray-300 rounded animate-pulse mb-6" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {[...Array(section === 3 ? 2 : 1)].map((_, index) => (
+                    <SkeletonCard key={index} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-left mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
             Board
@@ -100,97 +158,96 @@ export default function BoardPage() {
             onYearChange={setSelectedYear}
           />
         </div>
-        {loading ? (
-          <div className="text-center py-12">
-            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
-              <div className="text-xl text-gray-600 font-medium">
-                Loading board information...
-              </div>
-            </div>
-          </div>
-        ) : boardData &&
+        {boardData &&
           boardData.boardMembers &&
           boardData.boardMembers.length > 0 ? (
-          <div className="space-y-8">
+          <div className="space-y-12">
             {getBoardPositionOrder().map((position) => {
               const boardMembersByPosition = getBoardMembersByPosition();
               const members = boardMembersByPosition[position];
 
               if (!members || members.length === 0) return null;
 
+              const nameParts = (name) => {
+                const parts = name.trim().split(" ");
+                return {
+                  firstName: parts.slice(0, -1).join(" "),
+                  lastName: parts[parts.length - 1],
+                };
+              };
+
               return (
-                <div
-                  key={position}
-                  className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth"
-                >
-                  <div className="px-8 py-5 border-b-2 border-b-gray-100 bg-gray-50">
-                    <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
-                      {formatBoardPositionTitle(position, members)}
-                    </h2>
-                  </div>
-                  <div className="p-8">
-                    <div className="grid gap-8">
-                      {members.map((member, index) => {
-                        const profile = profileData[member.name];
-                        return (
-                          <div
-                            key={`${member.position}-${index}`}
-                            className="flex flex-col sm:flex-row gap-6 group"
-                          >
-                            <div className="flex-shrink-0">
-                              <div className="w-36 h-36 rounded-full overflow-hidden transition-all-smooth">
+                <div key={position}>
+                  <h3 className="text-2xl font-bold text-gray-900 tracking-tight mb-6">
+                    {formatBoardPositionTitle(position, members)}
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {members.map((member, index) => {
+                      const profile = profileData[member.name];
+                      const { firstName, lastName } = nameParts(member.name);
+
+                      return (
+                        <div
+                          key={`${member.position}-${index}`}
+                          className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group"
+                        >
+                          <div className="relative h-48 bg-gray-100 overflow-hidden">
+                            {profile?.profile_image_url ? (
+                              <Image
+                                src={profile.profile_image_url}
+                                alt={member.name}
+                                fill
+                                className="object-cover object-top transition-transform duration-500 group-hover:scale-110 ring-1 ring-inset ring-gray-200"
+                              />
+                            ) : (
+                              <div className="flex items-center justify-center h-full bg-gradient-to-br from-gray-50 to-gray-100">
                                 <Image
-                                  src={
-                                    profile?.profile_image_url ||
-                                    "/images/HarvardLogo.svg"
-                                  }
-                                  alt={member.name}
-                                  width={144}
-                                  height={144}
-                                  className={`w-full h-full ${
-                                    profile?.profile_image_url
-                                      ? "object-cover"
-                                      : "object-contain p-6 opacity-50"
-                                  }`}
+                                  src="/images/HarvardLogo.svg"
+                                  alt="Harvard Logo"
+                                  width={80}
+                                  height={80}
+                                  className="opacity-50 group-hover:opacity-70 transition-opacity"
                                 />
                               </div>
-                            </div>
-                            <div className="flex-1">
-                              <div className="space-y-3">
-                                <div className="text-xl font-bold text-gray-900 tracking-tight">
-                                  {member.name}
-                                </div>
-                                <div className="text-base text-gray-600 font-medium space-y-2">
-                                  {profile?.graduation_year && (
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-[#A51C30]">•</span>
-                                      Class of {profile.graduation_year}
-                                    </div>
-                                  )}
-                                  {profile?.house && (
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-[#A51C30]">•</span>
-                                      {profile.house}
-                                    </div>
-                                  )}
-                                  {profile?.hometown && (
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-[#A51C30]">•</span>
-                                      {profile.hometown}
-                                    </div>
-                                  )}
-                                  {!profile && (
-                                    <div className="text-gray-400 italic">
-                                      Profile not found
-                                    </div>
-                                  )}
-                                </div>
+                            )}
+                          </div>
+                          <div className="p-5">
+                            <div className="mb-4">
+                              <div className="text-left">
+                                <span className="text-sm text-gray-600 font-medium">
+                                  {firstName}{" "}
+                                </span>
+                                <span className="text-lg font-bold text-gray-900 tracking-tight">
+                                  {lastName}
+                                </span>
                               </div>
                             </div>
+                            {(profile?.concentration || profile?.house || profile?.hometown) && (
+                              <div className="space-y-3 text-sm text-gray-700">
+                                {profile?.concentration && (
+                                  <div className="flex items-center gap-3">
+                                    <SchoolIcon className="text-[#A51C30]" fontSize="small" />
+                                    <span className="font-medium">{profile.concentration}</span>
+                                  </div>
+                                )}
+                                {profile?.house && (
+                                  <div className="flex items-center gap-3">
+                                    <HomeIcon className="text-[#A51C30]" fontSize="small" />
+                                    <span className="font-medium">{profile.house}</span>
+                                  </div>
+                                )}
+                                {profile?.hometown && (
+                                  <div className="flex items-center gap-3">
+                                    <LocationOnIcon className="text-[#A51C30]" fontSize="small" />
+                                    <span className="font-medium">{profile.hometown}</span>
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
-                        );
-                      })}
-                    </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );
