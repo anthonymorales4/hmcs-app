@@ -119,7 +119,7 @@ export default function StandingsPage() {
                     {getTeams().map((team, index) => (
                       <tr
                         key={team.id}
-                        className={`transition-all-smooth hover:bg-[#A51C30]/5 ${
+                        className={`transition-all-smooth hover:bg-[#A51C30]/5 cursor-pointer ${
                           index % 2 === 0 ? "bg-white" : "bg-gray-50"
                         }`}
                       >
