@@ -66,7 +66,7 @@ export default function RosterPage() {
             {/* Header skeleton */}
             <div className="h-12 bg-gray-300 rounded-lg w-48 mb-4"></div>
             {/* Subheader skeleton */}
-            <div className="h-6 bg-gray-200 rounded w-80 mt-4"></div>
+            <div className="h-6 bg-gray-200 rounded w-96 mt-4"></div>
             {/* Divider skeleton */}
             <div className="h-1 bg-gray-300 rounded my-6 w-32"></div>
             {/* Year dropdown skeleton */}

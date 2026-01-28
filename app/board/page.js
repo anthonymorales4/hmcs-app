@@ -119,7 +119,7 @@ export default function BoardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-left mb-12">
             <div className="h-12 w-40 bg-gray-300 rounded animate-pulse mb-4" />
-            <div className="h-6 w-96 bg-gray-200 rounded animate-pulse mt-4" />
+            <div className="h-6 w-[28rem] bg-gray-200 rounded animate-pulse mt-4" />
             <div className="h-1 w-32 bg-gray-200 rounded my-6 animate-pulse" />
             <div className="h-10 w-40 bg-gray-200 rounded-lg animate-pulse mt-4" />
           </div>
