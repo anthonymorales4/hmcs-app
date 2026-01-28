@@ -60,13 +60,36 @@ export default function RosterPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="animate-pulse">
-              <div className="h-12 bg-gray-300 rounded w-1/3 mx-auto mb-4"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/4 mx-auto"></div>
-            </div>
+          <div className="text-left mb-12 animate-pulse">
+            {/* Header skeleton */}
+            <div className="h-12 bg-gray-300 rounded-lg w-48 mb-4"></div>
+            {/* Subheader skeleton */}
+            <div className="h-6 bg-gray-200 rounded w-80 mt-4"></div>
+            {/* Divider skeleton */}
+            <div className="h-1 bg-gray-300 rounded my-6 w-32"></div>
+            {/* Year dropdown skeleton */}
+            <div className="h-10 bg-gray-200 rounded-lg w-32"></div>
+          </div>
+          {/* Player cards skeleton grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 animate-pulse">
+            {[...Array(8)].map((_, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden"
+              >
+                {/* Image skeleton */}
+                <div className="h-48 bg-gray-200"></div>
+                {/* Content skeleton */}
+                <div className="p-4 flex items-center justify-between">
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-24"></div>
+                  </div>
+                  <div className="h-6 bg-gray-300 rounded w-8"></div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
