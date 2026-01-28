@@ -9,6 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CloseIcon from "@mui/icons-material/Close";
 import { supabase } from "../../../lib/supabase";
+import { formatDistanceToNow } from "date-fns";
 
 export default function AlumniAnnouncementsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,14 +71,14 @@ export default function AlumniAnnouncementsPage() {
           .from("posts")
           // profile:profiles(*) -> Gets the author of the post
           // likes(profile_id) -> To check if the current user has liked the post and total likes
-          // comments(id) -> To check total comments
+          // comments(id, profile_id) -> To check total comments and if user has commented
           .select(
             `
           *,
           profile:profiles(*),
           likes(profile_id),
-          comments(id)
-        `
+          comments(id, profile_id)
+        `,
           )
           .order("created_at", { ascending: false })
           .range(from, to);
@@ -101,7 +102,7 @@ export default function AlumniAnnouncementsPage() {
     },
     // fetchPosts only recreates when posts.length changes
     // Dependency array
-    [posts.length]
+    [posts.length],
   );
 
   // Event handler (arrow function)
@@ -168,7 +169,7 @@ export default function AlumniAnnouncementsPage() {
       if (isEditMode && imagePreviewUrls.length > selectedImages.length) {
         // Keep existing URLs
         const existingImageUrls = imagePreviewUrls.filter(
-          (url) => url.startsWith("http") // Prefix used for URLs stored in Supabase
+          (url) => url.startsWith("http"), // Prefix used for URLs stored in Supabase
         );
         updatedImageUrls = [...existingImageUrls, ...uploadedImageUrls];
       }
@@ -208,7 +209,7 @@ export default function AlumniAnnouncementsPage() {
       setSubmitError(
         isEditMode
           ? "Failed to edit post. Please try again."
-          : "Failed to create post. Please try again."
+          : "Failed to create post. Please try again.",
       );
     } finally {
       setSubmitting(false);
@@ -267,7 +268,7 @@ export default function AlumniAnnouncementsPage() {
     URL.revokeObjectURL(imagePreviewUrls[index]);
     // Keep all image URLs except for the one at index
     const updatedImagePreviewUrls = imagePreviewUrls.filter(
-      (_, i) => i !== index
+      (_, i) => i !== index,
     );
     setImagePreviewUrls(updatedImagePreviewUrls);
   };
@@ -367,7 +368,7 @@ export default function AlumniAnnouncementsPage() {
           `
           *,
           profile:profiles(*)
-        `
+        `,
         )
         .eq("post_id", postId)
         .order("created_at", { ascending: true });
@@ -466,16 +467,52 @@ export default function AlumniAnnouncementsPage() {
     setImagePreviewUrls([]);
   };
 
+  // Loading skeleton for auth state
+  const LoadingSkeleton = (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <div className="h-12 w-64 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-5 w-80 bg-gray-200 rounded animate-pulse mt-4"></div>
+          </div>
+          <div className="h-10 w-24 bg-gray-200 rounded-md animate-pulse"></div>
+        </div>
+        <div className="space-y-4">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="bg-white rounded-xl shadow-lg p-8 animate-pulse"
+            >
+              <div className="flex items-start mb-5">
+                <div className="w-14 h-14 bg-gray-200 rounded-full"></div>
+                <div className="ml-4 flex-grow">
+                  <div className="h-4 bg-gray-200 rounded w-1/4 mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded w-1/6"></div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="h-3 bg-gray-200 rounded w-full"></div>
+                <div className="h-3 bg-gray-200 rounded w-5/6"></div>
+                <div className="h-3 bg-gray-200 rounded w-4/6"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <ProtectedRoute>
+    <ProtectedRoute loadingComponent={LoadingSkeleton}>
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-start mb-8">
+          <div className="flex justify-between items-center mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-5xl font-bold text-gray-900">
                 Announcements
               </h1>
-              <p className="mt-2 text-lg text-gray-600">
+              <p className="mt-4 text-lg text-gray-600">
                 Latest news and announcements for alumni.
               </p>
             </div>
@@ -484,7 +521,7 @@ export default function AlumniAnnouncementsPage() {
               onClick={handleNewPost}
               className="bg-[#A51C30] text-white px-4 py-2 rounded-md hover:bg-[#8B1828] transition-colors font-medium"
             >
-              New Post +
+              Add Post +
             </button>
           </div>
           <div className="space-y-4">
@@ -494,16 +531,16 @@ export default function AlumniAnnouncementsPage() {
                 {[1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className="bg-white rounded-lg shadow-md p-6 animate-pulse"
+                    className="bg-white rounded-xl shadow-lg p-8 animate-pulse"
                   >
-                    <div className="flex items-start mb-4">
-                      <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
-                      <div className="ml-3 flex-grow">
+                    <div className="flex items-start mb-5">
+                      <div className="w-14 h-14 bg-gray-200 rounded-full"></div>
+                      <div className="ml-4 flex-grow">
                         <div className="h-4 bg-gray-200 rounded w-1/4 mb-2"></div>
                         <div className="h-3 bg-gray-200 rounded w-1/6"></div>
                       </div>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       <div className="h-3 bg-gray-200 rounded w-full"></div>
                       <div className="h-3 bg-gray-200 rounded w-5/6"></div>
                       <div className="h-3 bg-gray-200 rounded w-4/6"></div>
@@ -557,10 +594,17 @@ export default function AlumniAnnouncementsPage() {
             className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="border-b border-gray-200 px-6 py-4">
+            <div className="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-gray-900">
                 {isEditMode ? "Edit Announcement" : "Create Announcement"}
               </h2>
+              <button
+                onClick={handleCancelPost}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Close modal"
+              >
+                <CloseIcon />
+              </button>
             </div>
             <div className="px-6 py-4">
               <TextEditor content={postContent} onChange={setPostContent} />
@@ -631,8 +675,8 @@ export default function AlumniAnnouncementsPage() {
                     ? "Saving..."
                     : "Posting..."
                   : isEditMode
-                  ? "Save"
-                  : "Post"}
+                    ? "Save"
+                    : "Post"}
               </button>
             </div>
           </div>
@@ -649,17 +693,15 @@ export default function AlumniAnnouncementsPage() {
             className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="border-b border-gray-200 px-6 py-4 flex-shrink-0">
+            <div className="border-b border-gray-200 px-6 py-4 flex-shrink-0 flex items-center justify-between">
               <h2 className="text-xl font-bold text-gray-900">Comments</h2>
-            </div>
-            <div className="border-b border-gray-200 px-6 py-4 flex-shrink-0">
-              <Post
-                post={selectedPost}
-                currentUserId={currentUserId}
-                onDelete={null}
-                onToggleLike={null}
-                onOpenComments={null}
-              />
+              <button
+                onClick={() => setIsCommentsModalOpen(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Close modal"
+              >
+                <CloseIcon />
+              </button>
             </div>
             <div className="flex-1 overflow-y-auto px-6 py-4">
               {loadingComments ? (
@@ -707,7 +749,7 @@ export default function AlumniAnnouncementsPage() {
                           {comment.profile_id === currentUserId && (
                             <button
                               onClick={() => handleDeleteComment(comment.id)}
-                              className="text-gray-400 hover:text-red-600 transition-colors"
+                              className="text-gray-400 hover:text-gray-600 transition-colors"
                               title="Delete comment"
                             >
                               <DeleteIcon fontSize="small" />
@@ -718,7 +760,9 @@ export default function AlumniAnnouncementsPage() {
                           {comment.content}
                         </p>
                         <p className="text-xs text-gray-500 mt-1">
-                          {new Date(comment.created_at).toLocaleString()}
+                          {formatDistanceToNow(new Date(comment.created_at), {
+                            addSuffix: true,
+                          })}
                         </p>
                       </div>
                     </div>
@@ -737,8 +781,8 @@ export default function AlumniAnnouncementsPage() {
                       handleSubmitComment();
                     }
                   }}
-                  placeholder="Write a comment..."
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A51C30] focus:border-transparent"
+                  placeholder="Add a comment..."
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
                   disabled={submittingComment}
                 />
                 <button
