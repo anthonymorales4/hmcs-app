@@ -8,6 +8,7 @@ import Link from "@tiptap/extension-link";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { formatDistanceToNow } from "date-fns";
@@ -73,6 +74,8 @@ export default function Post({
 
   // Calculate comments
   const commentsCount = comments?.length || 0;
+  const userHasCommented =
+    comments?.some((comment) => comment.profile_id === currentUserId) || false;
 
   // Event handler (arrow function)
   const handleEdit = () => {
@@ -228,9 +231,17 @@ export default function Post({
         </button>
         <button
           onClick={handleCommentsClick}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:text-[#A51C30] hover:bg-gray-50 transition-all-smooth font-medium"
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all-smooth font-medium ${
+            userHasCommented
+              ? "text-[#A51C30] bg-red-50 hover:bg-red-100"
+              : "text-gray-600 hover:text-[#A51C30] hover:bg-gray-50"
+          }`}
         >
-          <ChatBubbleOutlineIcon fontSize="small" />
+          {userHasCommented ? (
+            <ChatBubbleIcon fontSize="small" />
+          ) : (
+            <ChatBubbleOutlineIcon fontSize="small" />
+          )}
           <span className="text-sm font-semibold">{commentsCount}</span>
         </button>
       </div>

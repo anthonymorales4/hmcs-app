@@ -81,7 +81,7 @@ function Dropdown({ label, value, options, onChange }) {
               <button
                 key={option}
                 onClick={() => handleSelect(option)}
-                className={`block w-full text-left px-5 py-3 text-sm font-medium transition-all-smooth cursor-pointer ${
+                className={`block w-full text-left px-5 py-3 text-sm font-medium whitespace-nowrap transition-all-smooth cursor-pointer ${
                   option === value || String(option) === value
                     ? "bg-gray-100 text-black"
                     : "text-gray-500 hover:bg-gray-100 hover:text-black"

@@ -6,7 +6,7 @@ export default function SearchBar({ searchTerm, onSearchChange, placeholder = "S
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none"
+        className="w-full px-4 py-2 border border-gray-400 rounded-md text-sm focus:outline-none"
       />
     </div>
   );

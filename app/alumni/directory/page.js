@@ -211,8 +211,7 @@ export default function AlumniDirectoryPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 animate-pulse">
           <div className="h-12 w-80 bg-gray-300 rounded mx-auto mb-4" />
-          <div className="h-6 w-64 bg-gray-200 rounded mx-auto mt-4" />
-          <div className="h-1 w-32 bg-gray-200 rounded my-6 mx-auto" />
+          <div className="h-6 w-64 bg-gray-200 rounded mx-auto mt-4 mb-6" />
           <div className="flex flex-col items-center gap-4">
             <div className="h-10 w-full max-w-xl bg-gray-200 rounded-md" />
             <div className="flex flex-wrap justify-center gap-4">
@@ -251,8 +250,7 @@ export default function AlumniDirectoryPage() {
             <p className="mt-4 text-xl text-gray-600 leading-relaxed">
               Browse and connect with alumni.
             </p>
-            <div className="gradient-divider my-6 w-32 mx-auto"></div>
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-6 mt-6">
               <SearchBar
                 searchTerm={searchTerm}
                 onSearchChange={handleSearchChange}
