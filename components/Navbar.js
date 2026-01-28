@@ -7,8 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function Navbar() {
   const [showAlumniDropdown, setShowAlumniDropdown] = useState(false);
-  const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const { user, profile, signOut } = useAuth();
+  const { user, signOut } = useAuth();
 
   const primaryNavItems = [
     { name: "About Us", href: "/" },
@@ -70,16 +69,18 @@ export default function Navbar() {
 
                   {/* Alumni Dropdown */}
                   {item.name === "Alumni" && showAlumniDropdown && (
-                    <div className="absolute top-full left-0 mt-2 bg-white shadow-2xl rounded-xl overflow-hidden z-50 min-w-56 border border-gray-100 animate-slide-up">
-                      {alumniNavItems.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          href={subItem.href}
-                          className="block px-5 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-black transition-all-smooth"
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
+                    <div className="absolute top-full left-0 pt-2 z-50">
+                      <div className="bg-white shadow-2xl rounded-xl overflow-hidden min-w-56 border border-gray-100 animate-slide-up">
+                        {alumniNavItems.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            className="block px-5 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-black transition-all-smooth"
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -90,52 +91,16 @@ export default function Navbar() {
           {/* Authentication Section */}
           <div className="hidden md:block">
             {user ? (
-              <div
-                className="relative"
-                onMouseEnter={() => setShowUserDropdown(true)}
-                onMouseLeave={() => setShowUserDropdown(false)}
+              <button
+                onClick={signOut}
+                className="text-white hover:bg-white/20 px-4 py-2 rounded-lg text-sm font-semibold transition-all-smooth cursor-pointer hover:shadow-lg"
               >
-                <button className="text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-semibold transition-all-smooth flex items-center space-x-2 cursor-pointer hover:shadow-lg">
-                  <span>{profile?.full_name || "Profile"}</span>
-                  <svg
-                    className={`w-4 h-4 transition-transform duration-300 ${
-                      showUserDropdown ? "rotate-180" : ""
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-
-                {/* User Dropdown */}
-                {showUserDropdown && (
-                  <div className="absolute top-full right-0 mt-1 bg-white shadow-2xl rounded-xl overflow-hidden z-50 min-w-56 border border-gray-100 animate-slide-up">
-                    <Link
-                      href="/profile"
-                      className="block px-5 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-black transition-all-smooth"
-                    >
-                      View Profile
-                    </Link>
-                    <button
-                      onClick={signOut}
-                      className="block w-full text-left px-5 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-black transition-all-smooth"
-                    >
-                      Sign Out
-                    </button>
-                  </div>
-                )}
-              </div>
+                Sign Out
+              </button>
             ) : (
               <Link
                 href="/login"
-                className="text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-semibold transition-all-smooth hover:shadow-lg"
+                className="text-white hover:bg-white/20 px-4 py-2 rounded-lg text-sm font-semibold transition-all-smooth hover:shadow-lg"
               >
                 Login
               </Link>

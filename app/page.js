@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import EmailIcon from "@mui/icons-material/Email";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -154,24 +159,36 @@ export default function Home() {
                       Day 1
                     </h3>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600 font-medium">Date:</span>
+                      <span className="text-gray-600 font-medium flex items-center gap-2">
+                        <CalendarTodayIcon sx={{ fontSize: 18 }} />
+                        Date:
+                      </span>
                       <span className="font-semibold text-gray-900">
                         September 6, 2025
                       </span>
                     </div>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600 font-medium">Time:</span>
+                      <span className="text-gray-600 font-medium flex items-center gap-2">
+                        <AccessTimeIcon sx={{ fontSize: 18 }} />
+                        Time:
+                      </span>
                       <span className="font-semibold text-gray-900">
                         2 PM - 5 PM
                       </span>
                     </div>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600 font-medium">
+                      <span className="text-gray-600 font-medium flex items-center gap-2">
+                        <LocationOnIcon sx={{ fontSize: 18 }} />
                         Location:
                       </span>
-                      <span className="font-semibold text-gray-900">
+                      <a
+                        href="https://www.google.com/maps/place/cumnock+fields/data=!4m2!3m1!1s0x89e3776444313839:0x3472833330f707fe"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[#A51C30] hover:text-[#8B1721] transition-colors"
+                      >
                         Cumnock Fields
-                      </span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -181,24 +198,36 @@ export default function Home() {
                       Day 2
                     </h3>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600 font-medium">Date:</span>
+                      <span className="text-gray-600 font-medium flex items-center gap-2">
+                        <CalendarTodayIcon sx={{ fontSize: 18 }} />
+                        Date:
+                      </span>
                       <span className="font-semibold text-gray-900">
                         September 7, 2025
                       </span>
                     </div>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600 font-medium">Time:</span>
+                      <span className="text-gray-600 font-medium flex items-center gap-2">
+                        <AccessTimeIcon sx={{ fontSize: 18 }} />
+                        Time:
+                      </span>
                       <span className="font-semibold text-gray-900">
                         3:30 PM - 5:30 PM
                       </span>
                     </div>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600 font-medium">
+                      <span className="text-gray-600 font-medium flex items-center gap-2">
+                        <LocationOnIcon sx={{ fontSize: 18 }} />
                         Location:
                       </span>
-                      <span className="font-semibold text-gray-900">
+                      <a
+                        href="https://www.google.com/maps/place/cumnock+fields/data=!4m2!3m1!1s0x89e3776444313839:0x3472833330f707fe"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[#A51C30] hover:text-[#8B1721] transition-colors"
+                      >
                         Cumnock Fields
-                      </span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -214,16 +243,18 @@ export default function Home() {
             <div className="gradient-divider mx-auto mt-4 w-24"></div>
           </div>
           <div className="max-w-2xl mx-auto">
-            <div className="bg-white border border-gray-200 rounded-xl p-10 shadow-lg hover:shadow-xl transition-all-smooth">
+            <div className="bg-white border border-gray-200 rounded-xl p-10 shadow-lg hover:shadow-xl transition-all-smooth hover:scale-[1.02]">
               <div className="space-y-6">
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <span className="text-gray-600 font-medium text-lg">
+                  <span className="text-gray-600 font-medium text-lg flex items-center gap-2">
+                    <EmailIcon sx={{ fontSize: 20 }} />
                     Email:
                   </span>
                   <span className="font-semibold text-gray-900"></span>
                 </div>
                 <div className="flex justify-between items-center py-3">
-                  <span className="text-gray-600 font-medium text-lg">
+                  <span className="text-gray-600 font-medium text-lg flex items-center gap-2">
+                    <InstagramIcon sx={{ fontSize: 20 }} />
                     Instagram:
                   </span>
                   <a
