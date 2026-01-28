@@ -3,12 +3,12 @@
 import { useAuth } from "../contexts/AuthContext";
 import LockIcon from "@mui/icons-material/Lock";
 
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute({ children, loadingComponent }) {
   const { user, loading } = useAuth();
 
-  // Show loading spinner while checking auth
+  // Show loading component while checking auth
   if (loading) {
-    return (
+    return loadingComponent || (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A51C30]"></div>
       </div>

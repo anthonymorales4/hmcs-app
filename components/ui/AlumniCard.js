@@ -1,12 +1,9 @@
-import { useState } from "react";
 import Image from "next/image";
 import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
-import SchoolIcon from "@mui/icons-material/School";
-import AlumniProfileModal from "./AlumniProfileModal";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function AlumniCard({ name, profile }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const nameParts = name.trim().split(" ");
   const firstName = nameParts.slice(0, -1).join(" ");
   const lastName = nameParts[nameParts.length - 1];
@@ -14,6 +11,7 @@ export default function AlumniCard({ name, profile }) {
   const profileImageUrl = profile?.profile_image_url;
   const currentJob = profile?.current_job;
   const currentCompany = profile?.current_company;
+  const currentLocation = profile?.current_location;
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group">
@@ -46,9 +44,14 @@ export default function AlumniCard({ name, profile }) {
             <span className="text-lg font-bold text-gray-900 tracking-tight">
               {lastName}
             </span>
+            {profile?.graduation_year && (
+              <span className="text-sm text-gray-600 font-medium italic">
+                {" "}&apos;{String(profile.graduation_year).slice(-2)}
+              </span>
+            )}
           </div>
         </div>
-        {(currentJob || currentCompany) && (
+        {(currentJob || currentCompany || currentLocation) && (
           <div className="space-y-3 text-sm text-gray-700">
             {currentJob && (
               <div className="flex items-center gap-3 group/item">
@@ -62,32 +65,15 @@ export default function AlumniCard({ name, profile }) {
                 <span className="font-medium">{currentCompany}</span>
               </div>
             )}
-            <div className="flex items-center gap-3 group/item">
-              <SchoolIcon className="text-[#A51C30]" fontSize="small" />
-              <span className="font-medium">
-                Class of {profile.graduation_year}
-              </span>
-            </div>
+            {currentLocation && (
+              <div className="flex items-center gap-3 group/item">
+                <LocationOnIcon className="text-[#A51C30]" fontSize="small" />
+                <span className="font-medium">{currentLocation}</span>
+              </div>
+            )}
           </div>
         )}
       </div>
-      {profile && (
-        <>
-          <div className="px-5 pb-4 flex justify-end">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="text-[#A51C30] text-sm font-semibold hover:text-[#8a1828] transition-colors flex items-center gap-1"
-            >
-              View Profile <span>›</span>
-            </button>
-          </div>
-          <AlumniProfileModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            alumni={{ name, profile }}
-          />
-        </>
-      )}
     </div>
   );
 }

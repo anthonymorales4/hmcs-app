@@ -47,7 +47,7 @@ export default function BoardPage() {
         const { data: profiles, error } = await supabase
           .from("profiles")
           .select(
-            "full_name, concentration, house, hometown, profile_image_url"
+            "full_name, concentration, house, hometown, profile_image_url, graduation_year"
           )
           .in("full_name", names);
 
@@ -218,6 +218,11 @@ export default function BoardPage() {
                                 <span className="text-lg font-bold text-gray-900 tracking-tight">
                                   {lastName}
                                 </span>
+                                {profile?.graduation_year && (
+                                  <span className="text-sm text-gray-600 font-medium italic">
+                                    {" "}&apos;{String(profile.graduation_year).slice(-2)}
+                                  </span>
+                                )}
                               </div>
                             </div>
                             {(profile?.concentration || profile?.house || profile?.hometown) && (

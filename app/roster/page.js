@@ -21,7 +21,7 @@ export default function RosterPage() {
 
         const { data: profiles, error } = await supabase
           .from("profiles")
-          .select("full_name, profile_image_url");
+          .select("full_name, profile_image_url, graduation_year, position");
 
         if (error) {
           console.error("Error fetching profiles:", error);
@@ -30,6 +30,8 @@ export default function RosterPage() {
               name: player,
               number: index + 1,
               profileImageUrl: null,
+              graduationYear: null,
+              position: null,
             }))
           );
         } else {
@@ -39,6 +41,8 @@ export default function RosterPage() {
               name: player,
               number: index + 1,
               profileImageUrl: profile?.profile_image_url || null,
+              graduationYear: profile?.graduation_year || null,
+              position: profile?.position || null,
             };
           });
           setPlayerData(playerData);
@@ -120,6 +124,8 @@ export default function RosterPage() {
                 playerName={player.name}
                 playerNumber={player.number}
                 profileImageUrl={player.profileImageUrl}
+                graduationYear={player.graduationYear}
+                position={player.position}
               />
             ))}
           </div>
