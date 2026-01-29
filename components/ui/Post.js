@@ -123,13 +123,13 @@ export default function Post({
         }
       `}</style>
       <div className="flex items-start mb-5">
-        <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
+        <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-gray-200">
           {profile?.profile_image_url ? (
             <Image
               src={profile.profile_image_url}
               alt={profile.full_name}
               fill
-              className="object-cover"
+              className="object-cover object-top"
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
@@ -144,6 +144,11 @@ export default function Post({
             <div>
               <p className="font-bold text-gray-900 text-base">
                 {profile?.full_name}
+                {profile?.graduation_year && (
+                  <span className="font-normal italic text-sm text-gray-500 ml-1">
+                    '{String(profile.graduation_year).slice(-2)}
+                  </span>
+                )}
               </p>
               <p className="text-sm text-gray-500 font-medium">
                 {formatTimestamp(created_at)}

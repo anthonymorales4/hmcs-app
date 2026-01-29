@@ -473,8 +473,8 @@ export default function AlumniAnnouncementsPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <div className="h-12 w-64 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-5 w-80 bg-gray-200 rounded animate-pulse mt-4"></div>
+            <div className="h-12 w-80 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-5 w-64 bg-gray-200 rounded animate-pulse mt-4"></div>
           </div>
           <div className="h-10 w-24 bg-gray-200 rounded-md animate-pulse"></div>
         </div>
@@ -513,7 +513,7 @@ export default function AlumniAnnouncementsPage() {
                 Announcements
               </h1>
               <p className="mt-4 text-lg text-gray-600">
-                Latest news and announcements for alumni.
+                Latest news and updates for alumni.
               </p>
             </div>
             <button
