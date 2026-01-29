@@ -266,7 +266,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
               rows={4}
               value={formData.bio}
               onChange={handleChange}
-              className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+              className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
               placeholder="Tell us about yourself..."
             />
           </div>
@@ -298,7 +298,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 id="concentration"
                 value={formData.concentration}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
                 placeholder="e.g., Economics"
               />
             </div>
@@ -316,7 +316,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 id="hometown"
                 value={formData.hometown}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
                 placeholder="e.g., Chicago, IL"
               />
             </div>
@@ -366,7 +366,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 value={formData.phone_number}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
                 placeholder="e.g., (617) 555-0123"
               />
               {validationErrors.phone_number && (
@@ -390,7 +390,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 value={formData.linkedin_url}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
                 placeholder="https://www.linkedin.com/in/yourname"
               />
               {validationErrors.linkedin_url && (
@@ -414,7 +414,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 value={formData.instagram_url}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
                 placeholder="https://www.instagram.com/yourname"
               />
               {validationErrors.instagram_url && (
@@ -444,7 +444,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                   id="current_job"
                   value={formData.current_job}
                   onChange={handleChange}
-                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
                   placeholder="e.g., Investment Banking"
                 />
               </div>
@@ -462,7 +462,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                   id="current_company"
                   value={formData.current_company}
                   onChange={handleChange}
-                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
                   placeholder="e.g., Goldman Sachs"
                 />
               </div>
@@ -480,7 +480,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                   id="current_location"
                   value={formData.current_location}
                   onChange={handleChange}
-                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
+                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-900 focus:outline-none"
                   placeholder="e.g., New York, NY"
                 />
               </div>
@@ -490,11 +490,19 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
       )}
       <div className="mt-6 flex justify-end space-x-3">
         <button
+          type="button"
+          onClick={onCancel}
+          disabled={isLoading}
+          className="px-4 py-2 rounded-md text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Cancel
+        </button>
+        <button
           type="submit"
           disabled={isLoading}
           className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#A51C30] hover:bg-[#8B1721] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          {isLoading ? "Saving..." : "Save Changes"}
+          {isLoading ? "Saving..." : "Save"}
         </button>
       </div>
     </form>

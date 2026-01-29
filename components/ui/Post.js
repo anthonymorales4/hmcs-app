@@ -123,19 +123,23 @@ export default function Post({
         }
       `}</style>
       <div className="flex items-start mb-5">
-        <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-gray-200">
+        <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-gray-200 group/avatar">
           {profile?.profile_image_url ? (
             <Image
               src={profile.profile_image_url}
               alt={profile.full_name}
               fill
-              className="object-cover object-top"
+              className="object-cover object-top transition-transform duration-300 group-hover/avatar:scale-110"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-              <span className="text-gray-600 text-lg font-bold">
-                {profile?.full_name?.charAt(0)}
-              </span>
+            <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center transition-transform duration-300 group-hover/avatar:scale-110">
+              <Image
+                src="/images/HarvardLogo.svg"
+                alt="Harvard Logo"
+                width={32}
+                height={32}
+                className="opacity-50 group-hover/avatar:opacity-70 transition-opacity"
+              />
             </div>
           )}
         </div>

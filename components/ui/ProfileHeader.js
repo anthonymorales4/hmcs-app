@@ -79,18 +79,16 @@ export default function ProfileHeader({
                   ))}
               </div>
             </div>
-            <div className="flex items-center">
-              <button
-                onClick={onEditClick}
-                className={`mt-6 sm:mt-0 px-6 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isEditing
-                    ? "bg-gray-200 hover:bg-gray-300 text-gray-800"
-                    : "bg-[#A51C30] hover:bg-[#8B1721] text-white"
-                }`}
-              >
-                {isEditing ? "Cancel" : "Edit Profile"}
-              </button>
-            </div>
+            {!isEditing && (
+              <div className="flex items-center">
+                <button
+                  onClick={onEditClick}
+                  className="mt-6 sm:mt-0 px-6 py-2 rounded-md text-sm font-medium transition-colors bg-[#A51C30] hover:bg-[#8B1721] text-white"
+                >
+                  Edit
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

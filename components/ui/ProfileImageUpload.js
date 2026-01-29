@@ -126,48 +126,59 @@ export default function ProfileImageUpload({
   }
 
   return (
-    <div className="relative w-32 h-32 flex-shrink-0">
-      <Image
-        src={profile?.profile_image_url || "/images/HarvardLogo.svg"}
-        alt={profile?.full_name}
-        fill
-        className="rounded-full object-cover object-top ring-1 ring-gray-200"
+    <div className="relative w-32 h-32 flex-shrink-0 group">
+      {profile?.profile_image_url ? (
+        <Image
+          src={profile.profile_image_url}
+          alt={profile?.full_name}
+          fill
+          className="rounded-full object-cover object-top ring-1 ring-gray-200 transition-transform duration-300 group-hover:scale-105"
+        />
+      ) : (
+        <div className="w-full h-full rounded-full bg-gradient-to-br from-gray-50 to-gray-100 ring-1 ring-gray-200 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+          <Image
+            src="/images/HarvardLogo.svg"
+            alt="Harvard Logo"
+            width={64}
+            height={64}
+            className="opacity-50 group-hover:opacity-70 transition-opacity"
+          />
+        </div>
+      )}
+
+      {/* Edit/Add button - always visible on hover */}
+      <button
+        type="button"
+        onClick={handleEditClick}
+        disabled={isUploading}
+        className="absolute -top-1 -left-1 w-8 h-8 bg-white/90 hover:bg-white text-gray-600 hover:text-gray-900 rounded-full shadow-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {hasProfileImage ? <EditIcon fontSize="small" /> : <AddIcon fontSize="small" />}
+      </button>
+
+      {/* Delete button - only visible in edit mode */}
+      {isEditing && hasProfileImage && (
+        <button
+          type="button"
+          onClick={handleDeleteImage}
+          disabled={isUploading}
+          className="absolute -top-1 -right-1 w-8 h-8 bg-gray-600 hover:bg-gray-700 text-white rounded-full shadow-lg flex items-center justify-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <CloseIcon fontSize="small" />
+        </button>
+      )}
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/png"
+        onChange={handleUploadImage}
+        className="hidden"
       />
 
-      {isEditing && (
-        <>
-          <button
-            type="button"
-            onClick={handleEditClick}
-            disabled={isUploading}
-            className="absolute -top-1 -left-1 w-8 h-8 bg-[#A51C30] hover:bg-[#8B1721] text-white rounded-full shadow-lg flex items-center justify-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {hasProfileImage ? <EditIcon /> : <AddIcon />}
-          </button>
-          {hasProfileImage && (
-            <button
-              type="button"
-              onClick={handleDeleteImage}
-              disabled={isUploading}
-              className="absolute -top-1 -right-1 w-8 h-8 bg-gray-600 hover:bg-gray-700 text-white rounded-full shadow-lg flex items-center justify-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <CloseIcon />
-            </button>
-          )}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/jpeg,image/png"
-            onChange={handleUploadImage}
-            className="hidden"
-          />
-          {/* TODO - Standardize uploading state */}
-          {isUploading && (
-            <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
-            </div>
-          )}
-        </>
+      {/* Uploading state */}
+      {isUploading && (
+        <div className="absolute inset-0 rounded-full bg-white/60 animate-pulse" />
       )}
       {/* TODO - Standardize error state */}
       {uploadError && (
