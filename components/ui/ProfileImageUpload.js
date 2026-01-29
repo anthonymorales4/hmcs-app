@@ -10,7 +10,6 @@ import {
 } from "../../lib/utils";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import CloseIcon from "@mui/icons-material/Close";
 
 export default function ProfileImageUpload({
   profile,
@@ -88,39 +87,6 @@ export default function ProfileImageUpload({
     }
   }
 
-  async function handleDeleteImage() {
-    if (!hasProfileImage) return;
-
-    setIsUploading(true);
-    setUploadError(null);
-
-    try {
-      const currentFileName = extractFileNameFromUrl(profile.profile_image_url);
-      await supabase.storage
-        .from("profile-images")
-        .remove([`${profile.id}/${currentFileName}`]);
-
-      const { error: updateProfileError } = await supabase
-        .from("profiles")
-        .update({ profile_image_url: null })
-        .eq("id", profile.id);
-
-      if (updateProfileError) throw updateProfileError;
-
-      if (onImageUpdate) {
-        onImageUpdate({
-          ...profile,
-          profile_image_url: null,
-        });
-      }
-    } catch (error) {
-      console.error("Error deleting image:", error);
-      setUploadError("Failed to delete image. Please try again.");
-    } finally {
-      setIsUploading(false);
-    }
-  }
-
   function handleEditClick() {
     fileInputRef.current?.click();
   }
@@ -155,18 +121,6 @@ export default function ProfileImageUpload({
       >
         {hasProfileImage ? <EditIcon fontSize="small" /> : <AddIcon fontSize="small" />}
       </button>
-
-      {/* Delete button - only visible in edit mode */}
-      {isEditing && hasProfileImage && (
-        <button
-          type="button"
-          onClick={handleDeleteImage}
-          disabled={isUploading}
-          className="absolute -top-1 -right-1 w-8 h-8 bg-gray-600 hover:bg-gray-700 text-white rounded-full shadow-lg flex items-center justify-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <CloseIcon fontSize="small" />
-        </button>
-      )}
 
       <input
         ref={fileInputRef}
