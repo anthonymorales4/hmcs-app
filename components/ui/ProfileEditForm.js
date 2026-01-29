@@ -15,6 +15,91 @@ import {
   validateLinkedInUrl,
   validatePhoneNumber,
 } from "@/lib/utils";
+// Personal Info icons
+import HomeIcon from "@mui/icons-material/Home";
+import SchoolIcon from "@mui/icons-material/School";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import GroupsIcon from "@mui/icons-material/Groups";
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import BadgeIcon from "@mui/icons-material/Badge";
+// Contact Info icons
+import PhoneIcon from "@mui/icons-material/Phone";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
+// Career Info icons
+import WorkIcon from "@mui/icons-material/Work";
+import BusinessIcon from "@mui/icons-material/Business";
+
+function FormDropdown({ label, name, value, options, onChange, placeholder, icon }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelect = (option) => {
+    onChange({ target: { name, value: option } });
+    setIsOpen(false);
+  };
+
+  const displayValue = value || placeholder || `Select ${label.toLowerCase()}`;
+  const hasValue = Boolean(value);
+
+  return (
+    <div>
+      <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1">
+        {icon && <span className="text-gray-400">{icon}</span>}
+        {label}
+      </label>
+      <div
+        className="relative inline-flex items-center w-full"
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+      >
+        <button
+          type="button"
+          className={`flex items-center justify-between w-full gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 transition-all-smooth cursor-pointer shadow-sm ${
+            hasValue ? "text-gray-900" : "text-gray-500"
+          }`}
+        >
+          <span>{displayValue}</span>
+          <svg
+            className={`w-4 h-4 transition-transform duration-300 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+
+        {isOpen && (
+          <div className="absolute top-full left-0 right-0 pt-2 z-50">
+            <div className="bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-100 animate-slide-up max-h-64 overflow-y-auto">
+              {options.map((option) => (
+                <button
+                  type="button"
+                  key={option}
+                  onClick={() => handleSelect(option)}
+                  className={`block w-full text-left px-5 py-3 text-sm font-medium whitespace-nowrap transition-all-smooth cursor-pointer ${
+                    option === value
+                      ? "bg-gray-100 text-black"
+                      : "text-gray-500 hover:bg-gray-100 hover:text-black"
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
   const [formData, setFormData] = useState({
@@ -181,7 +266,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
               rows={4}
               value={formData.bio}
               onChange={handleChange}
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] text-gray-900"
+              className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
               placeholder="Tell us about yourself..."
             />
           </div>
@@ -189,78 +274,22 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
       </div>
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <ProfileSection title="Personal Information">
-          <div className="space-y-4">
-            <div>
-              <label
-                htmlFor="position"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Position
-              </label>
-              <select
-                name="position"
-                id="position"
-                value={formData.position}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900 bg-white"
-              >
-                <option value="">Select a position</option>
-                {POSITION_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label
-                htmlFor="board_position"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Board Position
-              </label>
-              <select
-                name="board_position"
-                id="board_position"
-                value={formData.board_position}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900 bg-white"
-              >
-                <option value="">Select a board position</option>
-                {BOARD_POSITION_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label
-                htmlFor="house"
-                className="block text-sm font-medium text-gray-700"
-              >
-                House
-              </label>
-              <select
-                name="house"
-                id="house"
-                value={formData.house}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900 bg-white"
-              >
-                <option value="">Select a house</option>
-                {HOUSE_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div className="grid grid-cols-2 gap-4">
+            <FormDropdown
+              label="House"
+              name="house"
+              value={formData.house}
+              options={HOUSE_OPTIONS}
+              onChange={handleChange}
+              placeholder="Select a house"
+              icon={<HomeIcon fontSize="small" />}
+            />
             <div>
               <label
                 htmlFor="concentration"
-                className="block text-sm font-medium text-gray-700"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1"
               >
+                <span className="text-gray-400"><SchoolIcon fontSize="small" /></span>
                 Concentration
               </label>
               <input
@@ -269,15 +298,16 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 id="concentration"
                 value={formData.concentration}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
                 placeholder="e.g., Economics"
               />
             </div>
             <div>
               <label
                 htmlFor="hometown"
-                className="block text-sm font-medium text-gray-700"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1"
               >
+                <span className="text-gray-400"><LocationOnIcon fontSize="small" /></span>
                 Hometown
               </label>
               <input
@@ -286,32 +316,37 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 id="hometown"
                 value={formData.hometown}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
                 placeholder="e.g., Chicago, IL"
               />
             </div>
-            <div>
-              <label
-                htmlFor="final_club"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Final Club
-              </label>
-              <select
-                name="final_club"
-                id="final_club"
-                value={formData.final_club}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900 bg-white"
-              >
-                <option value="">Select a final club</option>
-                {FINAL_CLUB_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <FormDropdown
+              label="Final Club"
+              name="final_club"
+              value={formData.final_club}
+              options={FINAL_CLUB_OPTIONS}
+              onChange={handleChange}
+              placeholder="Select a final club"
+              icon={<GroupsIcon fontSize="small" />}
+            />
+            <FormDropdown
+              label="Position"
+              name="position"
+              value={formData.position}
+              options={POSITION_OPTIONS}
+              onChange={handleChange}
+              placeholder="Select a position"
+              icon={<SportsSoccerIcon fontSize="small" />}
+            />
+            <FormDropdown
+              label="Board Position"
+              name="board_position"
+              value={formData.board_position}
+              options={BOARD_POSITION_OPTIONS}
+              onChange={handleChange}
+              placeholder="Select a board position"
+              icon={<BadgeIcon fontSize="small" />}
+            />
           </div>
         </ProfileSection>
         <ProfileSection title="Contact Information">
@@ -319,8 +354,9 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
             <div>
               <label
                 htmlFor="phone_number"
-                className="block text-sm font-medium text-gray-700"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1"
               >
+                <span className="text-gray-400"><PhoneIcon fontSize="small" /></span>
                 Phone Number
               </label>
               <input
@@ -330,7 +366,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 value={formData.phone_number}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
                 placeholder="e.g., (617) 555-0123"
               />
               {validationErrors.phone_number && (
@@ -342,8 +378,9 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
             <div>
               <label
                 htmlFor="linkedin_url"
-                className="block text-sm font-medium text-gray-700"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1"
               >
+                <span className="text-gray-400"><LinkedInIcon fontSize="small" /></span>
                 LinkedIn
               </label>
               <input
@@ -353,7 +390,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 value={formData.linkedin_url}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
                 placeholder="https://www.linkedin.com/in/yourname"
               />
               {validationErrors.linkedin_url && (
@@ -365,8 +402,9 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
             <div>
               <label
                 htmlFor="instagram_url"
-                className="block text-sm font-medium text-gray-700"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1"
               >
+                <span className="text-gray-400"><InstagramIcon fontSize="small" /></span>
                 Instagram
               </label>
               <input
@@ -376,7 +414,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                 value={formData.instagram_url}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900"
+                className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
                 placeholder="https://www.instagram.com/yourname"
               />
               {validationErrors.instagram_url && (
@@ -391,12 +429,13 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
       {profile.role === "alumni" && (
         <div className="mt-6">
           <ProfileSection title="Career Information">
-            <div className="space-y-4">
+            <div className="grid grid-cols-3 gap-4">
               <div>
                 <label
                   htmlFor="current_job"
-                  className="block text-sm font-medium text-gray-700"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1"
                 >
+                  <span className="text-gray-400"><WorkIcon fontSize="small" /></span>
                   Current Job
                 </label>
                 <input
@@ -405,15 +444,16 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                   id="current_job"
                   value={formData.current_job}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900"
+                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
                   placeholder="e.g., Investment Banking"
                 />
               </div>
               <div>
                 <label
                   htmlFor="current_company"
-                  className="block text-sm font-medium text-gray-700"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1"
                 >
+                  <span className="text-gray-400"><BusinessIcon fontSize="small" /></span>
                   Current Company
                 </label>
                 <input
@@ -422,15 +462,16 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                   id="current_company"
                   value={formData.current_company}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900"
+                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
                   placeholder="e.g., Goldman Sachs"
                 />
               </div>
               <div>
                 <label
                   htmlFor="current_location"
-                  className="block text-sm font-medium text-gray-700"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1"
                 >
+                  <span className="text-gray-400"><LocationOnIcon fontSize="small" /></span>
                   Current Location
                 </label>
                 <input
@@ -439,7 +480,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
                   id="current_location"
                   value={formData.current_location}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#A51C30] focus:ring-[#A51C30] sm:text-sm text-gray-900"
+                  className="block w-full px-4 py-2 rounded-lg border border-gray-200 shadow-sm text-sm text-gray-900 focus:outline-none"
                   placeholder="e.g., New York, NY"
                 />
               </div>

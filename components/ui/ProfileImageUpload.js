@@ -131,7 +131,7 @@ export default function ProfileImageUpload({
         src={profile?.profile_image_url || "/images/HarvardLogo.svg"}
         alt={profile?.full_name}
         fill
-        className="rounded-full object-cover object-top"
+        className="rounded-full object-cover object-top ring-1 ring-gray-200"
       />
 
       {isEditing && (

@@ -2,6 +2,30 @@
 
 import RoleBadge from "./RoleBadge";
 import ProfileImageUpload from "./ProfileImageUpload";
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import SportsHandballIcon from "@mui/icons-material/SportsHandball";
+import ShieldIcon from "@mui/icons-material/Shield";
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+
+const getPositionIcon = (position) => {
+  const positionLower = position?.toLowerCase() || "";
+
+  if (positionLower.includes("goalkeeper") || positionLower.includes("goalie") || positionLower.includes("gk")) {
+    return SportsHandballIcon;
+  }
+  if (positionLower.includes("defender") || positionLower.includes("defense") || positionLower.includes("back")) {
+    return ShieldIcon;
+  }
+  if (positionLower.includes("midfielder") || positionLower.includes("midfield") || positionLower.includes("mid")) {
+    return AutoFixHighIcon;
+  }
+  if (positionLower.includes("forward") || positionLower.includes("striker") || positionLower.includes("attacker")) {
+    return RocketLaunchIcon;
+  }
+
+  return SportsSoccerIcon;
+};
 
 export default function ProfileHeader({
   profile,
@@ -15,6 +39,7 @@ export default function ProfileHeader({
     profile;
 
   const isBoard = board_position && board_position.trim() !== "";
+  const PositionIcon = getPositionIcon(position);
 
   return (
     <div className="rounded-lg overflow-hidden">
@@ -27,12 +52,19 @@ export default function ProfileHeader({
         <div className="flex-1 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold text-gray-900">{full_name}</h1>
-              <h3 className="text-lg italic text-gray-700">
-                Class of {graduation_year}
-              </h3>
+              <h1 className="text-3xl font-bold text-gray-900">
+                {full_name}
+                {graduation_year && (
+                  <span className="font-normal italic text-xl text-gray-500 ml-2">
+                    '{String(graduation_year).slice(-2)}
+                  </span>
+                )}
+              </h1>
               {position && (
-                <p className="text-gray-600 font-medium">{position}</p>
+                <div className="flex items-center gap-2 text-gray-600 font-medium">
+                  <PositionIcon className="text-[#A51C30]" fontSize="small" />
+                  <span>{position}</span>
+                </div>
               )}
               <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                 <RoleBadge role={role} />
