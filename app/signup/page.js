@@ -85,155 +85,149 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left side image with vignette and accent stripe */}
-      <div className="hidden lg:flex lg:flex-1 lg:relative">
-        <Image
-          src="/DSC01096.JPG"
-          alt="Harvard Men's Club Soccer Team"
-          fill
-          className="object-cover"
-          style={{ objectPosition: "50% center" }}
-          priority
-        />
-        {/* Vignette overlay */}
-        <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.7)]"></div>
-        {/* Crimson accent stripe on the right edge */}
-        <div className="absolute top-0 right-0 w-1.5 h-full bg-gradient-to-b from-[#A51C30] via-[#A51C30] to-[#8B1721]"></div>
-      </div>
+    <div className="min-h-screen relative flex items-center justify-center">
+      {/* Full-screen background image */}
+      <Image
+        src="/DSC01096.JPG"
+        alt="Harvard Men's Club Soccer Team"
+        fill
+        className="object-cover"
+        style={{ objectPosition: "50% center" }}
+        priority
+      />
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-black/50"></div>
 
-      <div className="flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-20 bg-gray-50">
-        <div className="w-full max-w-sm mx-auto">
-          {/* Form container with card styling */}
-          <div className="bg-white/80 backdrop-blur-sm shadow-xl rounded-2xl p-8">
-            <div className="text-center mb-8">
-              <Image
-                src="/images/HarvardLogo.svg"
-                alt="Harvard Logo"
-                width={60}
-                height={60}
-                className="mx-auto mb-4"
+      {/* Centered form card */}
+      <div className="relative z-10 w-full max-w-sm mx-4">
+        <div className="bg-white/95 backdrop-blur-md shadow-2xl rounded-2xl p-8">
+          <div className="text-center mb-8">
+            <Image
+              src="/images/HarvardLogo.svg"
+              alt="Harvard Logo"
+              width={60}
+              height={60}
+              className="mx-auto mb-4"
+            />
+            <h1 className="text-3xl font-bold text-gray-900">Create Account</h1>
+            <p className="text-gray-500 mt-2">Join the HMCS community</p>
+          </div>
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm mb-6">
+              {error}
+            </div>
+          )}
+          {success && (
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm mb-6">
+              {success}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="relative">
+              <label htmlFor="name" className="sr-only">
+                Name
+              </label>
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <PersonIcon className="h-5 w-5 text-gray-400" />
+              </div>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleInputChange}
               />
-              <h1 className="text-3xl font-bold text-gray-900">Create Account</h1>
-              <p className="text-gray-500 mt-2">Join the HMCS community</p>
             </div>
 
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm mb-6">
-                {error}
+            <div className="relative">
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <AlternateEmailIcon className="h-5 w-5 text-gray-400" />
               </div>
-            )}
-            {success && (
-              <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm mb-6">
-                {success}
-              </div>
-            )}
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
+                placeholder="Email address"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="relative">
-                <label htmlFor="name" className="sr-only">
-                  Name
-                </label>
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <PersonIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
-                  placeholder="Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                />
+            <div className="relative">
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <LockIcon className="h-5 w-5 text-gray-400" />
               </div>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                required
+                className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+            </div>
 
-              <div className="relative">
-                <label htmlFor="email" className="sr-only">
-                  Email address
-                </label>
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <AlternateEmailIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
-                  placeholder="Email address"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
+            <div className="relative">
+              <label htmlFor="graduationYear" className="sr-only">
+                Graduation Year
+              </label>
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <SchoolIcon className="h-5 w-5 text-gray-400" />
               </div>
+              <input
+                id="graduationYear"
+                name="graduationYear"
+                type="number"
+                min="2015"
+                max="2030"
+                required
+                className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
+                placeholder="Graduation Year"
+                value={formData.graduationYear}
+                onChange={handleInputChange}
+              />
+            </div>
 
-              <div className="relative">
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LockIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-              </div>
+            <div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-semibold text-white bg-[#A51C30] hover:bg-[#8B1721] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] transition-all-smooth disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                {loading ? "Creating Account..." : "Sign Up"}
+              </button>
+            </div>
 
-              <div className="relative">
-                <label htmlFor="graduationYear" className="sr-only">
-                  Graduation Year
-                </label>
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <SchoolIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="graduationYear"
-                  name="graduationYear"
-                  type="number"
-                  min="2015"
-                  max="2030"
-                  required
-                  className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
-                  placeholder="Graduation Year"
-                  value={formData.graduationYear}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-semibold text-white bg-[#A51C30] hover:bg-[#8B1721] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] transition-all-smooth disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            <div className="text-center">
+              <p className="text-sm text-gray-500">
+                Already have an account?{" "}
+                <Link
+                  href="/login"
+                  className="font-semibold text-[#A51C30] hover:text-[#8B1721] transition-all-smooth"
                 >
-                  {loading ? "Creating Account..." : "Sign Up"}
-                </button>
-              </div>
-
-              <div className="text-center">
-                <p className="text-sm text-gray-500">
-                  Already have an account?{" "}
-                  <Link
-                    href="/login"
-                    className="font-semibold text-[#A51C30] hover:text-[#8B1721] transition-all-smooth"
-                  >
-                    Sign in
-                  </Link>
-                </p>
-              </div>
-            </form>
-          </div>
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </div>
