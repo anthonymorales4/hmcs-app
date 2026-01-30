@@ -166,7 +166,7 @@ export default function Post({
             {onEdit && (
               <button
                 onClick={handleEdit}
-                className="text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-lg transition-all-smooth p-2"
+                className="text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-lg transition-all-smooth p-2 cursor-pointer"
                 title="Edit post"
               >
                 <EditIcon fontSize="small" />
@@ -175,7 +175,7 @@ export default function Post({
             {onDelete && (
               <button
                 onClick={handleDelete}
-                className="text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-lg transition-all-smooth p-2"
+                className="text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-lg transition-all-smooth p-2 cursor-pointer"
                 title="Delete post"
               >
                 <DeleteIcon fontSize="small" />
@@ -225,7 +225,7 @@ export default function Post({
       <div className="flex items-center gap-8 pt-5 border-t-2 border-gray-100">
         <button
           onClick={handleLikeClick}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all-smooth font-medium ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all-smooth font-medium cursor-pointer ${
             userHasLiked
               ? "text-[#A51C30] bg-red-50 hover:bg-red-100"
               : "text-gray-600 hover:text-[#A51C30] hover:bg-gray-50"
@@ -240,7 +240,7 @@ export default function Post({
         </button>
         <button
           onClick={handleCommentsClick}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all-smooth font-medium ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all-smooth font-medium cursor-pointer ${
             userHasCommented
               ? "text-[#A51C30] bg-red-50 hover:bg-red-100"
               : "text-gray-600 hover:text-[#A51C30] hover:bg-gray-50"

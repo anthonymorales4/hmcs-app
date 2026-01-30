@@ -73,7 +73,7 @@ export default function TextEditor({ content, onChange }) {
     <button
       type="button"
       onClick={onClick}
-      className={`p-2 rounded-lg transition-all-smooth text-gray-500 ${
+      className={`p-2 rounded-lg transition-all-smooth text-gray-500 cursor-pointer ${
         isActive ? "bg-gray-200 shadow-sm" : "hover:bg-gray-100"
       }`}
       title={label}

@@ -34,7 +34,10 @@ const LoadingSkeleton = (
       <div className="text-center mb-12">
         <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-6 animate-pulse" />
         <div className="h-12 w-72 bg-gray-300 rounded animate-pulse mx-auto mb-4" />
-        <div className="h-6 w-96 max-w-full bg-gray-200 rounded animate-pulse mx-auto" />
+        <div className="space-y-2">
+          <div className="h-6 w-96 max-w-full bg-gray-200 rounded animate-pulse mx-auto" />
+          <div className="h-6 w-72 max-w-full bg-gray-200 rounded animate-pulse mx-auto" />
+        </div>
       </div>
 
       {/* Main Card Skeleton */}

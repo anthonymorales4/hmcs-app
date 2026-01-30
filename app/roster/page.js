@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import PlayerCard from "../../components/ui/PlayerCard";
+import PlayerProfileModal from "../../components/ui/PlayerProfileModal";
 import YearDropdown from "../../components/ui/YearDropdown";
 import { supabase } from "../../lib/supabase";
 
@@ -10,6 +11,8 @@ export default function RosterPage() {
   const [rosterData, setRosterData] = useState(null);
   const [playerData, setPlayerData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchRosterData() {
@@ -21,7 +24,7 @@ export default function RosterPage() {
 
         const { data: profiles, error } = await supabase
           .from("profiles")
-          .select("full_name, profile_image_url, graduation_year, position");
+          .select("*");
 
         if (error) {
           console.error("Error fetching profiles:", error);
@@ -32,6 +35,7 @@ export default function RosterPage() {
               profileImageUrl: null,
               graduationYear: null,
               position: null,
+              profile: null,
             }))
           );
         } else {
@@ -43,6 +47,7 @@ export default function RosterPage() {
               profileImageUrl: profile?.profile_image_url || null,
               graduationYear: profile?.graduation_year || null,
               position: profile?.position || null,
+              profile: profile || null,
             };
           });
           setPlayerData(playerData);
@@ -60,6 +65,18 @@ export default function RosterPage() {
 
   const handleYearChange = (year) => {
     setSelectedYear(year);
+  };
+
+  const handleCardClick = (player) => {
+    if (player.profile) {
+      setSelectedPlayer(player.profile);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedPlayer(null);
   };
 
   if (loading) {
@@ -126,6 +143,7 @@ export default function RosterPage() {
                 profileImageUrl={player.profileImageUrl}
                 graduationYear={player.graduationYear}
                 position={player.position}
+                onClick={() => handleCardClick(player)}
               />
             ))}
           </div>
@@ -140,6 +158,12 @@ export default function RosterPage() {
           </div>
         )}
       </div>
+
+      <PlayerProfileModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        profile={selectedPlayer}
+      />
     </div>
   );
 }

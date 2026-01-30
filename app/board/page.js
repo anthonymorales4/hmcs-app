@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 import YearDropdown from "../../components/ui/YearDropdown";
+import PlayerProfileModal from "../../components/ui/PlayerProfileModal";
 import { formatBoardPositionTitle, getBoardPositionOrder } from "@/lib/utils";
 import SchoolIcon from "@mui/icons-material/School";
 import HomeIcon from "@mui/icons-material/Home";
@@ -14,6 +15,8 @@ export default function BoardPage() {
   const [boardData, setBoardData] = useState(null);
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [selectedMember, setSelectedMember] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function loadBoardData(year) {
@@ -46,9 +49,7 @@ export default function BoardPage() {
 
         const { data: profiles, error } = await supabase
           .from("profiles")
-          .select(
-            "full_name, concentration, house, hometown, profile_image_url, graduation_year"
-          )
+          .select("*")
           .in("full_name", names);
 
         if (error) {
@@ -83,6 +84,20 @@ export default function BoardPage() {
     });
 
     return membersByPosition;
+  };
+
+  const handleCardClick = (member) => {
+    const profile = profileData[member.name];
+    if (profile) {
+      // Add board_position to the profile for display in the modal
+      setSelectedMember({ ...profile, board_position: member.position });
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedMember(null);
   };
 
   const SkeletonCard = () => (
@@ -187,7 +202,8 @@ export default function BoardPage() {
                       return (
                         <div
                           key={`${member.position}-${index}`}
-                          className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group"
+                          className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group cursor-pointer"
+                          onClick={() => handleCardClick(member)}
                         >
                           <div className="relative h-48 bg-gray-100 overflow-hidden">
                             {profile?.profile_image_url ? (
@@ -266,6 +282,12 @@ export default function BoardPage() {
           </div>
         )}
       </div>
+
+      <PlayerProfileModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        profile={selectedMember}
+      />
     </div>
   );
 }

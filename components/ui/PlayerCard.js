@@ -30,6 +30,7 @@ export default function PlayerCard({
   profileImageUrl,
   graduationYear,
   position,
+  onClick,
 }) {
   const nameParts = playerName.trim().split(" ");
   const firstName = nameParts.slice(0, -1).join(" ");
@@ -37,7 +38,10 @@ export default function PlayerCard({
   const PositionIcon = getPositionIcon(position);
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group">
+    <div
+      className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group cursor-pointer"
+      onClick={onClick}
+    >
       <div className="relative h-48 bg-gray-100 overflow-hidden">
         {profileImageUrl ? (
           <Image

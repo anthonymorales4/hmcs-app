@@ -117,7 +117,7 @@ export default function ProfileImageUpload({
         type="button"
         onClick={handleEditClick}
         disabled={isUploading}
-        className="absolute -top-1 -left-1 w-8 h-8 bg-white/90 hover:bg-white text-gray-600 hover:text-gray-900 rounded-full shadow-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute -top-1 -left-1 w-8 h-8 bg-white/90 hover:bg-white text-gray-600 hover:text-gray-900 rounded-full shadow-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
       >
         {hasProfileImage ? <EditIcon fontSize="small" /> : <AddIcon fontSize="small" />}
       </button>

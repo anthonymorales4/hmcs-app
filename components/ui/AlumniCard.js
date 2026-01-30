@@ -3,7 +3,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-export default function AlumniCard({ name, profile }) {
+export default function AlumniCard({ name, profile, onClick }) {
   const nameParts = name.trim().split(" ");
   const firstName = nameParts.slice(0, -1).join(" ");
   const lastName = nameParts[nameParts.length - 1];
@@ -14,7 +14,10 @@ export default function AlumniCard({ name, profile }) {
   const currentLocation = profile?.current_location;
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group">
+    <div
+      className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group cursor-pointer"
+      onClick={onClick}
+    >
       <div className="relative h-48 bg-gray-100 overflow-hidden">
         {profileImageUrl ? (
           <Image

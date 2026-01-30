@@ -493,14 +493,14 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
           type="button"
           onClick={onCancel}
           disabled={isLoading}
-          className="px-4 py-2 rounded-md text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-2 rounded-md text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#A51C30] hover:bg-[#8B1721] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#A51C30] hover:bg-[#8B1721] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A51C30] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors"
         >
           {isLoading ? "Saving..." : "Save"}
         </button>

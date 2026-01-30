@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import ProtectedRoute from "../../../components/ProtectedRoute";
 import AlumniCard from "../../../components/ui/AlumniCard";
+import PlayerProfileModal from "../../../components/ui/PlayerProfileModal";
 import SearchBar from "../../../components/ui/SearchBar";
 import FilterDropdowns from "../../../components/ui/FilterDropdowns";
 import { supabase } from "../../../lib/supabase";
@@ -22,6 +23,8 @@ export default function AlumniDirectoryPage() {
     currentLocation: "",
   });
   const [loading, setLoading] = useState(true);
+  const [selectedAlumni, setSelectedAlumni] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Extract unique values for dynamic dropdowns from alumni data
   const dynamicOptions = useMemo(() => {
@@ -175,6 +178,18 @@ export default function AlumniDirectoryPage() {
     }));
   };
 
+  const handleCardClick = (alumni) => {
+    if (alumni.profile) {
+      setSelectedAlumni(alumni.profile);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedAlumni(null);
+  };
+
   // Skeleton card component
   const SkeletonCard = () => (
     <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
@@ -271,6 +286,7 @@ export default function AlumniDirectoryPage() {
                   key={`${alumni.name}-${index}`}
                   name={alumni.name}
                   profile={alumni.profile}
+                  onClick={() => handleCardClick(alumni)}
                 />
               ))}
             </div>
@@ -282,6 +298,12 @@ export default function AlumniDirectoryPage() {
             </div>
           )}
         </div>
+
+        <PlayerProfileModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          profile={selectedAlumni}
+        />
       </div>
     </ProtectedRoute>
   );

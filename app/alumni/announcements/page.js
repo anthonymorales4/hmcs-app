@@ -519,7 +519,7 @@ export default function AlumniAnnouncementsPage() {
             <button
               // Event handler is an anonymous arrow function defined inline
               onClick={handleNewPost}
-              className="bg-[#A51C30] text-white px-4 py-2 rounded-md hover:bg-[#8B1828] transition-colors font-medium"
+              className="bg-[#A51C30] text-white px-4 py-2 rounded-md hover:bg-[#8B1828] transition-colors font-medium cursor-pointer"
             >
               Add Post +
             </button>
@@ -574,7 +574,7 @@ export default function AlumniAnnouncementsPage() {
                 <button
                   onClick={handleLoadMore}
                   disabled={loadingMore}
-                  className="px-6 py-3 bg-[#A51C30] text-white rounded-md hover:bg-[#8B1828] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-3 bg-[#A51C30] text-white rounded-md hover:bg-[#8B1828] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {loadingMore ? "Loading..." : "Load More"}
                 </button>
@@ -600,7 +600,7 @@ export default function AlumniAnnouncementsPage() {
               </h2>
               <button
                 onClick={handleCancelPost}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
                 aria-label="Close modal"
               >
                 <CloseIcon />
@@ -609,7 +609,7 @@ export default function AlumniAnnouncementsPage() {
             <div className="px-6 py-4">
               <TextEditor content={postContent} onChange={setPostContent} />
               <div className="mt-4">
-                <label className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors cursor-pointer w-fit">
+                <label className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors cursor-pointer w-fit select-none">
                   <AddPhotoAlternateIcon fontSize="small" />
                   <span className="text-sm font-medium">Add Images</span>
                   <input
@@ -641,7 +641,7 @@ export default function AlumniAnnouncementsPage() {
                           // Anonymous arrow function calls handleRemoveImage(index)
                           // Stores function for later instead of when component renders
                           onClick={() => handleRemoveImage(index)}
-                          className="absolute top-1 right-1 p-1 bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
+                          className="absolute top-1 right-1 p-1 bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 cursor-pointer"
                           title="Remove image"
                         >
                           <CloseIcon fontSize="medium" />
@@ -660,7 +660,7 @@ export default function AlumniAnnouncementsPage() {
             <div className="border-t border-gray-200 px-6 py-4 flex justify-end gap-3">
               <button
                 onClick={() => handleCancelPost()}
-                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors font-medium"
+                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors font-medium cursor-pointer"
                 disabled={submitting}
               >
                 Cancel
@@ -668,7 +668,7 @@ export default function AlumniAnnouncementsPage() {
               <button
                 onClick={handleSubmitPost}
                 disabled={submitting}
-                className="px-4 py-2 bg-[#A51C30] text-white rounded-md hover:bg-[#8B1828] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-[#A51C30] text-white rounded-md hover:bg-[#8B1828] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {submitting
                   ? isEditMode
@@ -697,7 +697,7 @@ export default function AlumniAnnouncementsPage() {
               <h2 className="text-xl font-bold text-gray-900">Comments</h2>
               <button
                 onClick={() => setIsCommentsModalOpen(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
                 aria-label="Close modal"
               >
                 <CloseIcon />
@@ -749,7 +749,7 @@ export default function AlumniAnnouncementsPage() {
                           {comment.profile_id === currentUserId && (
                             <button
                               onClick={() => handleDeleteComment(comment.id)}
-                              className="text-gray-400 hover:text-gray-600 transition-colors"
+                              className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
                               title="Delete comment"
                             >
                               <DeleteIcon fontSize="small" />
@@ -788,7 +788,7 @@ export default function AlumniAnnouncementsPage() {
                 <button
                   onClick={handleSubmitComment}
                   disabled={submittingComment || !newComment.trim()}
-                  className="px-4 py-2 bg-[#A51C30] text-white rounded-md hover:bg-[#8B1828] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-[#A51C30] text-white rounded-md hover:bg-[#8B1828] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {submittingComment ? "Posting..." : "Post"}
                 </button>

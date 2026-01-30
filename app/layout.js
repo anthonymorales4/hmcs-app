@@ -9,7 +9,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: "Harvard Men's Club Soccer",
+  title: "HMCS",
   description:
     "Connecting current players and alumni of Harvard Men's Club Soccer",
 };
