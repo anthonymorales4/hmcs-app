@@ -150,7 +150,7 @@ export default function Post({
                 {profile?.full_name}
                 {profile?.graduation_year && (
                   <span className="font-normal italic text-sm text-gray-500 ml-1">
-                    '{String(profile.graduation_year).slice(-2)}
+                    &apos;{String(profile.graduation_year).slice(-2)}
                   </span>
                 )}
               </p>

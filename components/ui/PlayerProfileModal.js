@@ -24,16 +24,32 @@ import { formatInstagramUrl } from "@/lib/utils";
 const getPositionIcon = (position) => {
   const positionLower = position?.toLowerCase() || "";
 
-  if (positionLower.includes("goalkeeper") || positionLower.includes("goalie") || positionLower.includes("gk")) {
+  if (
+    positionLower.includes("goalkeeper") ||
+    positionLower.includes("goalie") ||
+    positionLower.includes("gk")
+  ) {
     return SportsHandballIcon;
   }
-  if (positionLower.includes("defender") || positionLower.includes("defense") || positionLower.includes("back")) {
+  if (
+    positionLower.includes("defender") ||
+    positionLower.includes("defense") ||
+    positionLower.includes("back")
+  ) {
     return ShieldIcon;
   }
-  if (positionLower.includes("midfielder") || positionLower.includes("midfield") || positionLower.includes("mid")) {
+  if (
+    positionLower.includes("midfielder") ||
+    positionLower.includes("midfield") ||
+    positionLower.includes("mid")
+  ) {
     return AutoFixHighIcon;
   }
-  if (positionLower.includes("forward") || positionLower.includes("striker") || positionLower.includes("attacker")) {
+  if (
+    positionLower.includes("forward") ||
+    positionLower.includes("striker") ||
+    positionLower.includes("attacker")
+  ) {
     return RocketLaunchIcon;
   }
 
@@ -89,26 +105,74 @@ export default function PlayerProfileModal({ isOpen, onClose, profile }) {
 
   // Personal info fields
   const personalInfoFields = [
-    { label: "House", value: house, icon: <HomeIcon className="h-5 w-5 text-gray-400" /> },
-    { label: "Concentration", value: concentration, icon: <SchoolIcon className="h-5 w-5 text-gray-400" /> },
-    { label: "Hometown", value: hometown, icon: <LocationOnIcon className="h-5 w-5 text-gray-400" /> },
-    { label: "Final Club", value: final_club, icon: <GroupsIcon className="h-5 w-5 text-gray-400" /> },
+    {
+      label: "House",
+      value: house,
+      icon: <HomeIcon className="h-5 w-5 text-gray-400" />,
+    },
+    {
+      label: "Concentration",
+      value: concentration,
+      icon: <SchoolIcon className="h-5 w-5 text-gray-400" />,
+    },
+    {
+      label: "Hometown",
+      value: hometown,
+      icon: <LocationOnIcon className="h-5 w-5 text-gray-400" />,
+    },
+    {
+      label: "Final Club",
+      value: final_club,
+      icon: <GroupsIcon className="h-5 w-5 text-gray-400" />,
+    },
   ].filter((field) => field.value);
 
   // Contact info fields
   const contactInfoFields = [
-    { label: "Email", value: email, icon: <EmailIcon className="h-5 w-5 text-gray-400" />, link: email ? `mailto:${email}` : null },
-    { label: "Phone", value: phone_number, icon: <PhoneIcon className="h-5 w-5 text-gray-400" />, link: phone_number ? `tel:${phone_number}` : null },
-    { label: "LinkedIn", value: linkedin_url ? full_name : null, icon: <LinkedInIcon className="h-5 w-5 text-gray-400" />, link: linkedin_url },
-    { label: "Instagram", value: instagram_url ? formatInstagramUrl(instagram_url) : null, icon: <InstagramIcon className="h-5 w-5 text-gray-400" />, link: instagram_url },
+    {
+      label: "Email",
+      value: email,
+      icon: <EmailIcon className="h-5 w-5 text-gray-400" />,
+      link: email ? `mailto:${email}` : null,
+    },
+    {
+      label: "Phone",
+      value: phone_number,
+      icon: <PhoneIcon className="h-5 w-5 text-gray-400" />,
+      link: phone_number ? `tel:${phone_number}` : null,
+    },
+    {
+      label: "LinkedIn",
+      value: linkedin_url ? full_name : null,
+      icon: <LinkedInIcon className="h-5 w-5 text-gray-400" />,
+      link: linkedin_url,
+    },
+    {
+      label: "Instagram",
+      value: instagram_url ? formatInstagramUrl(instagram_url) : null,
+      icon: <InstagramIcon className="h-5 w-5 text-gray-400" />,
+      link: instagram_url,
+    },
   ].filter((field) => field.value);
 
   // Career info fields (only for alumni)
   const careerInfoFields = isAlumni
     ? [
-        { label: "Job", value: current_job, icon: <WorkIcon className="h-5 w-5 text-gray-400" /> },
-        { label: "Company", value: current_company, icon: <BusinessIcon className="h-5 w-5 text-gray-400" /> },
-        { label: "Location", value: current_location, icon: <LocationOnIcon className="h-5 w-5 text-gray-400" /> },
+        {
+          label: "Job",
+          value: current_job,
+          icon: <WorkIcon className="h-5 w-5 text-gray-400" />,
+        },
+        {
+          label: "Company",
+          value: current_company,
+          icon: <BusinessIcon className="h-5 w-5 text-gray-400" />,
+        },
+        {
+          label: "Location",
+          value: current_location,
+          icon: <LocationOnIcon className="h-5 w-5 text-gray-400" />,
+        },
       ].filter((field) => field.value)
     : [];
 
@@ -160,7 +224,7 @@ export default function PlayerProfileModal({ isOpen, onClose, profile }) {
                 {full_name}
                 {graduation_year && (
                   <span className="font-normal italic text-lg sm:text-xl text-gray-500 ml-2">
-                    '{String(graduation_year).slice(-2)}
+                    &apos;{String(graduation_year).slice(-2)}
                   </span>
                 )}
               </h2>
@@ -197,7 +261,10 @@ export default function PlayerProfileModal({ isOpen, onClose, profile }) {
               <div className="px-6 py-5">
                 <div className="prose prose-sm max-w-none">
                   {bio.split("\n").map((paragraph, index) => (
-                    <p key={index} className="mb-2 text-gray-700 leading-relaxed">
+                    <p
+                      key={index}
+                      className="mb-2 text-gray-700 leading-relaxed"
+                    >
                       {paragraph}
                     </p>
                   ))}
@@ -212,17 +279,26 @@ export default function PlayerProfileModal({ isOpen, onClose, profile }) {
             {personalInfoFields.length > 0 && (
               <div className="bg-white border border-gray-200 shadow-lg rounded-xl">
                 <div className="px-6 py-4 border-b border-gray-100 bg-gray-50 rounded-t-xl">
-                  <h3 className="text-lg font-bold text-gray-900">Personal Information</h3>
+                  <h3 className="text-lg font-bold text-gray-900">
+                    Personal Information
+                  </h3>
                 </div>
                 <div className="px-6 py-5">
                   <ul className="divide-y divide-gray-200">
                     {personalInfoFields.map((field, index) => (
-                      <li key={index} className={`${index === 0 ? "" : "pt-4"} pb-4`}>
+                      <li
+                        key={index}
+                        className={`${index === 0 ? "" : "pt-4"} pb-4`}
+                      >
                         <div className="flex items-center">
                           <div className="flex-shrink-0">{field.icon}</div>
                           <div className="ml-3">
-                            <p className="text-sm font-medium text-gray-900">{field.label}</p>
-                            <p className="text-sm text-gray-500">{field.value}</p>
+                            <p className="text-sm font-medium text-gray-900">
+                              {field.label}
+                            </p>
+                            <p className="text-sm text-gray-500">
+                              {field.value}
+                            </p>
                           </div>
                         </div>
                       </li>
@@ -236,27 +312,41 @@ export default function PlayerProfileModal({ isOpen, onClose, profile }) {
             {contactInfoFields.length > 0 && (
               <div className="bg-white border border-gray-200 shadow-lg rounded-xl">
                 <div className="px-6 py-4 border-b border-gray-100 bg-gray-50 rounded-t-xl">
-                  <h3 className="text-lg font-bold text-gray-900">Contact Information</h3>
+                  <h3 className="text-lg font-bold text-gray-900">
+                    Contact Information
+                  </h3>
                 </div>
                 <div className="px-6 py-5">
                   <ul className="divide-y divide-gray-200">
                     {contactInfoFields.map((field, index) => (
-                      <li key={index} className={`${index === 0 ? "" : "pt-4"} pb-4`}>
+                      <li
+                        key={index}
+                        className={`${index === 0 ? "" : "pt-4"} pb-4`}
+                      >
                         <div className="flex items-center">
                           <div className="flex-shrink-0">{field.icon}</div>
                           <div className="ml-3">
-                            <p className="text-sm font-medium text-gray-900">{field.label}</p>
+                            <p className="text-sm font-medium text-gray-900">
+                              {field.label}
+                            </p>
                             {field.link ? (
                               <a
                                 href={field.link}
-                                target={field.label === "Email" || field.label === "Phone" ? "_self" : "_blank"}
+                                target={
+                                  field.label === "Email" ||
+                                  field.label === "Phone"
+                                    ? "_self"
+                                    : "_blank"
+                                }
                                 rel="noopener noreferrer"
                                 className="text-sm text-[#A51C30] hover:text-[#8B1721] hover:underline transition-colors"
                               >
                                 {field.value}
                               </a>
                             ) : (
-                              <p className="text-sm text-gray-500">{field.value}</p>
+                              <p className="text-sm text-gray-500">
+                                {field.value}
+                              </p>
                             )}
                           </div>
                         </div>
@@ -272,16 +362,23 @@ export default function PlayerProfileModal({ isOpen, onClose, profile }) {
           {isAlumni && careerInfoFields.length > 0 && (
             <div className="bg-white border border-gray-200 shadow-lg rounded-xl">
               <div className="px-6 py-4 border-b border-gray-100 bg-gray-50 rounded-t-xl">
-                <h3 className="text-lg font-bold text-gray-900">Career Information</h3>
+                <h3 className="text-lg font-bold text-gray-900">
+                  Career Information
+                </h3>
               </div>
               <div className="px-6 py-5">
                 <ul className="divide-y divide-gray-200">
                   {careerInfoFields.map((field, index) => (
-                    <li key={index} className={`${index === 0 ? "" : "pt-4"} pb-4`}>
+                    <li
+                      key={index}
+                      className={`${index === 0 ? "" : "pt-4"} pb-4`}
+                    >
                       <div className="flex items-center">
                         <div className="flex-shrink-0">{field.icon}</div>
                         <div className="ml-3">
-                          <p className="text-sm font-medium text-gray-900">{field.label}</p>
+                          <p className="text-sm font-medium text-gray-900">
+                            {field.label}
+                          </p>
                           <p className="text-sm text-gray-500">{field.value}</p>
                         </div>
                       </div>

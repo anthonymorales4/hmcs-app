@@ -11,16 +11,32 @@ import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 const getPositionIcon = (position) => {
   const positionLower = position?.toLowerCase() || "";
 
-  if (positionLower.includes("goalkeeper") || positionLower.includes("goalie") || positionLower.includes("gk")) {
+  if (
+    positionLower.includes("goalkeeper") ||
+    positionLower.includes("goalie") ||
+    positionLower.includes("gk")
+  ) {
     return SportsHandballIcon;
   }
-  if (positionLower.includes("defender") || positionLower.includes("defense") || positionLower.includes("back")) {
+  if (
+    positionLower.includes("defender") ||
+    positionLower.includes("defense") ||
+    positionLower.includes("back")
+  ) {
     return ShieldIcon;
   }
-  if (positionLower.includes("midfielder") || positionLower.includes("midfield") || positionLower.includes("mid")) {
+  if (
+    positionLower.includes("midfielder") ||
+    positionLower.includes("midfield") ||
+    positionLower.includes("mid")
+  ) {
     return AutoFixHighIcon;
   }
-  if (positionLower.includes("forward") || positionLower.includes("striker") || positionLower.includes("attacker")) {
+  if (
+    positionLower.includes("forward") ||
+    positionLower.includes("striker") ||
+    positionLower.includes("attacker")
+  ) {
     return RocketLaunchIcon;
   }
 
@@ -56,7 +72,7 @@ export default function ProfileHeader({
                 {full_name}
                 {graduation_year && (
                   <span className="font-normal italic text-xl text-gray-500 ml-2">
-                    '{String(graduation_year).slice(-2)}
+                    &apos;{String(graduation_year).slice(-2)}
                   </span>
                 )}
               </h1>
