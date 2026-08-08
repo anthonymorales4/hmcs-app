@@ -5,8 +5,10 @@ import PlayerCard from "../../components/ui/PlayerCard";
 import PlayerProfileModal from "../../components/ui/PlayerProfileModal";
 import YearDropdown from "../../components/ui/YearDropdown";
 import { supabase } from "../../lib/supabase";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function RosterPage() {
+  const { user } = useAuth();
   const [selectedYear, setSelectedYear] = useState("2024-2025");
   const [rosterData, setRosterData] = useState(null);
   const [playerData, setPlayerData] = useState([]);
@@ -22,16 +24,18 @@ export default function RosterPage() {
         const data = await response.json();
         setRosterData(data);
 
+        // Anonymous visitors read the public_profiles view, which exposes only
+        // the columns these cards render. Signed-in members read the full table
+        // so the profile modal has contact details to show.
         const { data: profiles, error } = await supabase
-          .from("profiles")
+          .from(user ? "profiles" : "public_profiles")
           .select("*");
 
         if (error) {
           console.error("Error fetching profiles:", error);
           setPlayerData(
-            data.players.map((player, index) => ({
+            data.players.map((player) => ({
               name: player,
-              number: index + 1,
               profileImageUrl: null,
               graduationYear: null,
               position: null,
@@ -39,11 +43,10 @@ export default function RosterPage() {
             }))
           );
         } else {
-          const playerData = data.players.map((player, index) => {
+          const playerData = data.players.map((player) => {
             const profile = profiles.find((p) => p.full_name === player);
             return {
               name: player,
-              number: index + 1,
               profileImageUrl: profile?.profile_image_url || null,
               graduationYear: profile?.graduation_year || null,
               position: profile?.position || null,
@@ -61,14 +64,16 @@ export default function RosterPage() {
     }
 
     fetchRosterData();
-  }, [selectedYear]);
+  }, [selectedYear, user]);
 
   const handleYearChange = (year) => {
     setSelectedYear(year);
   };
 
+  // The modal shows contact details, so it is members-only. Anonymous visitors
+  // get the cards without a click target rather than a modal of blank fields.
   const handleCardClick = (player) => {
-    if (player.profile) {
+    if (user && player.profile) {
       setSelectedPlayer(player.profile);
       setIsModalOpen(true);
     }
@@ -139,11 +144,14 @@ export default function RosterPage() {
               <PlayerCard
                 key={index}
                 playerName={player.name}
-                playerNumber={player.number}
                 profileImageUrl={player.profileImageUrl}
                 graduationYear={player.graduationYear}
                 position={player.position}
-                onClick={() => handleCardClick(player)}
+                onClick={
+                  user && player.profile
+                    ? () => handleCardClick(player)
+                    : undefined
+                }
               />
             ))}
           </div>

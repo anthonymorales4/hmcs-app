@@ -37,9 +37,15 @@ export default function PlayerCard({
   const lastName = nameParts[nameParts.length - 1];
   const PositionIcon = getPositionIcon(position);
 
+  // No onClick means there is nothing to open (anonymous visitor, or no linked
+  // profile), so the card should not advertise itself as interactive.
+  const isClickable = typeof onClick === "function";
+
   return (
     <div
-      className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group cursor-pointer"
+      className={`bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group ${
+        isClickable ? "cursor-pointer" : ""
+      }`}
       onClick={onClick}
     >
       <div className="relative h-48 bg-gray-100 overflow-hidden">
@@ -82,11 +88,13 @@ export default function PlayerCard({
             </div>
           )}
         </div>
-        <div className="text-right">
-          <span className="text-xl font-bold text-[#A51C30] group-hover:text-[#8B1721] transition-colors">
-            #{playerNumber}
-          </span>
-        </div>
+        {playerNumber != null && (
+          <div className="text-right">
+            <span className="text-xl font-bold text-[#A51C30] group-hover:text-[#8B1721] transition-colors">
+              #{playerNumber}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

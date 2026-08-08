@@ -8,8 +8,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
 import SchoolIcon from "@mui/icons-material/School";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { supabase } from "../../lib/supabase";
-import { validatePlayerName } from "../../lib/utils";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -17,6 +17,7 @@ export default function SignUpPage() {
     email: "",
     password: "",
     graduationYear: "",
+    accessCode: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -38,30 +39,34 @@ export default function SignUpPage() {
     setSuccess("");
 
     try {
-      // Validate name against roster data
-      const nameValidation = await validatePlayerName(formData.name);
-      if (!nameValidation.isValid) {
+      // Check the access code before creating anything. The signup trigger is
+      // the real enforcement, but a failure there surfaces as an opaque
+      // "Database error saving new user", so catch the common case here where
+      // we can show something useful.
+      const { data: codeIsValid, error: codeError } = await supabase.rpc(
+        "check_access_code",
+        { p_code: formData.accessCode }
+      );
+
+      if (codeError) {
+        throw codeError;
+      }
+      if (!codeIsValid) {
         throw new Error(
-          "Name not found in Harvard Men's Club Soccer roster. Please contact us if you believe this is an error."
+          "That access code isn't valid. Codes are issued by the club — reach out if you need one."
         );
       }
 
-      // Determine role based on graduation year
-      const currentYear = new Date().getFullYear();
-      const role =
-        parseInt(formData.graduationYear) > currentYear
-          ? "current_player"
-          : "alumni";
-
-      // Sign up user with Supabase Auth
-      const { data, error: signUpError } = await supabase.auth.signUp({
+      // `role` is derived server-side in handle_new_user() from the graduation
+      // year, so it is deliberately not sent here.
+      const { error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
           data: {
             full_name: formData.name,
             graduation_year: parseInt(formData.graduationYear),
-            role: role,
+            access_code: formData.accessCode,
           },
         },
       });
@@ -204,6 +209,36 @@ export default function SignUpPage() {
                 value={formData.graduationYear}
                 onChange={handleInputChange}
               />
+            </div>
+
+            <div className="relative">
+              <label htmlFor="accessCode" className="sr-only">
+                Access Code
+              </label>
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <VpnKeyIcon className="h-5 w-5 text-gray-400" />
+              </div>
+              <input
+                id="accessCode"
+                name="accessCode"
+                type="text"
+                autoComplete="off"
+                autoCapitalize="characters"
+                required
+                className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
+                placeholder="Access Code"
+                value={formData.accessCode}
+                onChange={handleInputChange}
+              />
+              <p className="mt-2 px-1 text-xs text-gray-500">
+                Issued by the club. Don&apos;t have one?{" "}
+                <a
+                  href="mailto:cjmcconnon@college.harvard.edu"
+                  className="font-semibold text-[#A51C30] hover:text-[#8B1721] transition-colors"
+                >
+                  Request access
+                </a>
+              </p>
             </div>
 
             <div>

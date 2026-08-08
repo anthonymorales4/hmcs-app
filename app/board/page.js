@@ -6,11 +6,13 @@ import { supabase } from "../../lib/supabase";
 import YearDropdown from "../../components/ui/YearDropdown";
 import PlayerProfileModal from "../../components/ui/PlayerProfileModal";
 import { formatBoardPositionTitle, getBoardPositionOrder } from "@/lib/utils";
+import { useAuth } from "../../contexts/AuthContext";
 import SchoolIcon from "@mui/icons-material/School";
 import HomeIcon from "@mui/icons-material/Home";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function BoardPage() {
+  const { user } = useAuth();
   const [selectedYear, setSelectedYear] = useState("2024-2025");
   const [boardData, setBoardData] = useState(null);
   const [profileData, setProfileData] = useState({});
@@ -47,8 +49,10 @@ export default function BoardPage() {
       try {
         const names = boardMembers.map((member) => member.name);
 
+        // Same split as the roster page: anon reads the column-limited view,
+        // members read the full table for the profile modal.
         const { data: profiles, error } = await supabase
-          .from("profiles")
+          .from(user ? "profiles" : "public_profiles")
           .select("*")
           .in("full_name", names);
 
@@ -69,7 +73,7 @@ export default function BoardPage() {
     }
 
     loadBoardData(selectedYear);
-  }, [selectedYear]);
+  }, [selectedYear, user]);
 
   const getBoardMembersByPosition = () => {
     if (!boardData || !boardData.boardMembers) return {};
@@ -86,9 +90,11 @@ export default function BoardPage() {
     return membersByPosition;
   };
 
+  // Members-only, for the same reason as the roster page: the modal renders
+  // contact details.
   const handleCardClick = (member) => {
     const profile = profileData[member.name];
-    if (profile) {
+    if (user && profile) {
       // Add board_position to the profile for display in the modal
       setSelectedMember({ ...profile, board_position: member.position });
       setIsModalOpen(true);
@@ -202,7 +208,9 @@ export default function BoardPage() {
                       return (
                         <div
                           key={`${member.position}-${index}`}
-                          className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group cursor-pointer"
+                          className={`bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-all-smooth hover:scale-[1.02] group ${
+                            user && profile ? "cursor-pointer" : ""
+                          }`}
                           onClick={() => handleCardClick(member)}
                         >
                           <div className="relative h-48 bg-gray-100 overflow-hidden">
@@ -274,10 +282,21 @@ export default function BoardPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-lg mx-auto">
               <div className="text-xl text-gray-600 font-medium">
-                No board information available for this year.
+                We&apos;re still reconstructing our board records.
               </div>
+              <p className="mt-4 text-gray-500 leading-relaxed">
+                We don&apos;t have verified records of who served on the board in{" "}
+                {selectedYear}, so we&apos;d rather show nothing than guess. If
+                you know — or if you served yourself — please get in touch.
+              </p>
+              <a
+                href="mailto:cjmcconnon@college.harvard.edu"
+                className="inline-block mt-6 font-semibold text-[#A51C30] hover:text-[#8B1721] transition-colors"
+              >
+                Help us fill this in
+              </a>
             </div>
           </div>
         )}
