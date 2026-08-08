@@ -211,27 +211,32 @@ export default function SignUpPage() {
               />
             </div>
 
-            <div className="relative">
+            <div>
               <label htmlFor="accessCode" className="sr-only">
                 Access Code
               </label>
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <VpnKeyIcon className="h-5 w-5 text-gray-400" />
+              {/* The icon is positioned against this wrapper, which spans only
+                  the input — the helper text below sits outside it so it does
+                  not drag the vertical centering down. */}
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <VpnKeyIcon className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="accessCode"
+                  name="accessCode"
+                  type="text"
+                  autoComplete="off"
+                  autoCapitalize="characters"
+                  required
+                  className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
+                  placeholder="Access Code"
+                  value={formData.accessCode}
+                  onChange={handleInputChange}
+                />
               </div>
-              <input
-                id="accessCode"
-                name="accessCode"
-                type="text"
-                autoComplete="off"
-                autoCapitalize="characters"
-                required
-                className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 shadow-sm transition-all-smooth focus:outline-none focus:border-gray-300 hover:border-gray-300"
-                placeholder="Access Code"
-                value={formData.accessCode}
-                onChange={handleInputChange}
-              />
               <p className="mt-2 px-1 text-xs text-gray-500">
-                Issued by the club. Don&apos;t have one?{" "}
+                Don&apos;t have one?{" "}
                 <a
                   href="mailto:cjmcconnon@college.harvard.edu"
                   className="font-semibold text-[#A51C30] hover:text-[#8B1721] transition-colors"
