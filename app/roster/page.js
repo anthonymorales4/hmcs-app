@@ -6,10 +6,11 @@ import PlayerProfileModal from "../../components/ui/PlayerProfileModal";
 import YearDropdown from "../../components/ui/YearDropdown";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
+import { DEFAULT_ACADEMIC_YEAR } from "../../lib/constants";
 
 export default function RosterPage() {
   const { user } = useAuth();
-  const [selectedYear, setSelectedYear] = useState("2024-2025");
+  const [selectedYear, setSelectedYear] = useState(DEFAULT_ACADEMIC_YEAR);
   const [rosterData, setRosterData] = useState(null);
   const [playerData, setPlayerData] = useState([]);
   const [loading, setLoading] = useState(true);

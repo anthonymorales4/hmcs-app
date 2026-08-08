@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import YearDropdown from "../../components/ui/YearDropdown";
 import { isHarvard } from "../../lib/utils";
+import { DEFAULT_ACADEMIC_YEAR } from "../../lib/constants";
 
 export default function StandingsPage() {
-  const [selectedYear, setSelectedYear] = useState("2024-2025");
+  const [selectedYear, setSelectedYear] = useState(DEFAULT_ACADEMIC_YEAR);
   const [standingsData, setStandingsData] = useState(null);
   const [loading, setLoading] = useState(true);
 

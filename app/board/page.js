@@ -7,13 +7,14 @@ import YearDropdown from "../../components/ui/YearDropdown";
 import PlayerProfileModal from "../../components/ui/PlayerProfileModal";
 import { formatBoardPositionTitle, getBoardPositionOrder } from "@/lib/utils";
 import { useAuth } from "../../contexts/AuthContext";
+import { DEFAULT_ACADEMIC_YEAR } from "../../lib/constants";
 import SchoolIcon from "@mui/icons-material/School";
 import HomeIcon from "@mui/icons-material/Home";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function BoardPage() {
   const { user } = useAuth();
-  const [selectedYear, setSelectedYear] = useState("2024-2025");
+  const [selectedYear, setSelectedYear] = useState(DEFAULT_ACADEMIC_YEAR);
   const [boardData, setBoardData] = useState(null);
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(true);

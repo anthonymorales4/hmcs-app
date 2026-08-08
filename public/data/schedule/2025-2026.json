@@ -1,0 +1,83 @@
+{
+  "academicYear": "2025-2026",
+  "seasons": {
+    "nirsa": {
+      "season": "2025",
+      "teamName": "Harvard University - Crimson",
+      "games": [
+        {
+          "id": 1,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Tufts University - Blue",
+          "date": "2025-10-12",
+          "time": "TBD",
+          "score": { "home": 0, "away": 4 },
+          "result": "LOSS"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Boston University",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2025-10-05",
+          "time": "TBD",
+          "score": { "home": 1, "away": 0 },
+          "result": "LOSS"
+        },
+        {
+          "id": 3,
+          "homeTeam": "Northeastern University",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2025-10-04",
+          "time": "TBD",
+          "score": { "home": 1, "away": 2 },
+          "result": "WIN"
+        },
+        {
+          "id": 4,
+          "homeTeam": "Harvard University - White",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2025-10-01",
+          "time": "TBD",
+          "score": { "home": 0, "away": 2 },
+          "result": "WIN"
+        },
+        {
+          "id": 5,
+          "homeTeam": "Tufts University - Brown",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2025-09-27",
+          "time": "TBD",
+          "score": { "home": 3, "away": 1 },
+          "result": "LOSS"
+        },
+        {
+          "id": 6,
+          "homeTeam": "College of the Holy Cross",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2025-09-21",
+          "time": "TBD",
+          "score": { "home": 0, "away": 0 },
+          "result": "WIN"
+        },
+        {
+          "id": 7,
+          "homeTeam": "Brandeis University",
+          "awayTeam": "Harvard University - Crimson",
+          "date": "2025-09-19",
+          "time": "TBD",
+          "score": { "home": 3, "away": 1 },
+          "result": "LOSS"
+        },
+        {
+          "id": 8,
+          "homeTeam": "Harvard University - Crimson",
+          "awayTeam": "Worcester Polytechnic",
+          "date": "2025-09-13",
+          "time": "TBD",
+          "score": { "home": 3, "away": 1 },
+          "result": "WIN"
+        }
+      ]
+    }
+  }
+}
