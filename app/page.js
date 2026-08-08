@@ -34,6 +34,12 @@ export default function Home() {
     },
   ];
 
+  const contactEmails = [
+    "cjmcconnon@college.harvard.edu",
+    "oaschiff@college.harvard.edu",
+    "fleonardi@college.harvard.edu",
+  ];
+
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
   };
@@ -139,7 +145,22 @@ export default function Home() {
           </div>
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
             <div>
-              <p className="text-lg text-gray-600 leading-relaxed"></p>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Harvard Men&apos;s Club Soccer is a student-run team open to
+                every undergraduate on campus, no matter how you came to the
+                game. We compete each fall in NIRSA Region 1 and at the Ivy
+                League Championships, playing our home matches at Cumnock
+                Fields.
+              </p>
+            </div>
+            <div className="mt-8 lg:mt-0">
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Rosters turn over, but the club doesn&apos;t. Players who pulled
+                on the crimson years ago still follow the results, come back for
+                games, and help the next group find their footing after
+                graduation. Tryouts are held at the start of each fall season
+                and everyone is welcome to come out.
+              </p>
             </div>
           </div>
         </div>
@@ -245,12 +266,22 @@ export default function Home() {
           <div className="max-w-2xl mx-auto">
             <div className="bg-white border border-gray-200 rounded-xl p-10 shadow-lg hover:shadow-xl transition-all-smooth hover:scale-[1.02]">
               <div className="space-y-6">
-                <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                <div className="flex justify-between items-start gap-4 py-3 border-b border-gray-100">
                   <span className="text-gray-600 font-medium text-lg flex items-center gap-2">
                     <EmailIcon sx={{ fontSize: 20 }} />
                     Email:
                   </span>
-                  <span className="font-semibold text-gray-900"></span>
+                  <div className="flex flex-col items-end gap-1 text-right">
+                    {contactEmails.map((email) => (
+                      <a
+                        key={email}
+                        href={`mailto:${email}`}
+                        className="font-semibold text-[#A51C30] hover:text-[#8B1721] transition-colors break-all"
+                      >
+                        {email}
+                      </a>
+                    ))}
+                  </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-600 font-medium text-lg flex items-center gap-2">
