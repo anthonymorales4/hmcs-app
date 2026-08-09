@@ -93,7 +93,7 @@ export default function SignUpPage() {
     <div className="min-h-screen relative flex items-center justify-center">
       {/* Full-screen background image */}
       <Image
-        src="/DSC01096.JPG"
+        src="/images/DSC01096.JPG"
         alt="Harvard Men's Club Soccer Team"
         fill
         className="object-cover"

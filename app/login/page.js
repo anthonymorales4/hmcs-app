@@ -53,7 +53,7 @@ export default function LoginPage() {
     <div className="min-h-screen relative flex items-center justify-center">
       {/* Full-screen background image */}
       <Image
-        src="/DSC01558.JPG"
+        src="/images/DSC01558.JPG"
         alt="Harvard Men's Club Soccer Team"
         fill
         className="object-cover"
