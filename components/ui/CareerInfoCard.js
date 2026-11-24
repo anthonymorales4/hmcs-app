@@ -1,12 +1,13 @@
 "use client";
 
 import ProfileSection from "./ProfileSection";
+import { deriveRole } from "@/lib/utils";
 import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function CareerInfoCard({ profile }) {
-  if (!profile || profile.role !== "alumni") return null;
+  if (!profile || deriveRole(profile.graduation_year) !== "alumni") return null;
 
   const { current_job, current_location, current_company } = profile;
 

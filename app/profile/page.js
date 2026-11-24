@@ -10,6 +10,7 @@ import PersonalInfoCard from "../../components/ui/PersonalInfoCard";
 import ContactInfoCard from "../../components/ui/ContactInfoCard";
 import CareerInfoCard from "../../components/ui/CareerInfoCard";
 import ProfileEditForm from "../../components/ui/ProfileEditForm";
+import { deriveRole } from "../../lib/utils";
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
@@ -166,7 +167,7 @@ export default function ProfilePage() {
                   <PersonalInfoCard profile={profile} />
                   <ContactInfoCard profile={profile} />
                 </div>
-                {profile.role === "alumni" && (
+                {deriveRole(profile.graduation_year) === "alumni" && (
                   <div className="mt-6">
                     <CareerInfoCard profile={profile} />
                   </div>

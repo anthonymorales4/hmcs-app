@@ -40,11 +40,16 @@ I played on the Harvard Men's Club Soccer team from 2021-2024. I loved being a p
 - `components/ui/ProfileCompletionBar.js` - Visual progress indicator
 - `components/ui/ProfileHeader.js` - Profile header
 
-**Roster Management**:
+**Season Data**:
 
-- `lib/rosterValidation.js` - Validates player names against historical rosters
-- Roster data stored in `public/data/rosters/` as JSON files by academic year
-- Available years: 2024-2025, 2023-2024, 2022-2023, 2021-2022, 2019-2020, 2018-2019, 2017-2018
+- Season data is stored as JSON files by academic year under `public/data/`, in
+  `rosters/`, `schedules/`, `standings/` and `board/`
+- `lib/constants.js` holds `ACADEMIC_YEAR_OPTIONS` (the year dropdown) and
+  `DEFAULT_ACADEMIC_YEAR`. Add a year there once its JSON files land
+- Historical seasons (2017-2018 through 2024-2025) were removed; recover any of
+  them from git history if needed. Only current seasons are carried forward
+- Every page guards a missing file and renders an empty state, so an absent
+  season is never a crash
 
 ### File Organization
 
@@ -69,7 +74,7 @@ I played on the Harvard Men's Club Soccer team from 2021-2024. I loved being a p
 
 - `lib/supabase.js` - Supabase client configuration
 - `lib/constants.js` - App constants
-- `lib/rosterValidation.js` - Roster validation functions
+- `lib/utils.js` - Shared helpers
 
 ## Environment Variables Required
 
@@ -84,7 +89,10 @@ I played on the Harvard Men's Club Soccer team from 2021-2024. I loved being a p
 
 - Regular users: Access to main pages (About Us, Roster, Schedule, Standings)
 - Players + Alumni: Additional access to protected `/alumni/*` routes (Alumni Directory, Announcements, Donations, Profile)
-- Role determined during signup with roster validation
+- Signup is gated by a club-issued access code, enforced in the `handle_new_user()`
+  signup trigger (`supabase/migrations/`)
+- `role` is derived from `graduation_year` against the current academic year, not
+  self-assigned by the client
 
 ## Technical Implementation
 

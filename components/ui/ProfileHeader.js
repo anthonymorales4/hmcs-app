@@ -1,6 +1,7 @@
 "use client";
 
 import RoleBadge from "./RoleBadge";
+import { deriveRole } from "@/lib/utils";
 import ProfileImageUpload from "./ProfileImageUpload";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import SportsHandballIcon from "@mui/icons-material/SportsHandball";
@@ -51,8 +52,8 @@ export default function ProfileHeader({
 }) {
   if (!profile) return null;
 
-  const { full_name, graduation_year, role, position, board_position } =
-    profile;
+  const { full_name, graduation_year, position, board_position } = profile;
+  const role = deriveRole(graduation_year);
 
   const isBoard = board_position && board_position.trim() !== "";
   const PositionIcon = getPositionIcon(position);

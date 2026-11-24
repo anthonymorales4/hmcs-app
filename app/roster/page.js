@@ -22,6 +22,11 @@ export default function RosterPage() {
       try {
         setLoading(true);
         const response = await fetch(`/data/rosters/${selectedYear}.json`);
+        if (!response.ok) {
+          setRosterData(null);
+          setPlayerData([]);
+          return;
+        }
         const data = await response.json();
         setRosterData(data);
 

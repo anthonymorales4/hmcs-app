@@ -7,7 +7,7 @@ import PlayerProfileModal from "../../../components/ui/PlayerProfileModal";
 import SearchBar from "../../../components/ui/SearchBar";
 import FilterDropdowns from "../../../components/ui/FilterDropdowns";
 import { supabase } from "../../../lib/supabase";
-import { ACADEMIC_YEAR_OPTIONS } from "../../../lib/constants";
+import { currentAcademicYearEnd } from "../../../lib/constants";
 
 export default function AlumniDirectoryPage() {
   const [alumniData, setAlumniData] = useState([]);
@@ -53,48 +53,28 @@ export default function AlumniDirectoryPage() {
       try {
         setLoading(true);
 
-        // A set is a built-in object that allows storing unique values of any type
-        const alumniNames = new Set();
-
-        async function fetchRosterForAcademicYear(academicYear, alumniNames) {
-          try {
-            const response = await fetch(`/data/rosters/${academicYear}.json`);
-            if (response.ok) {
-              const data = await response.json();
-              data.players.forEach((playerName) => alumniNames.add(playerName));
-            }
-          } catch (error) {
-            console.error(`Error fetching ${academicYear} roster:`, error);
-          }
-        }
-
-        // Array containing 7 promises (one for each academic year)
-        const rosterPromises = ACADEMIC_YEAR_OPTIONS.map((academicYear) =>
-          fetchRosterForAcademicYear(academicYear, alumniNames)
-        );
-
-        // Process all 7 promises in parallel
-        await Promise.all(rosterPromises);
-
-        // Get profile data from Supabase
+        // Alumni are everyone whose graduation year has already passed, which is
+        // the same rule deriveRole() applies. Rosters used to gate this list, so
+        // an alum only appeared if their name was in a roster JSON; now a profile
+        // is enough. A null graduation_year counts as alumni, matching
+        // handle_new_user().
         const { data: alumniProfiles, error } = await supabase
           .from("profiles")
           .select("*")
-          .eq("role", "alumni");
+          .not("full_name", "is", null)
+          .or(
+            `graduation_year.is.null,graduation_year.lt.${currentAcademicYearEnd()}`
+          )
+          .order("full_name");
 
         if (error) {
           console.error("Error fetching profiles:", error);
         }
 
-        // Combine roster names with profile data
-        const alumniData = Array.from(alumniNames).map((name) => {
-          const profile =
-            alumniProfiles?.find((p) => p.full_name === name) || null;
-          return {
-            name,
-            profile,
-          };
-        });
+        const alumniData = (alumniProfiles || []).map((profile) => ({
+          name: profile.full_name,
+          profile,
+        }));
 
         setAlumniData(alumniData);
         setFilteredAlumni(alumniData);

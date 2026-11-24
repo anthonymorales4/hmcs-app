@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
+import { deriveRole } from "@/lib/utils";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import SportsHandballIcon from "@mui/icons-material/SportsHandball";
 import ShieldIcon from "@mui/icons-material/Shield";
@@ -81,7 +82,6 @@ export default function PlayerProfileModal({ isOpen, onClose, profile }) {
   const {
     full_name,
     graduation_year,
-    role,
     position,
     board_position,
     bio,
@@ -101,6 +101,7 @@ export default function PlayerProfileModal({ isOpen, onClose, profile }) {
 
   const isBoard = board_position && board_position.trim() !== "";
   const PositionIcon = getPositionIcon(position);
+  const role = deriveRole(graduation_year);
   const isAlumni = role === "alumni";
 
   // Personal info fields

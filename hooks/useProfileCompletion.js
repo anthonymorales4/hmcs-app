@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { REQUIRED_FIELDS, PROFILE_COMPLETION } from "../lib/constants";
+import { deriveRole } from "../lib/utils";
 
 export function useProfileCompletion(profile) {
   const { percentage, tip, color } = useMemo(() => {
@@ -12,7 +13,9 @@ export function useProfileCompletion(profile) {
     // Determine required fields based on role
     const requiredFields = [
       ...REQUIRED_FIELDS.COMMON,
-      ...(profile.role === "alumni" ? REQUIRED_FIELDS.ALUMNI_ADDITIONAL : []),
+      ...(deriveRole(profile.graduation_year) === "alumni"
+        ? REQUIRED_FIELDS.ALUMNI_ADDITIONAL
+        : []),
     ];
 
     // Calculate completed fields

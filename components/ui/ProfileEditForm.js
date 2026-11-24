@@ -10,6 +10,7 @@ import {
   BOARD_POSITION_OPTIONS,
 } from "../../lib/constants";
 import {
+  deriveRole,
   formatPhoneNumber,
   validateInstagramUrl,
   validateLinkedInUrl,
@@ -426,7 +427,7 @@ export default function ProfileEditForm({ profile, onCancel, onUpdate }) {
           </div>
         </ProfileSection>
       </div>
-      {profile.role === "alumni" && (
+      {deriveRole(profile.graduation_year) === "alumni" && (
         <div className="mt-6">
           <ProfileSection title="Career Information">
             <div className="grid grid-cols-3 gap-4">

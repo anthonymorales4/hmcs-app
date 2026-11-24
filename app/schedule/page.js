@@ -16,7 +16,7 @@ export default function SchedulePage() {
   const loadScheduleData = async (year) => {
     setLoading(true);
     try {
-      const response = await fetch(`/data/schedule/${year}.json`);
+      const response = await fetch(`/data/schedules/${year}.json`);
       if (response.ok) {
         const data = await response.json();
         setScheduleData(data);
