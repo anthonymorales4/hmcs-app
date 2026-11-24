@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -33,14 +31,15 @@ export default function Post({
 
   // useEditor is a React hook from Tiptap that creates and manages an editor instance object with many properties and methods
   const editor = useEditor({
-    // StarterKit includes all basic formatting features
+    // StarterKit includes all basic formatting features, Underline and Link
+    // among them, so Link is configured through it rather than added again.
     extensions: [
-      StarterKit,
-      Underline,
-      Link.configure({
-        openOnClick: true,
-        HTMLAttributes: {
-          class: "text-[#A51C30] underline cursor-pointer",
+      StarterKit.configure({
+        link: {
+          openOnClick: true,
+          HTMLAttributes: {
+            class: "text-[#A51C30] underline cursor-pointer",
+          },
         },
       }),
     ],

@@ -179,8 +179,8 @@ export default function BoardPage() {
           />
         </div>
         {boardData &&
-          boardData.boardMembers &&
-          boardData.boardMembers.length > 0 ? (
+        boardData.boardMembers &&
+        boardData.boardMembers.length > 0 ? (
           <div className="space-y-12">
             {getBoardPositionOrder().map((position) => {
               const boardMembersByPosition = getBoardMembersByPosition();
@@ -245,29 +245,48 @@ export default function BoardPage() {
                                 </span>
                                 {profile?.graduation_year && (
                                   <span className="text-sm text-gray-600 font-medium italic">
-                                    {" "}&apos;{String(profile.graduation_year).slice(-2)}
+                                    {" "}
+                                    &apos;
+                                    {String(profile.graduation_year).slice(-2)}
                                   </span>
                                 )}
                               </div>
                             </div>
-                            {(profile?.concentration || profile?.house || profile?.hometown) && (
+                            {(profile?.concentration ||
+                              profile?.house ||
+                              profile?.hometown) && (
                               <div className="space-y-3 text-sm text-gray-700">
                                 {profile?.concentration && (
                                   <div className="flex items-center gap-3">
-                                    <SchoolIcon className="text-[#A51C30]" fontSize="small" />
-                                    <span className="font-medium">{profile.concentration}</span>
+                                    <SchoolIcon
+                                      className="text-[#A51C30]"
+                                      fontSize="small"
+                                    />
+                                    <span className="font-medium">
+                                      {profile.concentration}
+                                    </span>
                                   </div>
                                 )}
                                 {profile?.house && (
                                   <div className="flex items-center gap-3">
-                                    <HomeIcon className="text-[#A51C30]" fontSize="small" />
-                                    <span className="font-medium">{profile.house}</span>
+                                    <HomeIcon
+                                      className="text-[#A51C30]"
+                                      fontSize="small"
+                                    />
+                                    <span className="font-medium">
+                                      {profile.house}
+                                    </span>
                                   </div>
                                 )}
                                 {profile?.hometown && (
                                   <div className="flex items-center gap-3">
-                                    <LocationOnIcon className="text-[#A51C30]" fontSize="small" />
-                                    <span className="font-medium">{profile.hometown}</span>
+                                    <LocationOnIcon
+                                      className="text-[#A51C30]"
+                                      fontSize="small"
+                                    />
+                                    <span className="font-medium">
+                                      {profile.hometown}
+                                    </span>
                                   </div>
                                 )}
                               </div>
@@ -285,15 +304,14 @@ export default function BoardPage() {
           <div className="text-center py-20">
             <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-lg mx-auto">
               <div className="text-xl text-gray-600 font-medium">
-                We&apos;re still reconstructing our board records.
+                No board data is available for this year.
               </div>
               <p className="mt-4 text-gray-500 leading-relaxed">
-                We don&apos;t have verified records of who served on the board in{" "}
-                {selectedYear}, so we&apos;d rather show nothing than guess. If
-                you know — or if you served yourself — please get in touch.
+                If you have any information that may be helpful, please get in
+                touch.
               </p>
               <a
-                href="mailto:cjmcconnon@college.harvard.edu"
+                href="mailto:2020anthonymorales@gmail.com"
                 className="inline-block mt-6 font-semibold text-[#A51C30] hover:text-[#8B1721] transition-colors"
               >
                 Help us fill this in

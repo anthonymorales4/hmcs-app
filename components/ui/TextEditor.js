@@ -3,8 +3,6 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
-import Underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
@@ -18,12 +16,14 @@ export default function TextEditor({ content, onChange }) {
     // Editor waits until client-side to render
     immediatelyRender: false,
     extensions: [
-      StarterKit,
-      Underline,
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: "text-[#A51C30] underline cursor-pointer",
+      // StarterKit already registers Underline and Link, so they are
+      // configured through it rather than imported separately.
+      StarterKit.configure({
+        link: {
+          openOnClick: false,
+          HTMLAttributes: {
+            class: "text-[#A51C30] underline cursor-pointer",
+          },
         },
       }),
       Placeholder.configure({

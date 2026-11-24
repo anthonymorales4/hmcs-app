@@ -46,7 +46,7 @@ export default function Home() {
 
   const prevSlide = () => {
     setCurrentSlide(
-      (prev) => (prev - 1 + carouselImages.length) % carouselImages.length
+      (prev) => (prev - 1 + carouselImages.length) % carouselImages.length,
     );
   };
 
@@ -149,8 +149,7 @@ export default function Home() {
                 Harvard Men&apos;s Club Soccer is a student-run team open to
                 every undergraduate on campus, no matter how you came to the
                 game. We compete each fall in NIRSA Region 1 and at the Ivy
-                League Championships, playing our home matches at Cumnock
-                Fields.
+                League Championships, playing our home matches at Jordan Field.
               </p>
             </div>
             <div className="mt-8 lg:mt-0">
@@ -266,7 +265,7 @@ export default function Home() {
           <div className="max-w-2xl mx-auto">
             <div className="bg-white border border-gray-200 rounded-xl p-10 shadow-lg hover:shadow-xl transition-all-smooth hover:scale-[1.02]">
               <div className="space-y-6">
-                <div className="flex justify-between items-start gap-4 py-3 border-b border-gray-100">
+                <div className="flex justify-between items-center gap-4 py-3 border-b border-gray-100">
                   <span className="text-gray-600 font-medium text-lg flex items-center gap-2">
                     <EmailIcon sx={{ fontSize: 20 }} />
                     Email:

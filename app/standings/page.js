@@ -68,13 +68,27 @@ export default function StandingsPage() {
           <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
         </div>
       </td>
-      <td className="px-4 py-5"><div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" /></td>
-      <td className="px-4 py-5"><div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" /></td>
-      <td className="px-4 py-5"><div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" /></td>
-      <td className="px-4 py-5"><div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" /></td>
-      <td className="px-4 py-5"><div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" /></td>
-      <td className="px-4 py-5"><div className="h-4 w-8 bg-gray-200 rounded animate-pulse mx-auto" /></td>
-      <td className="px-4 py-5"><div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" /></td>
+      <td className="px-4 py-5">
+        <div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" />
+      </td>
+      <td className="px-4 py-5">
+        <div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" />
+      </td>
+      <td className="px-4 py-5">
+        <div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" />
+      </td>
+      <td className="px-4 py-5">
+        <div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" />
+      </td>
+      <td className="px-4 py-5">
+        <div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" />
+      </td>
+      <td className="px-4 py-5">
+        <div className="h-4 w-8 bg-gray-200 rounded animate-pulse mx-auto" />
+      </td>
+      <td className="px-4 py-5">
+        <div className="h-4 w-6 bg-gray-200 rounded animate-pulse mx-auto" />
+      </td>
     </tr>
   );
 
@@ -84,14 +98,30 @@ export default function StandingsPage() {
         <table className="min-w-full">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Team</th>
-              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">W</th>
-              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">L</th>
-              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">T</th>
-              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">GF</th>
-              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">GA</th>
-              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">GD</th>
-              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">PTS</th>
+              <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                Team
+              </th>
+              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
+                W
+              </th>
+              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
+                L
+              </th>
+              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
+                T
+              </th>
+              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
+                GF
+              </th>
+              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
+                GA
+              </th>
+              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
+                GD
+              </th>
+              <th className="px-4 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
+                PTS
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -133,7 +163,9 @@ export default function StandingsPage() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-left mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">Standings</h1>
+          <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+            Standings
+          </h1>
           <p className="mt-4 text-xl text-gray-600 leading-relaxed">
             Current league standings and team performance.
           </p>
@@ -216,13 +248,15 @@ export default function StandingsPage() {
                             <td className="px-4 py-5 whitespace-nowrap text-center text-sm font-semibold text-gray-900">
                               {team.goalsAgainst}
                             </td>
-                            <td className={`px-4 py-5 whitespace-nowrap text-center text-sm font-bold ${
-                              team.goalDifference > 0
-                                ? "text-green-600"
-                                : team.goalDifference < 0
-                                ? "text-red-600"
-                                : "text-gray-600"
-                            }`}>
+                            <td
+                              className={`px-4 py-5 whitespace-nowrap text-center text-sm font-bold ${
+                                team.goalDifference > 0
+                                  ? "text-green-600"
+                                  : team.goalDifference < 0
+                                    ? "text-red-600"
+                                    : "text-gray-600"
+                              }`}
+                            >
                               {team.goalDifference > 0
                                 ? `+${team.goalDifference}`
                                 : team.goalDifference}
@@ -241,7 +275,7 @@ export default function StandingsPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-md mx-auto">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-12 max-w-lg mx-auto">
               <div className="text-xl text-gray-600 font-medium">
                 No standings data available for this year.
               </div>
